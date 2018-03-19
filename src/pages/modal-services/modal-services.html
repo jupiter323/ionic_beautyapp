@@ -1,0 +1,130 @@
+<!--
+  Generated template for the ModalServicesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+
+<ion-navbar color='verdeApp'>
+    <ion-title><span style='position: absolute;
+    top: 0;
+    left: 0;
+    margin: 15px;
+    font-weight: 500;'>Agregar mas servicios</span></ion-title>
+
+    <ion-buttons end>
+    <button style="    font-size: 34px;" ion-button (click)="closeModal()"><ion-icon ios="ios-close"></ion-icon></button>
+
+
+    </ion-buttons>
+</ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+
+
+
+
+	
+	  		          <ion-list class="accordion-list">
+    <!-- First Level -->
+    <ion-list-header *ngFor="let item of information; let i = index" no-lines no-padding>
+      <!-- Toggle Button -->
+      <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
+        <ion-icon class='btnList' item-right  name="ios-add" *ngIf="!item.open"></ion-icon>
+        <ion-icon class='btnList' item-right name="ios-remove" *ngIf="item.open"></ion-icon>
+          {{ item.name }}
+      </button>
+ 
+      <ion-list *ngIf="item.children && item.open" no-lines >
+        <!-- Second Level -->
+        <ion-list-header  [ngClass]="{'section-active': child.open, 'section': !child.open}"  *ngFor="let child of item.children; let j = index" no-padding>
+          <!-- Toggle Button -->
+          <button ion-item (click)="toggleSelect(i, j)" *ngIf="child.children" class="child" detail-none>
+<!--             <ion-icon item-left name="add" *ngIf="!child.open"></ion-icon>
+            <ion-icon item-left name="close" *ngIf="child.open"></ion-icon> 
+            <ion-icon  class='btnList' item-right  name="ios-add" *ngIf="!child.open"></ion-icon>
+            <ion-icon class='btnList' item-right name="ios-remove" *ngIf="child.open"></ion-icon>-->
+
+            {{ child.name }}
+          </button>
+ 
+          <!-- Direct Add Button as Fallback -->
+          <ion-item  (click)="toggleSelect(i, j)"  *ngIf="!child.children" ion-item detail-none class="child-item section-active section" text-wrap >
+<ion-icon *ngIf="child.selected" style='position: absolute;
+    right: 10px;
+    font-size: 25px;
+    top: 22px;
+    color: #2FD99B;' name='ios-checkbox'></ion-icon>
+            <h2>{{ child.name }}</h2>
+            <!-- Direct Add Button as Fallback 
+            <p text-lowercase>{{ child.information }}</p>
+            -->
+   <p > <span style="  text-transform: none !important;
+    font-size: 15px;
+    margin: 0px;
+    margin-top: 8px;
+    display: block;
+    margin-bottom: 4px;"  >
+                <ion-icon name="ios-time-outline"></ion-icon> 60min
+             </span>
+</p>
+             
+
+            <div style="    margin: 4px;
+    font-size: 15px;
+    color: #777;
+    position: absolute;
+    right: 0;
+    margin-right: 58px;
+    margin-top: -20px;
+    text-decoration: line-through;" item-end>{{ child.price }}</div>
+
+
+     <div style="margin: 4px;
+     margin-right: 41px;
+    font-size: 15px;
+    color: #EC527E;" item-end>{{ child.price }}</div>
+
+
+
+          </ion-item>
+
+          <div  style="    width: 100%;
+    height: 2px;
+    background-color: #2FD99B;" ><div style="width: 100%;
+    height: 2px;
+    background-color: #f1f1f1;
+    margin-left: 7px;"></div>
+    </div>
+
+
+
+
+
+
+
+ 
+          <ion-list *ngIf="child.children && child.open" >
+            <!-- Third Level -->
+            <ion-item   *ngFor="let item of child.children; let k = index" detail-none class="child-item " text-wrap>
+              <h2>{{ item.name }}</h2>
+              <p text-lowercase>{{ item.information }}</p>
+              <!-- Direct Add Button -->
+              <button ion-button outline item-end (click)="buyItem(item)">{{ item.price }}</button>
+            </ion-item>
+          </ion-list>
+ 
+        </ion-list-header>
+      </ion-list>
+      
+    </ion-list-header>
+
+	 </ion-list>
+
+
+</ion-content>

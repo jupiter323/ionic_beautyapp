@@ -1,0 +1,185 @@
+page-modal-services {
+ 
+
+ ion-content{
+       
+ }
+
+.content-ios {
+    background-color: rgb(247,248,249);
+}
+
+
+
+
+.button-ios.activated{
+    background-color:#24bb84;
+}
+
+
+.botonVerdeFull{
+
+    width: 85%;
+    margin-left: 7.5%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #2FD99B;
+    font-size: 16px;
+    color: white;
+    border-radius: 30px;
+    }
+
+
+.separator{
+    
+        height: 2px;
+    background: rgba(230, 230, 230, 0.74);
+    margin-left: 32px;
+    margin: 18px 32px;
+}
+
+
+
+ ion-footer .toolbar-ios {
+    min-height: 80px !important;
+        border-top: none !important;
+
+}
+.toolbar-background-ios {
+    background: rgb(245,246,247);
+    border-top:none !important;
+}
+
+
+ .item-ios{
+     border-top: solid 1px rgba(231,232,233,0.5);
+ }
+
+
+ .list-header-ios {
+
+    text-transform: none !important;
+
+    } 
+   .accordion-list {
+        background: color($colors, light) !important;
+        height: 100% !important;
+    }
+    .sections {
+
+
+          background: rgba(232,232,233,1);
+background: -moz-linear-gradient(left, rgba(232,232,233,1) 0%, rgba(255,255,255,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(232,232,233,1)), color-stop(100%, rgba(255,255,255,1)));
+background: -webkit-linear-gradient(left, rgba(232,232,233,1) 0%, rgba(255,255,255,1) 100%);
+background: -o-linear-gradient(left, rgba(232,232,233,1) 0%, rgba(255,255,255,1) 100%);
+background: -ms-linear-gradient(left, rgba(232,232,233,1) 0%, rgba(255,255,255,1) 100%);
+background: linear-gradient(to right, rgba(232,232,233,1) 0%, rgba(255,255,255,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8e8e9', endColorstr='#ffffff', GradientType=1 );
+
+   color: #777 !important;
+     
+    }
+
+
+        .section {
+
+   
+     background: white !important;
+   color: #444 !important;
+
+     
+    }
+
+
+    .section-active {
+    color: #444 !important;
+    border-left: solid 7px #2FD99B !important;
+    background: white !important;
+
+
+    }
+ 
+    .child {
+
+        color: #000 !important;
+  background: rgba(232,232,233,1);
+background: -moz-linear-gradient(left, rgba(232,232,233,1) 0%, rgba(255,255,255,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(232,232,233,1)), color-stop(100%, rgba(255,255,255,1)));
+background: -webkit-linear-gradient(left, rgba(232,232,233,1) 0%, rgba(255,255,255,1) 100%);
+background: -o-linear-gradient(left, rgba(232,232,233,1) 0%, rgba(255,255,255,1) 100%);
+background: -ms-linear-gradient(left, rgba(232,232,233,1) 0%, rgba(255,255,255,1) 100%);
+background: linear-gradient(to right, rgba(232,232,233,1) 0%, rgba(255,255,255,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8e8e9', endColorstr='#ffffff', GradientType=1 );
+
+
+    }
+    .child-item {
+        background: rgb(247,248,249) !important;
+        padding: 10px !important;
+    }
+    .label {
+        margin: 0px !important;
+    }
+    .list {
+        margin-bottom: 0px !important;
+    }
+ 
+
+
+
+
+
+ 
+}
+
+
+
+.ratingStar{
+	color:#FFCB19
+}
+
+.fondoG{
+    position: absolute;
+    height:  100%;
+    width:  100%;
+    background: rgba(255,255,255,0);
+    background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(148,148,148,0.35) 46%, rgba(0,0,0,0.77) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,0)), color-stop(46%, rgba(148,148,148,0.35)), color-stop(100%, rgba(0,0,0,0.77)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(148,148,148,0.35) 46%, rgba(0,0,0,0.77) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(148,148,148,0.35) 46%, rgba(0,0,0,0.77) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(148,148,148,0.35) 46%, rgba(0,0,0,0.77) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(148,148,148,0.35) 46%, rgba(0,0,0,0.77) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000', GradientType=0 );}
+
+
+
+
+
+    .segment-md .segment-button {
+    height: 5rem;
+        color: #878E94;
+    }
+
+    .toolbar-md {
+    padding: 0px;
+    min-height: 50px;
+    }
+
+
+.segment-md .segment-button.segment-activated {
+      border-color: white;
+    color: white;
+    background-color: #2FD99B;
+    opacity: 1;
+}
+
+.segment-md .segment-button.activated {
+    border-color: #2FD99B;
+    opacity: 1;
+}
+
+
+
+
+

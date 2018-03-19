@@ -1,0 +1,85 @@
+page-reserva {
+ @media (min-width: 300px) and (min-height: 500px){
+
+ ion-modal {
+    margin-left: 15px;
+    top: 76px;
+    position: absolute;
+    display: block;
+    width: calc(100% - 30px);
+    height: calc(100% - 100px);
+    contain: strict;
+
+     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+
+    
+}
+
+
+ }
+@media (max-width: 480px) {
+ion-modal {
+    margin-left: 15px;
+    top: 76px;
+    position: absolute;
+    display: block;
+    width: calc(100% - 30px);
+    height: calc(100% - 100px);
+    contain: strict;
+
+     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+
+}
+}
+    
+
+
+
+ion-backdrop {
+  opacity: 1 !important;
+}
+.content-ios {
+    background-color: rgb(247,248,249);
+}
+
+
+.list-ios {
+    margin: 0px !important;
+}
+
+
+
+.item-ios {
+   color:#777;
+}
+
+
+.botonVerdeFulls{
+	width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #2FD99B;
+    font-size: 16px;
+    color: white;
+    border-radius: 30px;
+
+}
+
+.footer-ios .toolbar-ios:first-child .toolbar-background-ios {
+
+    background-color: #f7f8f9 !important;
+    border-top: none !important;
+}
+
+
+    
+ ion-footer .toolbar-ios {
+    min-height: 80px !important;
+
+}
+
+
+
+}

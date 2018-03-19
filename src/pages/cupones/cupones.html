@@ -1,0 +1,438 @@
+<!--
+  Generated template for the CuponesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+
+   <ion-buttons start>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-buttons>
+
+    
+    <ion-title>Coupones</ion-title>
+
+
+
+          <ion-buttons end>
+      <button (click)='filtroCategoria()' ion-button icon-only>
+        <ion-icon name="ios-options"></ion-icon>
+      </button>
+
+
+       
+
+      </ion-buttons>
+
+
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+
+<div>
+	<span style="    vertical-align: middle;
+    height: 100%;
+    font-size: 17px;
+    color: #333;
+    margin-left: 12px;
+    margin-top: 23px;
+    display: inline-block;">Ingresar coupon</span>
+	<button ion-button   style="    padding: 14px 30px;
+    color: white;
+    background-color: #2FD99B;
+    margin: 12px 0px;
+    float: right;
+    margin-right: 9px;
+    border-radius: 40px;
+    font-size: 16px;">Usar coupon</button>
+
+</div>
+
+
+<ion-segment mode="md" [(ngModel)]="section" style='    border-top-style: solid;
+    border-top-width: 2px;
+    border-top-color: rgba(0, 0, 0, 0.1);
+    background: white;' >
+
+
+    <ion-segment-button   style='    border-right: solid 2px rgb(0,0,0,0.1);  font-size: 15px;text-transform: none !important;' value="one" >
+	       <span> 
+	       <img  *ngIf='section=="one"' style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/disponibleBlanco.png">
+	       <img  *ngIf='!(section=="one")' style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/disponibleGris.png">
+	        Disponible</span>
+	    </ion-segment-button>
+
+
+
+	    <ion-segment-button  value="two" style='    border-right: solid 2px rgb(0,0,0,0.1); 
+    	font-size: 15px;text-transform: none !important;' >
+    	<span>
+	      <img  *ngIf='section=="two"' style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/usadosBlanco.png"> 
+	      <img  *ngIf='!(section=="two")'  style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/usadosGris.png"> 
+
+	      
+
+	      Usado
+	       </span>
+	    </ion-segment-button>
+
+
+	        <ion-segment-button   style='font-size: 15px;text-transform: none !important;' value="tres" >
+	       <span> 
+	       <img  *ngIf='section=="tres"' style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/expireBlanco.png">
+	       <img  *ngIf='!(section=="tres")' style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/expireGris.png">
+	        Expirado</span>
+	    </ion-segment-button>
+
+
+
+</ion-segment>
+
+
+
+
+<div [ngSwitch]="section">
+    <ion-list mode="md" *ngSwitchCase="'one'">
+
+		<ion-card>
+
+		<ion-card-content>
+				<div style="
+				display: inline-block;    width: 100%;
+				">
+				<img src="assets/imgs/fotoComercio.png" style="
+				display: inline-block;
+				height: 90px;
+				width: 90px !important;
+				vertical-align: top;
+				">
+				<div style="    display: inline-block;
+    width: calc(100% - 105px);
+    margin-left: 10px;
+				">
+				
+				<span style="    display: block;
+    font-size: 16px;
+
+    font-weight: 800;
+    color: #EC527E;">20% de descuento</span>
+
+    <span style="margin: 2px 0px 0px 0px;
+				font-size: 19px;
+				color: #333;display:block">Center Name Here</span>
+
+				<span class="itemComercio" style="    margin-top: 13px;
+    display: block;
+}">
+
+					<span style="  margin-right: 21px;  color: #888;
+    font-size: 15px;"><ion-icon style='    margin-right: 8px;
+   color:#2FD99B;
+    font-size: 21px;
+    vertical-align: middle;' name="md-calendar"></ion-icon>Expira 20/02/05</span>
+
+					<span style="     color: #888;
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:rgb(249,199,0);
+    font-weight: 800;' name="ios-add-circle-outline"></ion-icon>Usar</span>
+
+				</span>
+
+				</div>
+				</div>
+
+		</ion-card-content>
+		</ion-card>
+
+
+
+
+		
+		<ion-card >
+
+		<ion-card-content>
+				<div style="
+				display: inline-block;    width: 100%;
+				">
+				<img src="assets/imgs/fotoComercio.png" style="
+				display: inline-block;
+				height: 90px;
+				width: 90px !important;
+				vertical-align: top;
+				">
+				<div style="    display: inline-block;
+    width: calc(100% - 105px);
+    margin-left: 10px;
+				">
+				
+				<span style="    display: block;
+    font-size: 16px;
+
+    font-weight: 800;
+    color: #EC527E;">20% de descuento</span>
+
+    <span style="margin: 2px 0px 0px 0px;
+				font-size: 19px;
+				color: #333;display:block">Center Name Here</span>
+
+				<span class="itemComercio" style="    margin-top: 13px;
+    display: block;
+}">
+
+					<span style="  margin-right: 21px;  color: #888;
+    font-size: 15px;"><ion-icon style='    margin-right: 8px;
+   color:#2FD99B;
+    font-size: 21px;
+    vertical-align: middle;' name="md-calendar"></ion-icon>Expira 20/02/05</span>
+
+					<span style="     color: #888;
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:rgb(249,199,0);
+    font-weight: 800;' name="ios-add-circle-outline"></ion-icon>Usar</span>
+
+				</span>
+
+				</div>
+				</div>
+
+		</ion-card-content>
+		</ion-card>
+
+
+
+		<ion-card >
+
+		<ion-card-content>
+				<div style="
+				display: inline-block;    width: 100%;
+				">
+				<img src="assets/imgs/fotoComercio.png" style="
+				display: inline-block;
+				height: 90px;
+				width: 90px !important;
+				vertical-align: top;
+				">
+				<div style="    display: inline-block;
+    width: calc(100% - 105px);
+    margin-left: 10px;
+				">
+				
+				<span style="    display: block;
+    font-size: 16px;
+
+    font-weight: 800;
+    color: #EC527E;">20% de descuento</span>
+
+    <span style="margin: 2px 0px 0px 0px;
+				font-size: 19px;
+				color: #333;display:block">Center Name Here</span>
+
+				<span class="itemComercio" style="    margin-top: 13px;
+    display: block;
+}">
+
+					<span style="  margin-right: 21px;  color: #888;
+    font-size: 15px;"><ion-icon style='    margin-right: 8px;
+   color:#2FD99B;
+    font-size: 21px;
+    vertical-align: middle;' name="md-calendar"></ion-icon>Expira 20/02/05</span>
+
+					<span style="     color: #888;
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:rgb(249,199,0);
+    font-weight: 800;' name="ios-add-circle-outline"></ion-icon>Usar</span>
+
+				</span>
+
+				</div>
+				</div>
+
+		</ion-card-content>
+		</ion-card>
+
+
+
+
+
+
+
+    </ion-list>
+  
+
+    <ion-list mode="md" *ngSwitchCase="'two'">
+
+
+		<ion-card >
+
+		<ion-card-content>
+				<div style="
+				display: inline-block;    width: 100%;
+				">
+				<img src="assets/imgs/fotoComercio.png" style="
+				display: inline-block;
+				height: 90px;
+				width: 90px !important;
+				vertical-align: top;
+				">
+				<div style="    display: inline-block;
+    width: calc(100% - 105px);
+    margin-left: 10px;
+				">
+				
+				<span style="    display: block;
+    font-size: 16px;
+
+    font-weight: 800;
+    color: #EC527E;">20% de descuento</span>
+
+    <span style="margin: 2px 0px 0px 0px;
+				font-size: 19px;
+				color: #333;display:block">Center Name Here</span>
+
+				<span class="itemComercio" style="    margin-top: 13px;
+    display: block;
+}">
+
+					<span style="  margin-right: 21px;  color: #888;
+    font-size: 15px;"><ion-icon style='    margin-right: 8px;
+   color:#2FD99B;
+    font-size: 21px;
+    vertical-align: middle;' name="md-calendar"></ion-icon>20/02/05</span>
+
+					<span style="     color: #888;
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;
+    font-weight: 800;' name="md-checkbox"></ion-icon>Usado</span>
+
+				</span>
+
+				</div>
+				</div>
+
+		</ion-card-content>
+		</ion-card>
+
+
+
+		<ion-card >
+
+		<ion-card-content>
+				<div style="
+				display: inline-block;    width: 100%;
+				">
+				<img src="assets/imgs/fotoComercio.png" style="
+				display: inline-block;
+				height: 90px;
+				width: 90px !important;
+				vertical-align: top;
+				">
+				<div style="    display: inline-block;
+    width: calc(100% - 105px);
+    margin-left: 10px;
+				">
+				
+				<span style="    display: block;
+    font-size: 16px;
+
+    font-weight: 800;
+    color: #EC527E;">20% de descuento</span>
+
+    <span style="margin: 2px 0px 0px 0px;
+				font-size: 19px;
+				color: #333;display:block">Center Name Here</span>
+
+				<span class="itemComercio" style="    margin-top: 13px;
+    display: block;
+}">
+
+					<span style="  margin-right: 21px;  color: #888;
+    font-size: 15px;"><ion-icon style='    margin-right: 8px;
+   color:#2FD99B;
+    font-size: 21px;
+    vertical-align: middle;' name="md-calendar"></ion-icon>20/02/05</span>
+
+					<span style="     color: #888;
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;
+    font-weight: 800;' name="md-checkbox"></ion-icon>Usado</span>
+
+				</span>
+
+				</div>
+				</div>
+
+		</ion-card-content>
+		</ion-card>
+
+
+
+
+    </ion-list>
+
+
+    <ion-list mode="md" *ngSwitchCase="'tres'">
+
+
+
+
+		<ion-card >
+
+		<ion-card-content>
+				<div style="
+				display: inline-block;    width: 100%;
+				">
+				<img src="assets/imgs/fotoComercio.png" style="
+				display: inline-block;
+				height: 90px;
+				width: 90px !important;
+				vertical-align: top;
+				">
+				<div style="    display: inline-block;
+    width: calc(100% - 105px);
+    margin-left: 10px;
+				">
+				
+				<span style=" text-decoration: line-through;   display: block;
+    font-size: 16px;
+
+    font-weight: 800;
+    color: #EC527E;">20% de descuento</span>
+
+    <span style="margin: 2px 0px 0px 0px;
+				font-size: 19px;
+				color: #333;display:block">Center Name Here</span>
+
+				<span class="itemComercio" style="    margin-top: 13px;
+    display: block;
+}">
+
+					<span style="  text-decoration: line-through; margin-right: 21px;  color: #888;
+    font-size: 15px;"><ion-icon style='    margin-right: 8px;
+   color:#EC527E;
+    font-size: 21px;
+    vertical-align: middle;' name="md-calendar"></ion-icon>20/02/05</span>
+
+					<span style="     color: #888;
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#EC527E;
+    font-weight: 800;' name="md-close-circle"></ion-icon>Expirado</span>
+
+				</span>
+
+				</div>
+				</div>
+
+		</ion-card-content>
+		</ion-card>
+
+
+
+
+    </ion-list>
+</div>
+
+
+</ion-content>

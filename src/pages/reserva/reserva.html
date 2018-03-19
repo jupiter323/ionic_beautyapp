@@ -1,0 +1,242 @@
+<!--
+  Generated template for the ReservaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  	<ion-navbar  >
+    <ion-title>Reserva</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+<div>
+
+
+<div class="itemReserva" >
+	<img src="assets/imgs/tijeras.png" >
+	<div style="
+    display: inline-block;
+    width: 70%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+">
+		<span style="    font-size: 17px;
+    color: #444;">Hair Cut</span>
+		<p style="
+    margin-top:  1px;
+    margin-bottom: 1px;    color: #777;
+">Lorem ipsum dolor sit amet, lectus voluptas ipsum felis nec massa vel.</p>
+		<span style="    color: #EC527E;
+    margin-top: 8px;
+    display: block;">$60.00</span>
+
+    <button ion-button style="    position: absolute;
+    top: 0;
+    right: 0px;
+    margin-right: 13px;
+    margin-top: 5px;
+    font-size: 27px;
+    width: 30px;
+    background: none;height: 30px;padding: 6px;
+    color: #888;"><ion-icon ios="ios-close"></ion-icon></button>
+	</div>
+
+</div>
+
+<div class="itemReserva" >
+	<img src="assets/imgs/tijeras.png" >
+	<div style="
+    display: inline-block;
+    width: 70%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+">
+		<span style="    font-size: 17px;
+    color: #444;">Hair Cut</span>
+		<p style="
+    margin-top:  1px;
+    margin-bottom: 1px;    color: #777;
+">Lorem ipsum dolor sit amet, lectus voluptas ipsum felis nec massa vel.</p>
+		<span style="    color: #EC527E;
+    margin-top: 8px;
+    display: block;">$60.00</span>
+
+    <button ion-button style="    position: absolute;
+    top: 0;
+    right: 0px;
+    margin-right: 13px;
+    margin-top: 5px;
+    font-size: 27px;
+    width: 30px;
+    background: none;height: 30px;padding: 6px;
+    color: #888;"><ion-icon ios="ios-close"></ion-icon></button>
+	</div>
+
+</div>
+
+
+    <button (click)='goAddServicios()' ion-button class="botonVerdeFull">Agregar mas servicios </button>
+
+
+</div>
+<div style="margin-top:20px;width:90%; margin-left:5%">
+
+
+
+		<ion-list class="accordion-list">
+			<!-- First Level -->
+			<ion-list-header  [ngClass]="{'borderSelected': item.open, 'borderSelected2': item.open && item.id==1}" *ngFor="let item of information; let i = index" no-lines no-padding>
+			<!-- Toggle Button -->
+			<button style='    background: white !important;
+    border-bottom: solid 1px #d3d3d352'  ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
+			<ion-icon class='btnList' item-right  name="ios-add" *ngIf="!item.open"></ion-icon>
+			<ion-icon class='btnList' item-right name="ios-remove" *ngIf="item.open"></ion-icon>
+
+			{{ item.id == 1 ? (fechaSeleccionada || item.nombre) : 
+			   item.id == 2 ? (horaSeleccionada  || item.nombre) : 
+			   item.id == 3 ? (staffSeleccionado  || item.nombre) : item.nombre }}
+
+			</button>
+
+			<ion-list style='margin:0px !important' *ngIf="item.open && item.id == 1" no-lines >
+			<!-- Second Level -->
+			
+				 <ion-calendar [(ngModel)]="date"
+	                  (onChange)="onChange($event)"
+	                  [options]="options"
+	                  type="string"
+
+	                  format="MMM DD YYYY">
+	   			 </ion-calendar>
+			</ion-list>
+
+
+			<ion-list class='backItem' style='width: 100%;
+    display: table;
+    white-space: normal;'  *ngIf="item.open && item.id == 2 "  radio-group [(ngModel)]="horaSeleccionada">
+				<ion-item class='itemHora'>
+				<ion-label>11:25am</ion-label>
+				<ion-radio mode='wp' value="11:25am" checked></ion-radio>
+				</ion-item>
+				<ion-item class='itemHora' >
+				<ion-label>11:35am</ion-label>
+				<ion-radio mode='wp' value="11:35am"></ion-radio>
+				</ion-item>
+				<ion-item class='itemHora'>
+				<ion-label>11:55am</ion-label>
+				<ion-radio mode='wp' value="11:55am" [disabled]="isDisabled"></ion-radio>
+				</ion-item>
+
+
+
+
+
+
+			</ion-list>
+
+
+
+						<ion-list class='backItem' style='width: 100%;
+    display: table;
+    white-space: normal;'  *ngIf="item.open && item.id == 3 "  radio-group [(ngModel)]="staffSeleccionado">
+
+
+
+				<ion-item class='avatarSelect'>
+				<ion-label>
+				<ion-avatar item-start>
+				<img src="assets/imgs/ben.png"  style="display: inline-block;">
+				<div style="    width: 100%;display: inline-block;margin-left: 7px;">
+				<h2  style="margin-bottom: 4px;">Carl Smith</h2>
+				<p style="    white-space: normal;
+    width: calc(100% - 50px);">Especialista en tintes</p>
+				</div>
+				</ion-avatar>
+				</ion-label>
+				
+				<ion-radio mode='wp' value="Carl Smith" ></ion-radio>
+				</ion-item>
+
+
+
+				<ion-item class='avatarSelect'>
+				<ion-label>
+				<ion-avatar item-start>
+				<img src="assets/imgs/ben.png"  style="display: inline-block;">
+				<div style="    width: 100%;display: inline-block;margin-left: 7px;">
+				<h2 style="margin-bottom: 4px;">Lilian Gen</h2>
+				<p style="    white-space: normal;
+    width: calc(100% - 50px);">Recomendado en el servicio</p>
+				</div>
+				</ion-avatar>
+				</ion-label>
+				
+				<ion-radio mode='wp' value="Lilian Gen" ></ion-radio>
+				</ion-item>
+
+
+
+
+				<ion-item class='avatarSelect'>
+				<ion-label>
+				<ion-avatar item-start>
+				<img src="assets/imgs/ben.png"  style="display: inline-block;">
+				<div style="    width: 100%;display: inline-block;margin-left: 7px;">
+				<h2  style="margin-bottom: 4px;">Marty McFly</h2>
+				<p style="    white-space: normal;
+    width: calc(100% - 50px);">Especialista en tintes</p>
+				</div>
+				</ion-avatar>
+				</ion-label>
+				
+				<ion-radio mode='wp' value="Marty McFly" ></ion-radio>
+				</ion-item>
+
+
+
+			</ion-list>
+
+
+
+
+
+
+
+			</ion-list-header>
+		</ion-list>
+
+
+<div style="    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;">
+	
+	    <button  *ngIf="fechaSeleccionada && horaSeleccionada" (click)='goReserva()' ion-button class="botonVerdeFulls">Confirmar {{fechaSeleccionada}},{{horaSeleccionada}}</button>
+
+</div>
+
+</div>
+
+
+
+
+
+</ion-content>
+
+
+<!-- <ion-footer style='    background-color: #f7f8f9 !important;'>
+  <ion-toolbar >
+
+
+    <button (click)='goReserva()' ion-button class="botonVerdeFull">Agendar Cita<ion-icon style='    margin-left: 10px !important;' name="md-arrow-forward"></ion-icon> </button>
+
+  </ion-toolbar>
+</ion-footer>
+
+
+ -->
+

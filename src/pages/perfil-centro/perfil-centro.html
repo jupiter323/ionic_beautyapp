@@ -1,0 +1,492 @@
+<ion-header>
+
+
+	<ion-navbar  color="headerColor">
+
+
+		<ion-title>
+		<span style="      display: block;
+    font-size: 15px;">Center Name Solor Site</span>  
+		<span style="    display: block;
+    font-size: 11px;
+    margin-top: 4px;">5.0 (39)<ion-icon  class='ratingStar' name="star"></ion-icon>
+    						  <ion-icon  class='ratingStar' name="star"></ion-icon>
+    						  <ion-icon class='ratingStar'  name="star"></ion-icon>
+    						  <ion-icon  class='ratingStar' name="star"></ion-icon>
+    						  <ion-icon class='ratingStar' name="star"></ion-icon>
+    						  </span>  
+		</ion-title>
+
+
+	</ion-navbar>
+
+
+</ion-header>
+
+
+
+<ion-content >
+
+<div style="background-color: black;
+    height: 200px;
+    width: 100%;
+    position: relative;">
+	<img   style='    position: absolute;
+    width: 100%;
+    bottom: 0px;' src="assets/imgs/fotoProfile.png">
+	<img style='position: absolute;
+    width: 100%;bottom:0px;
+' src="assets/imgs/overlayCentroProfile.png">
+
+		<div style="
+		position: absolute;
+		width:  100%;
+		height: 25px;
+		bottom:  0px;
+		color: white;
+		font-size:  13px;
+		">
+				<span style="
+				float: left;
+				margin-left: 20px;
+				"><img src="assets/imgs/corazon.png" style="
+				margin-right:  5px;
+				"> Agregar a favoritos</span>
+				<span style="
+				float: right;
+				margin-right: 20px;
+				"><img src="assets/imgs/reloj.png" style="
+				margin-right: 5px;
+				">7:00am to 9:00pm</span>
+		</div>
+</div>
+
+<ion-segment mode="md" [(ngModel)]="section">
+    <ion-segment-button   style='font-size: 15px;text-transform: none !important;' value="one" >
+	       <span> 
+	       <img  *ngIf='section=="one"' style='vertical-align: middle;margin-right: 5px;' src="assets/imgs/servicioBlanco.png">
+	       <img  *ngIf='!(section=="one")' style='vertical-align: middle;margin-right: 5px;' src="assets/imgs/servicio.png">
+	        Servicio</span>
+	    </ion-segment-button>
+
+
+
+	    <ion-segment-button  value="two" style='
+
+
+    	font-size: 15px;text-transform: none !important;' >
+      <span>
+	      <img  *ngIf='section=="two"' style='vertical-align: middle;margin-right: 5px;' src="assets/imgs/agregadosBlanco.png"> 
+	      <img  *ngIf='!(section=="two")'  style='vertical-align: middle;margin-right: 5px;' src="assets/imgs/agregados.png"> 
+
+	      
+
+
+	       Mapa</span>
+	    </ion-segment-button>
+
+    <ion-segment-button   style='font-size: 15px;text-transform: none !important;' value="tres" >
+         <span> 
+         <img  *ngIf='section=="tres"' style='vertical-align: middle;margin-right: 5px;' src="assets/imgs/estrellaBlanca.png">
+         <img  *ngIf='!(section=="tres")' style='vertical-align: middle;margin-right: 5px;' src="assets/imgs/estrellaGris.png">
+          Opiniones</span>
+      </ion-segment-button>
+
+</ion-segment>
+
+
+
+<div [ngSwitch]="section">
+    <ion-list mode="md" *ngSwitchCase="'one'">
+
+
+	  <div class='alertaCupon' style="background-color:#EC527E">
+	  	Todos los servicios con un <b> 20% Descontado</b> por Cupon DE1234
+
+	  </div>
+
+	  <div>
+	  		 <ion-list class="accordion-list">
+    <!-- First Level -->
+    <ion-list-header *ngFor="let item of information; let i = index" no-lines no-padding>
+      <!-- Toggle Button -->
+      <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
+        <ion-icon class='btnList' item-right  name="ios-add" *ngIf="!item.open"></ion-icon>
+        <ion-icon class='btnList' item-right name="ios-remove" *ngIf="item.open"></ion-icon>
+          {{ item.name }}
+      </button>
+ 
+      <ion-list *ngIf="item.children && item.open" no-lines >
+        <!-- Second Level -->
+        <ion-list-header  [ngClass]="{'section-active': child.open, 'section': !child.open}"  *ngFor="let child of item.children; let j = index" no-padding>
+          <!-- Toggle Button -->
+          <button ion-item (click)="toggleSelect(i, j)" *ngIf="child.children" class="child" detail-none>
+<!--             <ion-icon item-left name="add" *ngIf="!child.open"></ion-icon>
+            <ion-icon item-left name="close" *ngIf="child.open"></ion-icon> 
+            <ion-icon  class='btnList' item-right  name="ios-add" *ngIf="!child.open"></ion-icon>
+            <ion-icon class='btnList' item-right name="ios-remove" *ngIf="child.open"></ion-icon>-->
+
+            {{ child.name }}
+          </button>
+ 
+          <!-- Direct Add Button as Fallback -->
+          <ion-item  (click)="toggleSelect(i, j)"  *ngIf="!child.children" ion-item detail-none class="child-item section-active section" text-wrap >
+<ion-icon *ngIf="child.selected" style='position: absolute;
+    right: 10px;
+    font-size: 25px;
+    top: 22px;
+    color: #2FD99B;' name='ios-checkbox'></ion-icon>
+            <h2>{{ child.name }}</h2>
+            <!-- Direct Add Button as Fallback 
+            <p text-lowercase>{{ child.information }}</p>
+            -->
+   <p > <span style="  text-transform: none !important;
+    font-size: 15px;
+    margin: 0px;
+    margin-top: 8px;
+    display: block;
+    margin-bottom: 4px;"  >
+                <ion-icon name="ios-time-outline"></ion-icon> 60min
+             </span>
+</p>
+             
+
+            <div style="    margin: 4px;
+    font-size: 15px;
+    color: #777;
+    position: absolute;
+    right: 0;
+    margin-right: 58px;
+    margin-top: -20px;
+    text-decoration: line-through;" item-end>{{ child.price }}</div>
+
+
+     <div style="margin: 4px;
+     margin-right: 41px;
+    font-size: 15px;
+    color: #EC527E;" item-end>{{ child.price }}</div>
+
+
+
+          </ion-item>
+
+          <div  style="    width: 100%;
+    height: 2px;
+    background-color: #2FD99B;" ><div style="width: 100%;
+    height: 2px;
+    background-color: #f1f1f1;
+    margin-left: 7px;"></div>
+    </div>
+
+
+
+
+
+
+
+ 
+          <ion-list *ngIf="child.children && child.open" >
+            <!-- Third Level -->
+            <ion-item   *ngFor="let item of child.children; let k = index" detail-none class="child-item " text-wrap>
+              <h2>{{ item.name }}</h2>
+              <p text-lowercase>{{ item.information }}</p>
+              <!-- Direct Add Button -->
+              <button ion-button outline item-end (click)="buyItem(item)">{{ item.price }}</button>
+            </ion-item>
+          </ion-list>
+ 
+        </ion-list-header>
+      </ion-list>
+      
+    </ion-list-header>
+    <div style="width:100%;height:60px"></div>
+
+    <div style="width: 100%;
+    position: fixed;
+    bottom: 0px;
+    background: rgb(247,248,249);
+    padding-bottom: 6px;
+">
+          <button (click)='goReserva()' ion-button class="botonVerdeFull">Agendar Cita<ion-icon style='    margin-left: 10px !important;' name="md-arrow-forward"></ion-icon> </button>
+
+
+    </div>
+  </ion-list>
+
+
+	  </div>
+
+
+    </ion-list>
+
+    <ion-list  mode="md" *ngSwitchCase="'two'">
+
+
+<div style="
+    padding: 12px 20px;
+    border-bottom: solid 1px lightgray;
+">
+    <span style="color:#EC527E;font-size: 17px;font-weight: 800;">Direccion</span>
+    <p style="
+    margin: 5px 0px;
+    font-size: 15px;
+    color: #888;
+">Center Name, Buiding Name, Name, Country</p>
+    </div>
+
+<div style="
+    padding: 12px 20px;
+    border-bottom: solid 1px lightgray;    background: white;
+">
+    <span style="color:#EC527E;font-size: 17px;font-weight: 800;">Sobre nosotros</span>
+    <p style="
+    margin: 5px 0px;
+    font-size: 15px;
+    color: #888;    line-height: 22px;
+">Lorem ipsum dolor sit amet, feugiat et tellus, nec id suspendisse, rhoncus sed, viverra ut mollis phasellus sit mauris, pede tellus dictumst ut volutpat tellus. Consectetuer provident, risus ut et erat elit. </p>
+    </div>
+
+<div style="
+    padding: 12px 20px;
+    
+">
+    <span style="color:#EC527E;font-size: 17px;font-weight: 800;">Horario de atencion</span>
+    <p style="
+    margin: 5px 0px;
+    font-size: 15px;
+    color: #888;
+"><br>Lunes: 10:00am a 7:00pm <br><br>Martes: 10:00am a 7:00pm <br><br>Mieroles: 10:00am a 7:00pm <br></p>
+    </div>
+
+
+
+ <div style="    width: 100%;
+    text-align: center;
+ margin-top: 20px; margin-bottom: 30px;">
+
+  <button  color='headerColor' ion-button  style="    width: 40%;
+    margin-right: 5%;
+    border-radius: 70px;" > COMO LLEGAR</button> 
+
+  <button  style=" border-radius: 70px;   width: 40%;
+    margin-left: 5%;"  color='verdeApp' ion-button> LLAMAR </button>
+
+
+
+</div>
+
+
+
+
+
+    </ion-list>
+     <ion-list  mode="md" *ngSwitchCase="'tres'">
+
+
+
+
+<div style="margin-top:30px;
+    width: 100%;
+    display: inline-block;    padding-left: 15px;
+    padding-right: 15px;
+">
+  
+  <img src="assets/imgs/servicio1.png" style="
+    display: inline-block;
+    vertical-align: top;
+    height: 54px;
+    width: 54px;
+">
+  <div style="
+    display: inline-block;
+    width: calc(100% - 83px);
+    margin-left: 22px;
+">
+<span style="
+    color: #888;
+    font-size: 13px;
+    float: right;
+    margin-right: 47px;
+    margin-top: 6px;
+    ">hace 2 dias</span>
+
+    <span style="
+    font-size: 19px;
+    color:  #333;
+">John Smiths
+
+
+
+    </span>
+    <div style="    margin-top: 7px;">
+      
+          <span style="
+    display: block;
+    font-size: 17px;
+    margin-top: 4px;
+    color: #999;
+    ">5.0 <ion-icon class="ratingStar icon icon-ios ion-ios-star" name="star" role="img" aria-label="star" ng-reflect-name="star"></ion-icon>
+                  <ion-icon class="ratingStar icon icon-ios ion-ios-star" name="star" role="img" aria-label="star" ng-reflect-name="star"></ion-icon>
+                  <ion-icon class="ratingStar icon icon-ios ion-ios-star" name="star" role="img" aria-label="star" ng-reflect-name="star"></ion-icon>
+                  <ion-icon class="ratingStar icon icon-ios ion-ios-star" name="star" role="img" aria-label="star" ng-reflect-name="star"></ion-icon>
+                  <ion-icon class="ratingStar icon icon-ios ion-ios-star" name="star" role="img" aria-label="star" ng-reflect-name="star"></ion-icon>
+                  </span>  
+
+
+    </div>
+
+    <p style="
+    margin-right: 35px;
+    line-height: 19px;
+    color: #999;
+">Lorem ipsum dolor sit amet, id dui curabitur. Lobortis urna quam urna inceptos nibh felis, aliquam mi fusce</p>
+  </div>
+</div>
+
+
+<div class="separator"></div>
+
+
+<div style="
+    width: 100%;
+    display: inline-block;    padding-left: 15px;
+    padding-right: 15px;
+">
+  
+  <img src="assets/imgs/servicio1.png" style="
+    display: inline-block;
+    vertical-align: top;
+    height: 54px;
+    width: 54px;
+">
+  <div style="
+    display: inline-block;
+    width: calc(100% - 83px);
+    margin-left: 22px;
+">
+<span style="
+    color: #888;
+    font-size: 13px;
+    float: right;
+    margin-right: 47px;
+    margin-top: 6px;
+    ">hace 2 dias</span>
+
+    <span style="
+    font-size: 19px;
+    color:  #333;
+">John Smiths
+
+
+
+    </span>
+    <div style="    margin-top: 7px;">
+      
+          <span style="
+    display: block;
+    font-size: 17px;
+    margin-top: 4px;
+    color: #999;
+    ">5.0 <ion-icon class="ratingStar icon icon-ios ion-ios-star" name="star" role="img" aria-label="star" ng-reflect-name="star"></ion-icon>
+                  <ion-icon class="ratingStar icon icon-ios ion-ios-star" name="star" role="img" aria-label="star" ng-reflect-name="star"></ion-icon>
+                  <ion-icon class="ratingStar icon icon-ios ion-ios-star" name="star" role="img" aria-label="star" ng-reflect-name="star"></ion-icon>
+                  <ion-icon class="ratingStar icon icon-ios ion-ios-star" name="star" role="img" aria-label="star" ng-reflect-name="star"></ion-icon>
+                  <ion-icon class="ratingStar icon icon-ios ion-ios-star" name="star" role="img" aria-label="star" ng-reflect-name="star"></ion-icon>
+                  </span>  
+
+
+    </div>
+
+    <p style="
+    margin-right: 35px;
+    line-height: 19px;
+    color: #999;
+">Lorem ipsum dolor sit amet, id dui curabitur. Lobortis urna quam urna inceptos nibh felis, aliquam mi fusce</p>
+  </div>
+</div>
+
+
+
+
+<div class="separator"></div>
+
+
+<div style="
+    width: 100%;
+    display: inline-block;    padding-left: 15px;
+    padding-right: 15px;
+">
+  
+  <img src="assets/imgs/servicio1.png" style="
+    display: inline-block;
+    vertical-align: top;
+    height: 54px;
+    width: 54px;
+">
+  <div style="
+    display: inline-block;
+    width: calc(100% - 83px);
+    margin-left: 22px;
+">
+<span style="
+    color: #888;
+    font-size: 13px;
+    float: right;
+    margin-right: 47px;
+    margin-top: 6px;
+    ">hace 2 dias</span>
+
+    <span style="
+    font-size: 19px;
+    color:  #333;
+">John Smiths
+
+
+
+    </span>
+    <div style="    margin-top: 7px;">
+      
+          <span style="
+    display: block;
+    font-size: 17px;
+    margin-top: 4px;
+    color: #999;
+    ">5.0 <ion-icon class="ratingStar icon icon-ios ion-ios-star" name="star" role="img" aria-label="star" ng-reflect-name="star"></ion-icon>
+                  <ion-icon class="ratingStar icon icon-ios ion-ios-star" name="star" role="img" aria-label="star" ng-reflect-name="star"></ion-icon>
+                  <ion-icon class="ratingStar icon icon-ios ion-ios-star" name="star" role="img" aria-label="star" ng-reflect-name="star"></ion-icon>
+                  <ion-icon class="ratingStar icon icon-ios ion-ios-star" name="star" role="img" aria-label="star" ng-reflect-name="star"></ion-icon>
+                  <ion-icon class="ratingStar icon icon-ios ion-ios-star" name="star" role="img" aria-label="star" ng-reflect-name="star"></ion-icon>
+                  </span>  
+
+
+    </div>
+
+    <p style="
+    margin-right: 35px;
+    line-height: 19px;
+    color: #999;
+">Lorem ipsum dolor sit amet, id dui curabitur. Lobortis urna quam urna inceptos nibh felis, aliquam mi fusce</p>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+     </ion-list>
+
+</div>
+
+
+</ion-content>
+
+
+
+
+
+
+
+

@@ -14,3 +14,419 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+
+.botonVerdeFulls{
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #2FD99B;
+    font-size: 16px;
+    color: white;
+    border-radius: 30px;
+
+}
+
+
+.item-ios.item-block .item-inner {
+
+    border-bottom: none !important;
+}
+
+
+
+
+    .alert-ios .alert-title {
+
+    font-weight: normal !important;
+}
+.alertCustomCss {
+    // text color for basic alerts
+    color: white; 
+
+    // alert modal page bg color. Warning this will remove the alert transparency
+    //background-color: color($colors, dark, base); 
+
+    button {
+            color: #777 !important; // button text color
+        background-color: rgb(247,248,249) !important;
+            //button bg color
+    }
+
+    .alert-message {
+        color: #777; // text color for confirm alerts
+    }
+
+    .alert-wrapper {
+        background-color: #2FD99B; // bg color of alert content
+       
+    }
+
+
+
+
+  }
+
+
+.alert-ios [aria-checked=true] .alert-checkbox-icon {
+    border-color: #2FD99B !important;
+    background-color: #2FD99B !important;
+}
+
+
+
+
+.card-ios {
+
+        -webkit-box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3) !important;
+
+    box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3) !important;
+    border-radius: 7px !important;
+}
+
+.card-ios + ion-card {
+    margin-top: 19px !important;
+}
+
+
+
+.botonVerdeFull{
+
+    width: 85%;
+    margin-left: 7.5%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #2FD99B;
+    font-size: 16px;
+    color: white;
+    border-radius: 30px;
+    }
+
+
+
+.label-ios {
+    margin: 0px !important;
+}
+.item-block {
+   
+    min-height: 4rem;
+}
+.list-ios > .item-block:first-child {
+    border-top: none !important;
+}
+
+.toolbar-ios {
+
+    min-height: 53px !important;
+
+}
+
+
+.segment-md .segment-button {
+
+    border-left: solid 1px #dedede !important;
+}
+
+
+
+
+.bar-button-default-ios{
+    color: white;
+}
+.toolbar-title-ios {
+
+    color: white;
+
+    }
+
+
+.toolbar-background-ios {
+    background: #EC527E;
+}
+
+
+.btnList{
+        background: rgb(231,232,233);
+    padding: 3px 10px;
+    border-radius: 4px;
+    color: rgb(118,129,136);
+    margin-top: 10px;
+    margin-bottom: 13px;
+}
+
+button.item-ios:not([detail-none]) .item-inner{
+    padding-right: 20px;
+	}
+
+list-ios .item-block .item-inner {
+    border-bottom: none !important;
+}
+
+.list-ios .item-block .item-inner {
+    border-bottom: none !important;
+}
+
+
+
+.containerServicios{
+	      text-align: center;
+    max-width: 500px;
+    margin: auto;
+}
+
+.servicios{
+    display: inline-block;
+    text-align: center;
+    margin: 28px 11px
+
+}
+
+.tituloSeccion{
+	text-align:center; font-size: 19px;margin-top: 18px;    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+.fixProfileMargin .item-inner .input-wrapper ion-label{
+    margin-top:-10px !important;
+}
+
+
+
+.barraContainer{
+	
+    background-color: lightgray;
+    height: 2px;
+    position: relative;
+    margin-top: 10px;
+}
+
+.barraProgress{
+	
+	    background-color: #2FD99B;
+    height: 5px;
+    width: 85%;
+    position: absolute;
+    left: 0;
+    margin-top: -2px;
+
+}
+
+.barraProgress span{
+	
+	position: absolute;
+    margin-top: -14px;
+    font-size: 13px;
+    color: gray;
+
+
+}
+.servicios img{
+	    display: block;
+    margin: auto;
+}
+
+.servicios span{
+	    display: block;
+    margin: auto;
+        margin-top: 16px;
+}
+
+
+.item-ios {
+
+    background-color: #fafafa !important;
+}
+
+
+ button.item-ios:not([detail-none])  .item-inner {
+    background-image: none !important;
+
+}
+
+
+ion-calendar-month .primary .days .on-selected{
+    
+    background-color:#2FD99B;
+}
+.avatarSelect{
+        border-bottom: none !important;
+    border-top: solid 1px #d3d3d378 !important;
+        padding-right: 18px;
+}
+
+.avatarSelect ion-label ion-avatar{
+        margin-top: 15px !important;
+    margin-bottom: 15px !important;
+}
+
+.avatarSelect ion-label ion-avatar img{
+    
+        display: inline-block;
+    height: 50px;
+    width: 50px;
+    vertical-align: top;
+}
+
+.alertaCupon{
+        background-color: #EC527E;
+    color: white;
+    font-size: 17px;
+    text-align: center;
+    padding-top: 10px;
+    padding: 12px 13%;
+    
+}
+
+.itemHora{
+        border: none !important;   
+        background: transparent !important;width: 46%;display: inline-block;
+        color: #888;
+        margin-top:12px;
+}
+
+ion-calendar{
+    
+    background: rgba(231,231,231,1);
+background: -moz-linear-gradient(top, rgba(231,231,231,1) 0%, rgba(255,255,255,1) 28%, rgba(255,255,255,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(231,231,231,1)), color-stop(28%, rgba(255,255,255,1)), color-stop(100%, rgba(255,255,255,1)));
+background: -webkit-linear-gradient(top, rgba(231,231,231,1) 0%, rgba(255,255,255,1) 28%, rgba(255,255,255,1) 100%);
+background: -o-linear-gradient(top, rgba(231,231,231,1) 0%, rgba(255,255,255,1) 28%, rgba(255,255,255,1) 100%);
+background: -ms-linear-gradient(top, rgba(231,231,231,1) 0%, rgba(255,255,255,1) 28%, rgba(255,255,255,1) 100%);
+background: linear-gradient(to bottom, rgba(231,231,231,1) 0%, rgba(255,255,255,1) 28%, rgba(255,255,255,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e7e7e7', endColorstr='#ffffff', GradientType=0 );
+
+
+}
+.item-radio-checked.item-ios ion-label {
+    color: #EC527E;
+}
+
+.radio-wp .radio-icon {
+
+    border-color: #777;
+    }
+
+.radio-wp .radio-inner {
+    background-color: #EC527E;}
+
+
+    .radio-wp .radio-checked {
+    border-color: #EC527E;
+    border-top-color:#EC527E;
+    border-right-color: #EC527E;
+    border-bottom-color: #EC527E;
+    border-left-color: #EC527E;
+}
+
+
+
+.backItem{
+    
+        background: rgba(231,231,231,1);
+background: -moz-linear-gradient(top, rgba(231,231,231,1) 0%, rgba(255,255,255,1) 28%, rgba(255,255,255,1) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(231,231,231,1)), color-stop(28%, rgba(255,255,255,1)), color-stop(100%, rgba(255,255,255,1)));
+background: -webkit-linear-gradient(top, rgba(231,231,231,1) 0%, rgba(255,255,255,1) 28%, rgba(255,255,255,1) 100%);
+background: -o-linear-gradient(top, rgba(231,231,231,1) 0%, rgba(255,255,255,1) 28%, rgba(255,255,255,1) 100%);
+background: -ms-linear-gradient(top, rgba(231,231,231,1) 0%, rgba(255,255,255,1) 28%, rgba(255,255,255,1) 100%);
+background: linear-gradient(to bottom, rgba(231,231,231,1) 0%, rgba(255,255,255,1) 28%, rgba(255,255,255,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e7e7e7', endColorstr='#ffffff', GradientType=0 );
+
+
+
+}
+
+.backItem ion-item{background-color:transparent !important;}
+
+ .list-header-ios {
+ text-transform: none !important;
+
+}
+.borderSelected{
+        border-left: solid 1px #d3d3d378 !important;
+         border-right: solid 1px #d3d3d378 !important;
+          border-bottom: solid 1px #d3d3d378 !important;
+
+
+    background: white !important;
+}
+
+.borderSelected2{
+   border-top: solid 1px #d3d3d378 !important;
+}
+
+.botonVerdeFull{
+
+    width: 85%;
+    margin-left: 7.5%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #2FD99B;
+    font-size: 16px;
+    color: white;
+    border-radius: 30px;
+    }
+
+.itemReserva{
+
+ background-color:  white;
+    margin: 22px;
+    position:relative;
+
+
+}
+
+
+.itemReserva img{
+    
+    display: inline-block;
+    vertical-align: top;
+    margin: 10px;
+
+
+}
+.alert-ios .alert-head {
+        background: #2FD99B !important;
+    color: white !important;
+    font-weight: 800 !important;
+}
+.alert-ios .alert-message {
+        background: #2FD99B !important;
+}
+.alert-ios .alert-radio-label {
+
+    color: #888 !important;
+}
+.alert-ios .alert-button {
+ 
+    color: white !important;
+  background: #2FD99B !important;
+}
+
+
+.segment-md .segment-button.segment-activated {
+    border-color: #2FD99B !important;
+        line-height: 3.3 !important; 
+
+}
+
+
+.segment-md .segment-button {
+        line-height: 3.3 !important; 
+}
+
+
+
+
+.my-loading {
+    ion-backdrop {
+  
+        opacity: 0 !important; 
+    }
+}
+
+
+
+
+
+

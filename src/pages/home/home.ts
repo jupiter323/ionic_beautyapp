@@ -11,4 +11,13 @@ export class HomePage {
 
   }
 
+
+    goServicio(nombreServicio){
+
+  this.navCtrl.push('ListaServiciosPage',{nombre:nombreServicio});
+
+  }
+
+
+
 }

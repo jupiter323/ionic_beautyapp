@@ -1,0 +1,184 @@
+<!--
+  Generated template for the BuscarModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Filtrar busqueda</ion-title>
+
+
+
+    <ion-buttons end>
+    <button style="    font-size: 34px;" ion-button (click)="closeModal()"><ion-icon ios="ios-close"></ion-icon></button>
+
+
+    </ion-buttons>
+
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+
+
+
+
+<ion-list style='margin:0px;'>
+  <ion-item style='       background: white !important;  padding-top: 6px;
+    padding-bottom: 6px;   color: #444 !important;'>
+    <ion-label >Palabra clave</ion-label>
+    <ion-input placeholder="Opcional"></ion-input>
+  </ion-item>
+
+  <ion-item  style='        background: white !important;    padding-top: 6px;
+    padding-bottom: 6px;   border-top: solid 1px lightgray; color: #444 !important;'>
+    <ion-label  fixed>Lugar</ion-label>
+    <ion-input type="text" placeholder="Opcional"></ion-input>
+  </ion-item>
+</ion-list>
+ 
+ <div style="font-weight: 800;
+    font-size: 18px;
+    padding: 13px;
+    background: #9993;">Ordenar Por</div>
+
+<div style="    margin: 29px 15px;">
+  <ion-segment  style='background: rgb(245,246,247);
+    font-weight: 800;' color='verdeApp' [(ngModel)]="ordenarPor">
+    <ion-segment-button value="kittens">
+      Mejor a mayor precio
+    </ion-segment-button>
+    <ion-segment-button value="puppies">
+      Mayor a menor precio
+    </ion-segment-button>
+  </ion-segment>
+
+</div>
+
+
+<ion-list style='margin-bottom: 0px'>
+
+
+  <ion-item style='       background: white !important;    padding-top: 6px;
+    padding-bottom: 6px; border-top: solid 1px lightgray !important;'>
+    <ion-label  style='    color: #444 !important;'>Opiniones altas  primero</ion-label>
+    <ion-checkbox  item-right [(ngModel)]="peppfweroni"></ion-checkbox>
+  </ion-item>
+
+
+
+</ion-list>
+
+
+
+ <div style="font-weight: 800;
+    font-size: 18px;
+    padding: 13px;
+    background: #9993;">Mostrar solo</div>
+
+
+<ion-list style='margin-bottom: 0px'>
+
+  <ion-item style='     background: white !important;     padding-top: 6px;
+    padding-bottom: 6px;  border-top: solid 1px lightgray;'>
+    <ion-label style='    color: #444 !important;'>Abierto ahora</ion-label>
+    <ion-checkbox  item-right [(ngModel)]="pepperoni"></ion-checkbox>
+  </ion-item>
+
+
+  <ion-item style='     background: white !important;     padding-top: 6px;
+    padding-bottom: 10px;  border-top: solid 1px lightgray;'>
+    <ion-label  style='    color: #444 !important;'>Disponible hoy</ion-label>
+    <ion-checkbox  item-right [(ngModel)]="peppferoni"></ion-checkbox>
+  </ion-item>
+
+
+
+</ion-list>
+
+
+
+
+
+
+
+		<ion-list class="accordion-list">
+			<!-- First Level -->
+			<ion-list-header style='background: white !important;
+    border-top: solid 1px lightgray;    padding-bottom: 10px;'  [ngClass]="{'borderSelected': item.open, 'borderSelected2': item.open && item.id==1}" *ngFor="let item of information; let i = index" no-lines no-padding>
+			<!-- Toggle Button -->
+			<button style='    color: #444 !important;background: white !important;'  ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
+			<ion-icon class='btnList' item-right  name="ios-add" *ngIf="!item.open"></ion-icon>
+			<ion-icon class='btnList' item-right name="ios-remove" *ngIf="item.open"></ion-icon>
+{{item.nombre}} 
+			{{ item.id == 1 ? (fechaSeleccionada || '') : 
+			   item.id == 2 ? (horaSeleccionada  || '') : 
+			   item.id == 3 ? (staffSeleccionado  || '') : '' }}
+
+			</button>
+
+			<ion-list style='margin:0px !important' *ngIf="item.open && item.id == 1" no-lines >
+			<!-- Second Level -->
+			
+				 <ion-calendar [(ngModel)]="date"
+	                  (onChange)="onChange($event)"
+	                  [options]="options"
+	                  type="string"
+	                  format="MMM DD YYYY">
+	   			 </ion-calendar>
+			</ion-list>
+
+
+			<ion-list class='backItem' style='width: 100%;
+    display: table;
+    white-space: normal;'  *ngIf="item.open && item.id == 2 "  radio-group [(ngModel)]="horaSeleccionada">
+				<ion-item class='itemHora'>
+				<ion-label>11:25am</ion-label>
+				<ion-radio mode='wp' value="11:25am" checked></ion-radio>
+				</ion-item>
+				<ion-item class='itemHora' >
+				<ion-label>11:35am</ion-label>
+				<ion-radio mode='wp' value="11:35am"></ion-radio>
+				</ion-item>
+				<ion-item class='itemHora'>
+				<ion-label>11:55am</ion-label>
+				<ion-radio mode='wp' value="11:55am" [disabled]="isDisabled"></ion-radio>
+				</ion-item>
+
+
+
+
+
+
+			</ion-list>
+
+
+
+
+
+
+
+			</ion-list-header>
+		</ion-list>
+
+		<div style="width:100%;height:50px;"></div>
+
+
+    <div style="width: 100%;
+    position: fixed;
+    bottom: 0px;
+    background: rgb(247,248,249);
+    padding-bottom: 6px;
+">
+          <button ion-button class="botonVerdeFull">Buscar<ion-icon style='    margin-left: 10px !important;' name="md-arrow-forward"></ion-icon> </button>
+
+
+    </div>
+
+
+</ion-content>

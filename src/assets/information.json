@@ -1,0 +1,56 @@
+{
+    "items": [
+        {
+            "name": "Categoria 1",
+            "children": [
+                {
+                    "name": "Corte de cabello",
+                    "information": "Rotum Ipsum Dolor Site Ament sor Ler",
+                    "price": "$20.00",
+                    "time": "60 min"
+                },
+                {
+                    "name": "Lavado, corte, estilo",
+                    "information": "Lorem ipsum dolor sit amet, lectus voluptas ipsum felis nec massa vel, fusce porttitor justo.",
+                    "price": "$19.99",
+                    "time": "90 min"
+                }
+            ]
+        },
+
+        {
+            "name": "Categoria 2",
+            "children": [
+                {
+                    "name": "Tinte clasico",
+                    "information": "Lorem ipsum dolor sit amet, lectus voluptas ipsum felis nec massa vel, fusce porttitor justo landjaeger jowl.",
+                    "price": "$25.00"
+                },
+                {
+                    "name": "Tratamiento Shi completo",
+                    "information": "Lorem ipsum dolor sit amet, lectus voluptas ipsum felis nec massa vel, fusce porttitor justo.",
+                    "price": "$99.99"
+                }
+            ]
+        },
+
+                {
+            "name": "Categoria 3",
+            "children": [
+                {
+                    "name": "Tinte claseico",
+                    "information": "Lorem ipsum dolor sit amet, lectus voluptas ipsum felis nec massa vel, fusce porttitor justo.",
+                    "price": "$25.00"
+                },
+                {
+                    "name": "Tratamiento Shi completo",
+                    "information": "Lorem ipsum dolor sit amet, lectus voluptas ipsum felis nec massa vel, fusce porttitor justo..",
+                    "price": "$99.99"
+                }
+            ]
+        }
+
+
+
+    ]
+}

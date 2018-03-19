@@ -1,0 +1,352 @@
+<!--
+  Generated template for the ListaServiciosPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+
+  
+    <ion-title>
+<ion-item style='background-color: transparent !important;'>
+  <ion-label style='display:none'>Servicio</ion-label>
+      <ion-select style='
+    width: 100%;
+    text-align: center;
+    color: white !important;' [ngModel]='categoriaSeleccionada'>
+    <ion-option   value='Peluqueria'>Peluqueria</ion-option>
+    <ion-option value='Rostro y Cuerpo' >Rostro y Cuerpo</ion-option>
+
+    <ion-option value='Uñas'>Uñas</ion-option>
+    <ion-option value='Masaje' >Masaje</ion-option>
+
+    <ion-option value='Depilacion'>Depilacion</ion-option>
+    <ion-option value='Bienestar' >Bienestar</ion-option>
+    <ion-option value='Paquetes'>Paquetes</ion-option>
+    <ion-option value='Ofertas' >Ofertas</ion-option>
+
+  </ion-select>
+</ion-item>
+  </ion-title>
+
+
+
+          <ion-buttons end>
+      <button (click)='openBusqueda()' ion-button icon-only>
+        <ion-icon name="ios-options"></ion-icon>
+      </button>
+
+
+       
+
+      </ion-buttons>
+
+
+
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+
+
+
+
+
+
+
+
+
+<ion-segment mode="md" [(ngModel)]="section">
+    <ion-segment-button   style='font-size: 15px;text-transform: none !important;' value="one" >
+	       <span> 
+	       <img  *ngIf='section=="one"' style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/nearBlanco.png">
+	       <img  *ngIf='!(section=="one")' style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/nearGris.png">
+	        Cerca de ti</span>
+	    </ion-segment-button>
+
+
+
+	    <ion-segment-button  value="two" style='
+    	font-size: 15px;text-transform: none !important;' >
+    	<span>
+	      <img  *ngIf='section=="two"' style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/corazonBlanco.png"> 
+	      <img  *ngIf='!(section=="two")'  style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/corazonGris.png"> 
+
+	      
+
+	      Favoritos
+	       </span>
+	    </ion-segment-button>
+</ion-segment>
+
+
+
+
+<div [ngSwitch]="section">
+    <ion-list mode="md" *ngSwitchCase="'one'">
+
+		<ion-card (click)='goCentro()'>
+
+		<ion-card-content>
+				<div style="
+				display: inline-block;    width: 100%;
+				">
+				<img src="assets/imgs/fotoComercio.png" style="
+				display: inline-block;
+				height: 90px;
+				width: 90px !important;
+				vertical-align: top;
+				">
+				<div style="    display: inline-block;
+    width: calc(100% - 105px);
+    margin-left: 10px;
+				">
+				<span style="margin: 2px 0px 0px 0px;
+				font-size: 19px;
+				color: #333;">Center Name Here</span>
+				<span style="    display: block;
+    font-size: 16px;
+    margin: 10px 0px;
+    font-weight: 800;
+    color: #EC527E;">$25 - $40</span>
+
+				<span class="itemComercio" >
+
+					<span style="  margin-right: 21px;  color: #888;
+    font-size: 15px;"><ion-icon style='    margin-right: 8px;
+    color: rgb(249,199,53);
+    font-size: 21px;
+    vertical-align: middle;' name="md-star"></ion-icon>5.0 (20)</span>
+
+					<span style="     color: #888;
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>7.5 Km</span>
+
+				</span>
+
+				</div>
+				</div>
+
+		</ion-card-content>
+		</ion-card>
+
+
+
+		<ion-card (click)='goCentro()'>
+
+		<ion-card-content>
+				<div style="
+				display: inline-block;    width: 100%;
+				">
+				<img src="assets/imgs/fotoProfile.png" style="
+				display: inline-block;
+				height: 90px;
+
+    border-radius: 6px;
+				width: 90px !important;
+				vertical-align: top;
+				">
+				<div style="    display: inline-block;
+    width: calc(100% - 105px);
+    margin-left: 10px;
+				">
+				<span style="margin: 2px 0px 0px 0px;
+				font-size: 19px;
+				color: #333;">Center Name Here</span>
+				<span style="    display: block;
+    font-size: 16px;
+    margin: 10px 0px;
+    font-weight: 800;
+    color: #EC527E;">$25 - $40</span>
+
+				<span class="itemComercio" >
+
+					<span style="  margin-right: 21px;  color: #888;
+    font-size: 15px;"><ion-icon style='    margin-right: 8px;
+    color: rgb(249,199,53);
+    font-size: 21px;
+    vertical-align: middle;' name="md-star"></ion-icon>5.0 (20)</span>
+
+					<span style="     color: #888;
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>7.5 Km</span>
+
+				</span>
+
+				</div>
+				</div>
+
+		</ion-card-content>
+		</ion-card>
+
+
+
+		<ion-card (click)='goCentro()'>
+
+		<ion-card-content>
+				<div style="
+				display: inline-block;    width: 100%;
+				">
+				<img src="assets/imgs/imagenLogo.png" style="
+				display: inline-block;
+				height: 90px;
+				    object-fit: cover;
+				width: 90px !important;
+				vertical-align: top;
+				">
+				<div style="    display: inline-block;
+    width: calc(100% - 105px);
+    margin-left: 10px;
+				">
+				<span style="margin: 2px 0px 0px 0px;
+				font-size: 19px;
+				color: #333;">Center Name Here</span>
+				<span style="    display: block;
+    font-size: 16px;
+    margin: 10px 0px;
+    font-weight: 800;
+    color: #EC527E;">$25 - $40</span>
+
+				<span class="itemComercio" >
+
+					<span style="  margin-right: 21px;  color: #888;
+    font-size: 15px;"><ion-icon style='    margin-right: 8px;
+    color: rgb(249,199,53);
+    font-size: 21px;
+    vertical-align: middle;' name="md-star"></ion-icon>5.0 (20)</span>
+
+					<span style="     color: #888;
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>7.5 Km</span>
+
+				</span>
+
+				</div>
+				</div>
+
+		</ion-card-content>
+		</ion-card>
+
+
+
+
+
+
+
+    </ion-list>
+
+    <ion-list  mode="md" *ngSwitchCase="'two'">
+    	<ion-card (click)='goCentro()'>
+
+		<ion-card-content>
+				<div style="
+				display: inline-block;    width: 100%;
+				">
+				<img src="assets/imgs/fotoComercio.png" style="
+				display: inline-block;
+				height: 90px;
+				width: 90px !important;
+				vertical-align: top;
+				">
+				<div style="    display: inline-block;
+    width: calc(100% - 105px);
+    margin-left: 10px;
+				">
+				<span style="margin: 2px 0px 0px 0px;
+				font-size: 19px;
+				color: #333;">Center Name Here</span>
+				<span style="    display: block;
+    font-size: 16px;
+    margin: 10px 0px;
+    font-weight: 800;
+    color: #EC527E;">$25 - $40</span>
+
+				<span class="itemComercio" >
+
+					<span style="  margin-right: 21px;  color: #888;
+    font-size: 15px;"><ion-icon style='    margin-right: 8px;
+    color: rgb(249,199,53);
+    font-size: 21px;
+    vertical-align: middle;' name="md-star"></ion-icon>5.0 (20)</span>
+
+					<span style="     color: #888;
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>7.5 Km</span>
+
+				</span>
+
+				</div>
+				</div>
+
+		</ion-card-content>
+		</ion-card>
+
+
+
+
+
+		<ion-card (click)='goCentro()'>
+
+		<ion-card-content>
+				<div style="
+				display: inline-block;    width: 100%;
+				">
+				<img src="assets/imgs/imagenLogo.png" style="
+				display: inline-block;
+				height: 90px;
+				    object-fit: cover;
+				width: 90px !important;
+				vertical-align: top;
+				">
+				<div style="    display: inline-block;
+    width: calc(100% - 105px);
+    margin-left: 10px;
+				">
+				<span style="margin: 2px 0px 0px 0px;
+				font-size: 19px;
+				color: #333;">Center Name Here</span>
+				<span style="    display: block;
+    font-size: 16px;
+    margin: 10px 0px;
+    font-weight: 800;
+    color: #EC527E;">$25 - $40</span>
+
+				<span class="itemComercio" >
+
+					<span style="  margin-right: 21px;  color: #888;
+    font-size: 15px;"><ion-icon style='    margin-right: 8px;
+    color: rgb(249,199,53);
+    font-size: 21px;
+    vertical-align: middle;' name="md-star"></ion-icon>5.0 (20)</span>
+
+					<span style="     color: #888;
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>7.5 Km</span>
+
+				</span>
+
+				</div>
+				</div>
+
+		</ion-card-content>
+		</ion-card>
+
+
+
+
+
+
+
+    </ion-list>
+
+</div>
+
+
+
+
+
+
+
+
+
+</ion-content>

@@ -19,11 +19,6 @@
     <ion-title>Mis Reservaciones</ion-title>
   </ion-navbar>
 
-</ion-header>
-
-
-<ion-content >
-
 
 <ion-segment mode="md" [(ngModel)]="section">
     <ion-segment-button   style='font-size: 15px;text-transform: none !important;' value="one" >
@@ -50,212 +45,73 @@
 
 
 
+</ion-header>
+
+
+<ion-content >
+
+
+
+
+
 
 <div [ngSwitch]="section">
     <ion-list mode="md" *ngSwitchCase="'one'">
 
-		<ion-card (click)='goDetalle(1)'>
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/fotoComercio.png" style="
-				display: inline-block;
-				height: 90px;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				<span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;">Center Name Here</span>
-				<span style="    display: block;
+    	<div  style='    margin: 30px;
+    text-align: center;
     font-size: 16px;
-    margin: 10px 0px;
-    font-weight: 800;
-    color: #2FD99B;">Confimado</span>
+    color: darkgray;' *ngIf="(reservas | filtrofav: filterFav).length == 0" >No hay reservas en esta seccion
 
-				<span class="itemComercio" >
 
-					<span style="    font-size: 14px;"><ion-icon style='margin-right: 5px;    vertical-align: middle;' name="md-calendar"></ion-icon>Jue, 20 May 2018</span>
+    	</div>
+		<div class='cardReserva' *ngFor="let n of reservas | filtrofav: filterFav" (click)='goDetalle(n.idCita)'>
 
-					<span style="     font-size: 14px;   float: right;"><ion-icon style='  vertical-align: middle;margin-right: 5px' name="ios-time-outline"></ion-icon>11:30am</span>
-
+		<div>
+				<div style="display: inline-block;    width: 100%;">
+				<div  class="fechaItem" 
+				[ngClass]="{'citaE3sb3':n.estado == 3,'citaE4sb3':n.estado == 4 || n.estado == 7, 'citaE2sb3': n.estado == 5, 'citaE1sb3':n.estado == 2, 'citaE0sb3':n.estado == 1}">
+						<span style="display: block; text-transform: uppercase;">{{getMes(n.horaInicio)}}</span>
+						<span style="display: block;font-size: 27px;font-weight: 800">{{getDia(n.horaInicio)}}</span>
+						<span *ngIf='n.horaInicio' style="display: block;">{{getDattt(n.horaInicio)}}</span>
+				</div>
+				<div style="    display: inline-block;vertical-align: middle;    max-width: 58%;">
+				<span *ngIf='n.estado==1' class='estadoReservas' style="color: #efd801;">
+				PENDIENTE CONFIRMAR
+				</span>
+				<span *ngIf='n.estado==2'  class='estadoReservas' style="color:#5072C0 ">
+				CONFIRMADA
+				</span>
+				<span *ngIf='n.estado==3'  class='estadoReservas' style="color: #2FD99B;">
+				COMPLETA
+				</span>
+				<span *ngIf='n.estado==5'  class='estadoReservas' style="color: #FFC859">
+				REPROGRAMADA - PENDIENTE</span>
+				<span *ngIf='n.estado==4' class='estadoReservas' style="color: #f75669;">
+				DECLINADA
 				</span>
 
-				</div>
-				</div>
-
-		</ion-card-content>
-		</ion-card>
-
-
-		<ion-card (click)='goDetalle(1)'>
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/fotoComercio.png" style="
-				display: inline-block;
-				height: 90px;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				<span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;">Center Name Here</span>
-				<span style="    display: block;
-    font-size: 16px;
-    margin: 10px 0px;
-    font-weight: 800;
-    color: rgb(250,195,0);">Pendiente de confirmar</span>
-
-				<span class="itemComercio" >
-
-					<span style="    font-size: 14px;"><ion-icon style='margin-right: 5px;    vertical-align: middle;' name="md-calendar"></ion-icon>Jue, 20 May 2018</span>
-
-					<span style="     font-size: 14px;   float: right;"><ion-icon style='  vertical-align: middle;margin-right: 5px' name="ios-time-outline"></ion-icon>11:30am</span>
-
+						<span *ngIf='n.estado==7' class='estadoReservas' style="color: #f75669;">
+				CANCELADA
 				</span>
 
-				</div>
-				</div>
 
-		</ion-card-content>
-		</ion-card >
-
-		<ion-card (click)='goDetalle(1)'>
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/fotoComercio.png" style="
-				display: inline-block;
-				height: 90px;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				<span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;">Center Name Here</span>
-				<span style="    display: block;
-    font-size: 16px;
-    margin: 10px 0px;
-    font-weight: 800;
-    color: #2FD99B;">Confimado</span>
-
-				<span class="itemComercio" >
-
-				<span style="    font-size: 14px;"><ion-icon style='margin-right: 5px;    vertical-align: middle;' name="md-calendar"></ion-icon>Jue, 20 May 2018</span>
-
-					<span style="     font-size: 14px;   float: right;"><ion-icon style='  vertical-align: middle;margin-right: 5px' name="ios-time-outline"></ion-icon>11:30am</span>
-
+				<span style="font-size: 15px;
+    color: #8a8888;    font-weight: 500;">
+				{{n.nombreCentro}}
 				</span>
-
-				</div>
-				</div>
-
-		</ion-card-content>
-		</ion-card>
-
-
-		<ion-card (click)='goDetalle(1)'>
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/fotoComercio.png" style="
-				display: inline-block;
-				height: 90px;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				<span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;">Center Name Here</span>
-				<span style="    display: block;
-    font-size: 16px;
-    margin: 10px 0px;
-    font-weight: 800;
-    color: #2FD99B;">Confimado</span>
-
-				<span class="itemComercio" >
-
-					<span style="    font-size: 14px;"><ion-icon style='margin-right: 5px;    vertical-align: middle;' name="md-calendar"></ion-icon>Jue, 20 May 2018</span>
-
-					<span style="     font-size: 14px;   float: right;"><ion-icon style='  vertical-align: middle;margin-right: 5px' name="ios-time-outline"></ion-icon>11:30am</span>
-
+				<span  class='estadoReservas2' style="color: #999;">
+				{{n.servicioMain}} <span *ngIf='n.cantServicios>1'> y {{getNumMen(n.cantServicios)}} más </span> 
 				</span>
-
 				</div>
-				</div>
-
-		</ion-card-content>
-		</ion-card>
-
-
-		<ion-card (click)='goDetalle(1)'>
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/fotoComercio.png" style="
-				display: inline-block;
-				height: 90px;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				<span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;">Center Name Here</span>
-				<span style="    display: block;
-    font-size: 16px;
-    margin: 10px 0px;
-    font-weight: 800;
-    color: rgb(250,195,0);">Pendiente de confirmar</span>
-
-				<span class="itemComercio" >
-
-				<span style="    font-size: 14px;"><ion-icon style='margin-right: 5px;    vertical-align: middle;' name="md-calendar"></ion-icon>Jue, 20 May 2018</span>
-
-					<span style="     font-size: 14px;   float: right;"><ion-icon style='  vertical-align: middle;margin-right: 5px' name="ios-time-outline"></ion-icon>11:30am</span>
-
-				</span>
-
-				</div>
+				<ion-icon class='iconR' name="arrow-forward"></ion-icon>
 				</div>
 
-		</ion-card-content>
-		</ion-card>
+		</div>
+		</div>
 
 
-
-
-
+		
 
 
     </ion-list>
@@ -263,122 +119,60 @@
     <ion-list  mode="md" *ngSwitchCase="'two'">
 
 
-	<ion-card>
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/fotoComercio.png" style="
-				display: inline-block;
-				height: 90px;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				<span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;">Center Name Here</span>
-				<span style="    display: block;
+    	<div  style='    margin: 30px;
+    text-align: center;
     font-size: 16px;
-    margin: 10px 0px;
-    font-weight: 800;
-    color: #EC527E;">Cancelada</span>
+    color: darkgray;' *ngIf="(reservas | filtrofav: filterFav2).length == 0" >No hay reservas en esta seccion
 
-				<span class="itemComercio" >
+    
+    	</div>
 
-			<span style="    font-size: 14px;"><ion-icon style='margin-right: 5px;    vertical-align: middle;' name="md-calendar"></ion-icon>Jue, 20 May 2018</span>
+    	
 
-					<span style="     font-size: 14px;   float: right;"><ion-icon style='  vertical-align: middle;margin-right: 5px' name="ios-time-outline"></ion-icon>11:30am</span>
+			<div class='cardReserva' *ngFor="let n of reservas.slice().reverse() | filtrofav: filterFav2" (click)='goDetalle(n.idCita)'>
 
+		<div>
+				<div style="display: inline-block;    width: 100%;">
+				<div  class="fechaItem">
+						<span style="display: block; text-transform: uppercase;">{{getMes(n.horaInicio)}}</span>
+						<span style="display: block;font-size: 27px;font-weight: 800">{{getDia(n.horaInicio)}}</span>
+						<span *ngIf='n.horaInicio' style="display: block;">{{getDattt(n.horaInicio)}}</span>
+				</div>
+				<div style="    display: inline-block;vertical-align: middle;    max-width: 58%;">
+				<span *ngIf='n.estado==1' class='estadoReservas' style="color: rgb(250,195,0);">
+				PENDIENTE CONFIRMAR
 				</span>
-
-				</div>
-				</div>
-
-		</ion-card-content>
-		</ion-card>
-
-		<ion-card>
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/fotoComercio.png" style="
-				display: inline-block;
-				height: 90px;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				<span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;">Center Name Here</span>
-				<span style="    display: block;
-    font-size: 16px;
-    margin: 10px 0px;
-    font-weight: 800;
-    color: #2FD99B;">Completada</span>
-
-				<span class="itemComercio" >
-
-					<span style="    font-size: 14px;"><ion-icon style='margin-right: 5px;    vertical-align: middle;' name="md-calendar"></ion-icon>Jue, 20 May 2018</span>
-
-					<span style="     font-size: 14px;   float: right;"><ion-icon style='  vertical-align: middle;margin-right: 5px' name="ios-time-outline"></ion-icon>11:30am</span>
-
+				<span *ngIf='n.estado==2'  class='estadoReservas' style="color: #2FD99B;">
+				CONFIRMADA
 				</span>
-
-				</div>
-				</div>
-
-		</ion-card-content>
-		</ion-card>
-
-	<ion-card>
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/fotoComercio.png" style="
-				display: inline-block;
-				height: 90px;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				<span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;">Center Name Here</span>
-				<span style="    display: block;
-    font-size: 16px;
-    margin: 10px 0px;
-    font-weight: 800;
-    color: #EC527E;">Cancelada</span>
-
-				<span class="itemComercio" >
-
-					<span style="    font-size: 14px;"><ion-icon style='margin-right: 5px;    vertical-align: middle;' name="md-calendar"></ion-icon>Jue, 20 May 2018</span>
-
-					<span style="     font-size: 14px;   float: right;"><ion-icon style='  vertical-align: middle;margin-right: 5px' name="ios-time-outline"></ion-icon>11:30am</span>
-
+				<span *ngIf='n.estado==3'  class='estadoReservas' style="color: #2FD99B;">
+				COMPLETA
 				</span>
-
+				<span *ngIf='n.estado==5'  class='estadoReservas' style="color: #2FD99B;">
+				REPROGRAMADA - PENDIENTE</span>
+							<span *ngIf='n.estado==4' class='estadoReservas' style="color: #EC527E;">
+				DECLINADA
+				</span>
+				<span *ngIf='n.estado==7' class='estadoReservas' style="color: #EC527E;">
+				CANCELADA
+				</span>
+				<span style="font-size: 15px;
+    color: #8a8888;">
+				{{n.nombreCentro}}
+				</span>
+				<span  class='estadoReservas2' style="color: #999;">
+				{{n.servicioMain}} 
+				<span *ngIf='n.cantServicios>1'> y {{getNumMen(n.cantServicios)}} más </span> 
+				con {{n.nombreEmpleado}}
+				</span>
 				</div>
+				<ion-icon class='iconR' name="arrow-forward"></ion-icon>
 				</div>
 
-		</ion-card-content>
-		</ion-card>
+		</div>
+
+
+		</div>
 
 
 
@@ -388,6 +182,7 @@
     </ion-list>
 
 </div>
+
 
 
 </ion-content>

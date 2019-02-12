@@ -9,13 +9,32 @@
   <ion-navbar>
 
   
-    <ion-title>
-<ion-item style='background-color: transparent !important;'>
-  <ion-label style='display:none'>Servicio</ion-label>
-      <ion-select style='
-    width: 100%;
-    text-align: center;
-    color: white !important;' [ngModel]='categoriaSeleccionada'>
+    <ion-title style='padding: 0px;'>
+      <div style="    font-size: 14px;
+    font-weight: normal;
+    margin-top: 14px;">{{nombreCat2}}</div>
+    
+<ion-item style='background-color: transparent !important;    margin: auto;
+    width: 55%;'>
+  
+  <ion-label style='display:none'>Sub Categorias</ion-label>
+
+      <ion-select style='  
+        text-align: center;
+    color: white !important;
+    margin: 0px auto;
+    height: 25px;
+    padding: 0px;' [(ngModel)]="subcategoriaSeleccionada" (ionChange)="buscarServicios($event,true,0)" multiple="true" okText="Buscar"  cancelText="Cerrar">
+
+
+
+ <ion-option  *ngFor="let n of categorias; let idx = index"   [value]="n.idSubcategoria" 
+      >{{n.nombre}}</ion-option>
+
+     
+<!-- nombreCat2
+    <ion-option  *ngFor="let n of categorias" [value]="n.idCategoria" 
+    (ionSelect)="cambiarSeleccion($event, n)">{{n.nombre}}</ion-option>
     <ion-option   value='Peluqueria'>Peluqueria</ion-option>
     <ion-option value='Rostro y Cuerpo' >Rostro y Cuerpo</ion-option>
 
@@ -25,7 +44,7 @@
     <ion-option value='Depilacion'>Depilacion</ion-option>
     <ion-option value='Bienestar' >Bienestar</ion-option>
     <ion-option value='Paquetes'>Paquetes</ion-option>
-    <ion-option value='Ofertas' >Ofertas</ion-option>
+    <ion-option value='Ofertas' >Ofertas</ion-option> -->
 
   </ion-select>
 </ion-item>
@@ -34,6 +53,13 @@
 
 
           <ion-buttons end>
+
+                 <button  (click)='goMapa()'   ion-button icon-only>
+        <ion-icon name="ios-pin" style='    margin-right: 12px;font-color:white;color:white'></ion-icon>
+      </button>
+
+
+
       <button (click)='openBusqueda()' ion-button icon-only>
         <ion-icon name="ios-options"></ion-icon>
       </button>
@@ -48,6 +74,68 @@
 
   </ion-navbar>
 
+<!-- 
+  <ion-segment mode="md" [(ngModel)]="section">
+    <ion-segment-button   style='font-size: 15px;text-transform: none !important;' value="one" >
+         <span> 
+         <img  *ngIf='section=="one"' style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/nearBlanco.png">
+         <img  *ngIf='!(section=="one")' style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/nearGris.png">
+          Cerca de ti</span>
+
+
+        <ion-item  style='        background: white !important;    padding-top: 6px;
+    padding-bottom: 6px;   border-top: solid 1px lightgray; color: #444 !important;'>
+    <ion-label  fixed>Lugar</ion-label>
+
+      <ion-input [(ngModel)]="autocomplete.input" (ionFocus)="seleccionIn=true"  (ionChange)="updateSearchResults()" placeholder="Busqueda por lugar"></ion-input>
+
+
+
+
+  </ion-item>
+
+
+      </ion-segment-button>
+ -->
+
+
+<!--       <ion-segment-button  value="two" style='
+      font-size: 15px;text-transform: none !important;' >
+      <span>
+        <img  *ngIf='section=="two"' style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/corazonBlanco.png"> 
+        <img  *ngIf='!(section=="two")'  style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/corazonGris.png"> 
+
+        
+
+        Favoritos
+         </span>
+      </ion-segment-button>
+</ion-segment>
+ -->
+
+        <ion-item  style='         background-color: #f7f8f9 !important;   padding-top: 6px;
+    padding-bottom: 6px;   border-top: solid 1px lightgray; color: #444 !important;'>
+
+  <!--   <ion-label  fixed>Lugar</ion-label> -->
+    <!-- <ion-input type="text" placeholder="Opcional"></ion-input> -->
+
+                            <ion-label style=' color: #e6e6e6;   position: absolute;
+    right: 16px;
+    font-size: 21px;'>
+                  <ion-icon   ios="ios-navigate" md="ios-navigate" ></ion-icon> 
+            </ion-label>
+            
+      <ion-input [(ngModel)]="autocomplete.input" (ionFocus)="seleccionIn=true"  (ionChange)="updateSearchResults()" autocomplete='off' placeholder="Cerca de usted" 
+       class='inputLocation'>
+
+
+       </ion-input>
+
+
+
+
+  </ion-item>
+
 </ion-header>
 
 
@@ -55,171 +143,103 @@
 
 
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Actualizar ubicacion"
+      refreshingSpinner="circles"
+      refreshingText="Actualizando ubicacion...">
+    </ion-refresher-content>
+  </ion-refresher>
 
 
 
 
 
 
-<ion-segment mode="md" [(ngModel)]="section">
-    <ion-segment-button   style='font-size: 15px;text-transform: none !important;' value="one" >
-	       <span> 
-	       <img  *ngIf='section=="one"' style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/nearBlanco.png">
-	       <img  *ngIf='!(section=="one")' style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/nearGris.png">
-	        Cerca de ti</span>
-	    </ion-segment-button>
-
-
-
-	    <ion-segment-button  value="two" style='
-    	font-size: 15px;text-transform: none !important;' >
-    	<span>
-	      <img  *ngIf='section=="two"' style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/corazonBlanco.png"> 
-	      <img  *ngIf='!(section=="two")'  style='vertical-align: middle;margin-right: 10px;' src="assets/imgs/corazonGris.png"> 
-
-	      
-
-	      Favoritos
-	       </span>
-	    </ion-segment-button>
-</ion-segment>
 
 
 
 
-<div [ngSwitch]="section">
-    <ion-list mode="md" *ngSwitchCase="'one'">
 
-		<ion-card (click)='goCentro()'>
 
-		<ion-card-content>
+<div  *ngIf='cargaData'>
+
+
+
+
+       <ion-list style='position: fixed !important;' [hidden]="autocompleteItems?.length == 0 || !seleccionIn">
+  <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+    {{ item.description }}
+  </ion-item>
+</ion-list>
+
+    	<div *ngIf="!(resultados?.length > 0)" style="    text-align: center;">
+    		
+    		<img  style='    margin: 0px;' src="assets/imgs/busquedaNula.png">
+    		<p style="    text-align: center;
+    font-size: 16px;
+    margin: 34px;
+    line-height: 23px;"> <span style="    font-size: 22px !important;
+    color: #333 !important;
+    line-height: 2;">No hay centros cercanos</span><br>  <b style="color:#666">Prueba buscando en una región diferente utilizando el <a (click)='openBusqueda()'>filtro del buscador</a>  </b></p>
+    	</div>
+		<ion-card *ngFor="let n of resultados" (click)='goCentro(n.idCentro)' 
+        [ngStyle]="{'border': n.ofertaActiva > 0 ? 'solid 3px #EC527E' : 'none' }">
+		<ion-card-content style='padding: 10px !important;' >
 				<div style="
 				display: inline-block;    width: 100%;
 				">
-				<img src="assets/imgs/fotoComercio.png" style="
+<!-- 				<img src="assets/imgs/fotoComercio.png" style="
 				display: inline-block;
 				height: 90px;
 				width: 90px !important;
 				vertical-align: top;
-				">
+				"> -->
+<div style="
+    display: inline-block;
+    height: 76px;
+    width: 95px !important;
+    vertical-align: top;
+    text-align: center;
+        ">
+                <img src="http://50.116.17.150:3000/{{n.idFoto}}" 
+        onError="this.src='assets/imgs/fotoComercio.png';"
+        style="
+        display: inline-block;
+        height: 76px;
+        width: 76px !important;
+        vertical-align: top;
+        ">
+        <span style="    background-color: #EC527E;
+    font-size: 11px;
+    font-weight: 800;
+    color: white;
+    border-radius: 2px;
+    padding: 1px 9px;" *ngIf='n.ofertaActiva > 0'>Con Ofertas</span>
+        </div>
 				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
+        width: calc(100% - 103px);">
 				<span style="margin: 2px 0px 0px 0px;
 				font-size: 19px;
-				color: #333;">Center Name Here</span>
+				color: #333;">{{n.nombre}}</span>
 				<span style="    display: block;
     font-size: 16px;
     margin: 10px 0px;
     font-weight: 800;
-    color: #EC527E;">$25 - $40</span>
+    color: #EC527E;">${{n.pMin}} <span [hidden]='n.pMin == n.pMax'>- ${{n.pMax}}</span></span>
 
 				<span class="itemComercio" >
 
 					<span style="  margin-right: 21px;  color: #888;
-    font-size: 15px;"><ion-icon style='    margin-right: 8px;
+    font-size: 15px;"><ion-icon [ngClass]="{'colorGris': n.cantRate==0}"  style='    margin-right: 8px;
     color: rgb(249,199,53);
     font-size: 21px;
-    vertical-align: middle;' name="md-star"></ion-icon>5.0 (20)</span>
+    vertical-align: middle;' name="md-star"></ion-icon>{{n.rate  | number:'1.1-2'}} ({{n.cantRate
+}})</span>
 
 					<span style="     color: #888;
-    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>7.5 Km</span>
-
-				</span>
-
-				</div>
-				</div>
-
-		</ion-card-content>
-		</ion-card>
-
-
-
-		<ion-card (click)='goCentro()'>
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/fotoProfile.png" style="
-				display: inline-block;
-				height: 90px;
-
-    border-radius: 6px;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				<span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;">Center Name Here</span>
-				<span style="    display: block;
-    font-size: 16px;
-    margin: 10px 0px;
-    font-weight: 800;
-    color: #EC527E;">$25 - $40</span>
-
-				<span class="itemComercio" >
-
-					<span style="  margin-right: 21px;  color: #888;
-    font-size: 15px;"><ion-icon style='    margin-right: 8px;
-    color: rgb(249,199,53);
-    font-size: 21px;
-    vertical-align: middle;' name="md-star"></ion-icon>5.0 (20)</span>
-
-					<span style="     color: #888;
-    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>7.5 Km</span>
-
-				</span>
-
-				</div>
-				</div>
-
-		</ion-card-content>
-		</ion-card>
-
-
-
-		<ion-card (click)='goCentro()'>
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/imagenLogo.png" style="
-				display: inline-block;
-				height: 90px;
-				    object-fit: cover;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				<span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;">Center Name Here</span>
-				<span style="    display: block;
-    font-size: 16px;
-    margin: 10px 0px;
-    font-weight: 800;
-    color: #EC527E;">$25 - $40</span>
-
-				<span class="itemComercio" >
-
-					<span style="  margin-right: 21px;  color: #888;
-    font-size: 15px;"><ion-icon style='    margin-right: 8px;
-    color: rgb(249,199,53);
-    font-size: 21px;
-    vertical-align: middle;' name="md-star"></ion-icon>5.0 (20)</span>
-
-					<span style="     color: #888;
-    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>7.5 Km</span>
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>{{n.distance | number:'1.1-2'}} Km</span>
 
 				</span>
 
@@ -232,19 +252,32 @@
 
 
 
+<!--     <ion-list  mode="md" *ngSwitchCase="'two'">
 
 
+<div style='margin: 30px;
+    text-align: center;
+    color: #9998;
+    font-size: 17px;'  *ngIf='!favoritosActivo'>
+  Crea una cuenta o Logueate para acceder a tus favoritos
+</div>
+<div *ngIf='favoritosActivo'>
 
-    </ion-list>
+<div style='margin: 30px;
+    text-align: center;
+    color: #9998;
+    font-size: 17px;'  *ngIf="rFavs.length === 0">
+  No has agregado ningun favorito en esta subcategoria
+</div>
 
-    <ion-list  mode="md" *ngSwitchCase="'two'">
-    	<ion-card (click)='goCentro()'>
 
+    <ion-card *ngFor="let n of rFavs" (click)='goCentro(n.idCentro)'>
 		<ion-card-content>
 				<div style="
 				display: inline-block;    width: 100%;
 				">
-				<img src="assets/imgs/fotoComercio.png" style="
+				<img src="http://50.116.17.150:3000/{{n.idFoto}}" 
+        onError="this.src='assets/imgs/fotoComercio.png';" style="
 				display: inline-block;
 				height: 90px;
 				width: 90px !important;
@@ -256,23 +289,24 @@
 				">
 				<span style="margin: 2px 0px 0px 0px;
 				font-size: 19px;
-				color: #333;">Center Name Here</span>
+				color: #333;">{{n.nombre}}</span>
 				<span style="    display: block;
     font-size: 16px;
     margin: 10px 0px;
     font-weight: 800;
-    color: #EC527E;">$25 - $40</span>
+    color: #EC527E;">${{n.pMin}} <span [hidden]='n.pMin == n.pMax'>- ${{n.pMax}}</span></span>
 
 				<span class="itemComercio" >
 
 					<span style="  margin-right: 21px;  color: #888;
-    font-size: 15px;"><ion-icon style='    margin-right: 8px;
+    font-size: 15px;"><ion-icon [ngClass]="{'colorGris': n.cantRate==0}"  style='    margin-right: 8px;
     color: rgb(249,199,53);
     font-size: 21px;
-    vertical-align: middle;' name="md-star"></ion-icon>5.0 (20)</span>
+    vertical-align: middle;' name="md-star"></ion-icon>{{n.rate  | number:'1.1-2'}} ({{n.cantRate
+}})</span>
 
 					<span style="     color: #888;
-    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>7.5 Km</span>
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>{{n.distance | number:'1.1-2'}} Km</span>
 
 				</span>
 
@@ -282,62 +316,6 @@
 		</ion-card-content>
 		</ion-card>
 
-
-
-
-
-		<ion-card (click)='goCentro()'>
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/imagenLogo.png" style="
-				display: inline-block;
-				height: 90px;
-				    object-fit: cover;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				<span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;">Center Name Here</span>
-				<span style="    display: block;
-    font-size: 16px;
-    margin: 10px 0px;
-    font-weight: 800;
-    color: #EC527E;">$25 - $40</span>
-
-				<span class="itemComercio" >
-
-					<span style="  margin-right: 21px;  color: #888;
-    font-size: 15px;"><ion-icon style='    margin-right: 8px;
-    color: rgb(249,199,53);
-    font-size: 21px;
-    vertical-align: middle;' name="md-star"></ion-icon>5.0 (20)</span>
-
-					<span style="     color: #888;
-    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>7.5 Km</span>
-
-				</span>
-
-				</div>
-				</div>
-
-		</ion-card-content>
-		</ion-card>
-
-
-
-
-
-
-
-    </ion-list>
 
 </div>
 
@@ -346,6 +324,26 @@
 
 
 
+
+    </ion-list> -->
+
+</div>
+
+
+
+
+
+
+    	<div *ngIf='!cargaData' style="text-align: center;padding-top: 25%;">
+    		<ion-spinner name="bubbles"></ion-spinner>
+    	</div>
+
+  <ion-infinite-scroll *ngIf='showInfinite'  (ionInfinite)="$event.waitFor(doInfinite())">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles" 
+      loadingText="Obteniendo mas resultados...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 
 

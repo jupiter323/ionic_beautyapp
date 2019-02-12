@@ -1,8 +1,14 @@
 import { NgModule } from '@angular/core';
+import { IonicModule } from 'ionic-angular';
+import { EspecialselectComponent } from './especialselect/especialselect';
+
+
 
 @NgModule({
-	declarations: [],
+	declarations: [EspecialselectComponent,
+    ],
 	imports: [],
-	exports: []
+	exports: [EspecialselectComponent,
+    ]
 })
 export class ComponentsModule {}

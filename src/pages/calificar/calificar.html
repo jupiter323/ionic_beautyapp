@@ -1,0 +1,112 @@
+<!--
+  Generated template for the CalificarPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Evaluando</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding style='background-color: #f7f8f9;'>
+
+
+
+		<ion-card >
+
+		<ion-card-content>
+				<div style="
+				display: inline-block;    width: 100%;
+				">
+				<img src="http://50.116.17.150:3000/{{dataCentro.idFoto}}" 
+        onError="this.src='assets/imgs/fotoComercio.png';" style="
+				display: inline-block;
+				height: 90px;
+				width: 90px !important;
+				vertical-align: top;
+				">
+				<div style="    display: inline-block;
+    width: calc(100% - 105px);
+    margin-left: 10px;
+				">
+				<span style="display:block;margin: 2px 0px 0px 0px;
+				font-size: 16px;
+				color: #333;">{{dataCentro?.nombre}}</span>
+
+
+				<span style='       margin-top: 15px;
+    display: block;' class="itemComercio" >
+
+					<span style="margin-right: 15px"><ion-icon style='margin-right: 5px; ' name="md-calendar"></ion-icon>{{dataCentro.horaFinalEsperado?.split('T')[0] | date}}</span>
+
+					<span style="     color: #EC527E;   ">${{dataCentro.precioEsperado}}</span>
+
+
+				</span>
+
+				</div>
+				</div>
+
+		</ion-card-content>
+		</ion-card>
+
+
+
+
+
+
+<div class="rat">
+	Servicio
+<rating readOnly="{{readOnly}}"  (ngModelChange)="botonActivo=true"  [(ngModel)]="rate.servicio"    readOnly="false"  max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"  default value nullable="false" ></rating>
+</div>
+
+<div class="rat">
+	Staff
+<rating  readOnly="{{readOnly}}" (ngModelChange)="botonActivo=true"  [(ngModel)]="rate.staff"   readOnly="false"  max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"  default value nullable="false" ></rating>
+</div>
+
+<div class="rat">
+	Precio
+<rating  readOnly="{{readOnly}}"  (ngModelChange)="botonActivo=true"  [(ngModel)]="rate.precio" readOnly="false"  max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"  default value nullable="false" ></rating>
+</div>
+
+
+<div class="rat">
+	Limpieza
+<rating   readOnly="{{readOnly}}" (ngModelChange)="botonActivo=true" [(ngModel)]="rate.limpieza"  readOnly="false"  max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"  default value nullable="false" ></rating>
+</div>
+
+
+<div class="rat">
+	Ambiente
+<rating readOnly="{{readOnly}}"  (ngModelChange)="botonActivo=true"  [(ngModel)]="rate.ambiente"   readOnly="false"  max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star"  default value nullable="false" ></rating>
+</div>
+
+  <ion-item style='0px' >
+
+
+    <ion-textarea [disabled]='readOnly' [(ngModel)]="comentario" style='    border: 1px solid lightgray;
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-top: 30px;'  placeholder="Ingresa un comentario"></ion-textarea>
+  </ion-item>
+
+ <div style="    width: 100%;
+    text-align: center;
+ margin-top: 20px;">
+
+
+    <button  [hidden]='readOnly' [disabled]='!botonActivo || !rate.ambiente || !rate.limpieza || 
+    !rate.precio || !rate.staff || !rate.servicio'  (click)='agregar()' style=" border-radius: 70px;  "  color='verdeApp' ion-button> Agregar Evaluacion</button>
+
+
+
+</div>
+
+</ion-content>

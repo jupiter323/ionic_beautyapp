@@ -1,0 +1,34 @@
+page-mapa {
+
+.centradoTexto{
+	text-align: left;
+}
+
+.ratingStar{
+	color:#FFCB19
+}
+
+#map {
+
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+}
+
+
+
+ion-select {
+
+       max-width: 100%;
+}
+
+.select-ios .select-icon .select-icon-inner {
+
+    color: white !important;
+}
+
+
+
+
+}

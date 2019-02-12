@@ -1,3 +1,138 @@
+
+.select-alertless .alert-head{
+        background-color: #2FD99B !important;
+    color: white !important;
+}
+.select-alertless .alert-title{
+    font-size: 15px !important;
+}
+
+.select-alertless .alert-message{
+        background-color: #2FD99B !important;
+    color: white !important;
+}
+
+
+
+
+.itemCa{
+    
+        float: left;
+    color: #EC527E;
+    font-weight: 800;
+    font-size: 16px;
+    margin-top: 8px;
+
+
+}
+
+.itemFlo{
+        text-align: right;
+    padding-right: 5px;
+    height: 50px; width: 100%; 
+    color: #EC527E;
+ transform: translate(0, 8px);
+    font-weight: 800;
+    font-size: 18px;
+
+}
+
+
+.leyendaAlert{display: flex !important;color: #888;}
+.floating {  
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: ease-in-out;
+    animation-timing-function: ease-in-out;
+
+}
+
+@keyframes floating {
+    from { 
+      transform: translate(0,  0px);
+      opacity:0;
+      
+  }
+
+ 
+       100%  { 
+       transform: translate(0, 8px);
+       opacity:1;
+  }  
+}
+
+
+.meter { 
+    height: 5px;
+    position: relative;
+    background: #f3efe6;
+    overflow: hidden;
+}
+
+.meter span {
+    display: block;
+    height: 100%;
+}
+
+.progress2 {   background-color: #2FD99B;}
+.progress {
+    background-color: #2FD99B;
+    -webkit-animation: progressBar 5s 1;
+    -webkit-animation-fill-mode:both; 
+    -moz-animation: progressBar 5s 1;
+    -moz-animation-fill-mode:both; 
+}
+
+@-webkit-keyframes progressBar {
+  0% { width: 0; }
+  50% { width: 100%; }
+}
+
+@-moz-keyframes progressBar {
+  0% { width: 0; }
+  50% { width: 100%; }
+}
+
+
+
+
+
+
 page-inicio {
+
+.remove-ok {
+    .alert-button:nth-child(2) {
+        display: none;
+    }
+}
+
+.select-alertless .alert-button-group{
+    display:none
+}
+
+.select-alertless{
+   .alert-button:nth-child(2) {
+        display: none !important;
+    }
+
+       .alert-button-group{
+        display: none !important;
+    }
+
+    }
+
+
+.sliderImg{
+    width: 375px;
+    height: 210px;
+    max-height: 210px;
+    background-size: cover;
+    background-position: center;
+}
+.imagenCategoria{
+	height: 45px;
+}
+
+
 
 }

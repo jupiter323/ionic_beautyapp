@@ -1,0 +1,195 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>YOURBEAUTY para negocios</ion-title>
+
+
+
+    <ion-buttons end>
+    <button style="    font-size: 34px;" ion-button (click)="closeModal()"><ion-icon ios="ios-close"></ion-icon></button>
+
+
+    </ion-buttons>
+
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+
+
+
+
+  <div>
+<!--     <div style="background-color:#36609F;margin: 20px 17px;border-radius: 30px;color: white;text-align: center;font-size: 15px;">
+    <img src="assets/imgs/Facebook.png" style="
+    vertical-align: middle;
+    margin-right: 10px;
+    ">
+    <img src="assets/imgs/Sep.png" style="
+    vertical-align: middle;
+    padding-top:  10px;
+    padding-bottom: 10px;
+    ">
+    <span (click)='loginApp()' style="
+    ">Continuar con Facebook</span>
+    </div>
+
+<div style="
+    margin: 0px 17px;
+    text-align: center;
+    /* height: 300px; */
+">
+         <img src="assets/imgs/Sep2.png" style="
+    width: 40%;
+    display: inline-block;
+    height: 2px;
+    vertical-align: middle;
+"><span style="
+    display: inline-block;
+    margin: 0px 10px;
+">OR</span> <img src="assets/imgs/Sep2.png" style="
+    width: 40%;
+    display: inline-block;
+    height: 2px;
+    vertical-align: middle;
+">
+    </div>
+ -->
+    <div style="
+    margin: 0px 17px;">
+
+    <form style='margin-top: 20px;' [formGroup]="authForm" (ngSubmit)="crearUsuario(authForm.value)">
+
+
+
+            <ion-item style='    padding: 0px 13px 0px 0px;
+    background-color: white !important;
+    border-radius: 60px;
+    border: solid 1px #EC527E;
+    margin: 26px 0px;'>
+            <ion-label style=' color: #e6e6e6;   position: absolute;
+    right: 16px;
+    font-size: 21px;'>
+                  <ion-icon   ios="md-paper" md="md-paper" ></ion-icon>
+            </ion-label>
+
+
+
+            <ion-input class='inputT' placeholder='Nombre del Negocio' formControlName="nombre" type="text"></ion-input>
+        </ion-item>
+<ion-item *ngIf="authForm.controls.nombre.hasError('required') && authForm.controls.nombre.touched">
+            <p>Este campo es requerido</p>
+        </ion-item>
+
+ 
+       
+            <ion-item style='    padding: 0px 13px 0px 0px;
+    background-color: white !important;
+    border-radius: 60px;
+    border: solid 1px #EC527E;
+    margin: 26px 0px;'>
+            <ion-label style=' color: #e6e6e6;   position: absolute;
+    right: 16px;
+    font-size: 21px;'>
+                  <ion-icon   ios="md-contact" md="md-contact" ></ion-icon>
+            </ion-label>
+
+
+
+            <ion-input class='inputT' placeholder='Nombre de Contacto' formControlName="nombre2" type="text"></ion-input>
+        </ion-item>
+<ion-item *ngIf="authForm.controls.nombre2.hasError('required') && authForm.controls.nombre2.touched">
+            <p>Este campo es requerido</p>
+        </ion-item>
+
+
+      
+
+
+
+
+       
+            <ion-item style='    padding: 0px 13px 0px 0px;
+    background-color: white !important;
+    border-radius: 60px;
+    border: solid 1px #EC527E;
+    margin: 26px 0px;'>
+            <ion-label style=' color: #e6e6e6;   position: absolute;
+    right: 16px;
+    font-size: 21px;'>
+                  <ion-icon   ios="md-mail" md="md-mail" ></ion-icon>
+            </ion-label>
+
+            <ion-input class='inputT' placeholder='Email' formControlName="email" type="email"></ion-input>
+        </ion-item>
+  
+        <ion-item *ngIf="authForm.controls.email.hasError('required') && authForm.controls.email.touched">
+            <p>Este campo es requerido</p>
+        </ion-item>
+      
+            <ion-item style='    padding: 0px 13px 0px 0px;
+    background-color: white !important;
+    border-radius: 60px;
+    border: solid 1px #EC527E;
+    margin: 26px 0px;'>
+            <ion-label style=' color: #e6e6e6;   position: absolute;
+    right: 16px;
+    font-size: 21px;'>
+                  <ion-icon   ios="md-call" md="md-call" ></ion-icon>
+            </ion-label>
+
+            <ion-input class='inputT' placeholder='Telefono de contacto'  formControlName="telefono" type="text"></ion-input>
+        </ion-item>
+      
+            <ion-item style='    padding: 0px 13px 0px 0px;
+    background-color: white !important;
+    border-radius: 60px;
+    border: solid 1px #EC527E;
+    margin: 26px 0px;'>
+            <ion-label style=' color: #e6e6e6;   position: absolute;
+    right: 16px;
+    font-size: 21px;'>
+                  <ion-icon   ios="md-chatboxes" md="md-chatboxes" ></ion-icon>
+            </ion-label>
+
+            <ion-input class='inputT' placeholder='Comentario'  formControlName="comentario" type="text"></ion-input>
+        </ion-item>
+
+
+  <!-- 
+        <ion-item [ngClass]="{'error-border':!authForm.controls.password.valid && authForm.controls.password.touched}">
+            <ion-label floating>Password</ion-label>
+            <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="authForm.controls.password.hasError('required') && authForm.controls.password.touched">
+            <p>Este campo es requerido</p>
+        </ion-item>
+        <ion-item *ngIf="authForm.controls.password.hasError('minlength') && authForm.controls.password.touched">
+            <p>Este campo requiere al menos 6 caracteres</p>
+        </ion-item>        -->         
+  
+        <button ion-button full color="verdeApp" [disabled]="!authForm.valid" style="    border-radius: 40px;margin-top: 20px;" type="submit">Contactar</button>        
+    </form>
+<p style="    text-align: center;
+    font-size: 16px;
+    color: #555;
+    line-height: 27px;
+    margin-top: 40px;
+    opacity: 0.5;">Asegurate de brindar un email valido <br> Al registrarte en YOURBEAUTY aceptas los terminos y condiciones de uso</p>
+
+    </div>
+
+  </div>
+
+
+
+</ion-content>

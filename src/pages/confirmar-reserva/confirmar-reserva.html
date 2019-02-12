@@ -7,20 +7,21 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>ConfirmarReserva</ion-title>
+    <ion-title>Confirmar Reserva</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content style='    background-color: #fafafa !important; ' >
 
 
 
 <div style="
-    display: inline-block;    width: 100%;
+    display: inline-block;    width: 100%;padding: 10px;    border-bottom: solid 2px #ececec;
 ">
-	<img src="assets/imgs/fotoComercio.png" style="
+	<img src="http://50.116.17.150:3000/{{dataCentro.data?.idFoto}}" 
+        onError="this.src='assets/imgs/fotoComercio.png';"  style="
     display: inline-block;
     height: 90px;
     width: 90px !important;
@@ -28,109 +29,96 @@
 ">
 	<div style="
     display: inline-block;
-    width: calc(100% - 114px);
-    margin-left:  20px;
+/*    width: calc(100% - 114px);*/
+    margin-left:  10px;
 ">
 		<span style="margin: 2px 0px 0px 0px;
-    font-size: 19px;
-    color: #333;">Center Name Here.....</span>
-		<span class="itemComercio">Center name, Building name</span>
-		<span class="itemComercio">City Name, Country</span>
-		<span class="itemComercio" style="margin-top:10px !important">Date <span style="margin-left: 10px;color:#EC527E !important">Tue 5, Jan 2o12o</span></span>
+    font-size: 18px;
+    color: #333;">{{dataCentro.data?.nombre}}</span>
+    <span class="itemComercio"></span>
+		<span class="itemComercio">{{dataCentro.data?.direccion}}</span>
 
-	</div>
-	</div>
-
-
-
-
-<div class="separator"></div>
-
-<div style="
-    width: 100%;
-    display: inline-block;
-">
-	
-	<img src="assets/imgs/servicio1.png" style="
-    display: inline-block;
-    vertical-align: top;
-    height: 54px;
-    width: 54px;
-">
-	<div style="
-    display: inline-block;
-    width: calc(100% - 83px);
-    margin-left: 22px;
-">
-
-<span style="     color: #EC527E !important;
-    font-size: 16px;
-    float: right;
-    margin-right: 47px;">$42.00</span>
-
-
-		<span style="
-    font-size: 19px;
-    color:  #333;
-">Jaur Juro</span>
-		<div style="    margin-top: 7px;"><span style="    color: #333;
-    font-size: 12px;">Any staff</span>	<span style="margin-right: 20px;     margin-left: 20px;   color: #333;
-    font-size: 12px;"><ion-icon style='margin-right: 5px' name="ios-time-outline"></ion-icon>7:00am to 9:00pm</span></div>
-	</div>
-</div>
-
-
-
-<div class="separator"></div>
-
-<div style="
-    width: 100%;
-    display: inline-block;
-">
-	
-	<img src="assets/imgs/servicio1.png" style="
-    display: inline-block;
-    vertical-align: top;
-    height: 54px;
-    width: 54px;
-">
-	<div style="
-    display: inline-block;
-    width: calc(100% - 83px);
-    margin-left: 22px;
-">
-<span style="     color: #EC527E !important;
-    font-size: 16px;
-    float: right;
-    margin-right: 47px;">$42.00</span>
-
-		<span style="
-    font-size: 19px;
-    color:  #333;
-">Jaur Juro
-
-
-
+            <span class="itemComercio" style="margin-top:10px !important">
+       <ion-icon style='margin-right: 5px' name="contact"></ion-icon>
+        <span style="color:#666 !important">{{dataCentro?.nombreStaff}}</span>
     </span>
-		<div style="    margin-top: 7px;"><span style="    color: #333;
-    font-size: 12px;">Any staff</span>	<span style="margin-right: 20px;     margin-left: 20px;   color: #333;
-    font-size: 12px;"><ion-icon style='margin-right: 5px' name="ios-time-outline"></ion-icon>7:00am to 9:00pm</span></div>
+
+
+		<!-- <span class="itemComercio">City Name, Country</span> -->
+		<span class="itemComercio" style="margin-top:10px !important">Fecha <span style="margin-left: 10px;color:#EC527E !important">{{dataCentro?.fecha}}</span></span>
+    <span *ngIf="dataCentro.fechaInicio && dataCentro.fechaFinal"  class="itemComercio" style="margin-top:10px !important">
+      Hora 
+        <span style="margin-left: 10px;color:#EC527E !important;    font-size: 12px;">
+      {{getDattt(dataCentro.fechaInicio)}} - {{getDattt(dataCentro.fechaFinal)}}
+      </span>
+     </span>
+
+ 
+
+
+
+
+
+   <!--              <span class="itemComercio" style="margin-top:10px !important">Hora Inicio<span style="margin-left: 10px;color:#EC527E !important">{{dataCentro?.hora}}</span></span>
+
+                 <span class="itemComercio" style="margin-top:10px !important">Finalizacion aprox. <span style="margin-left: 10px;color:#EC527E !important">{{dataCentro?.horaF}}</span></span> -->
+
+
+
+
 	</div>
+
+
+	</div>
+
+
+
+
+
+
+<div *ngFor="let n of dataCentro.servicios;let index=index; let odd=odd; let even=even;" 
+style="width: 100%; display: inline-block;" [ngClass]="{ odd: odd, even: even }">
+	
+
+	<div style="
+    display: inline-block;
+    width: 100%;padding: 16px;    border-bottom: solid 2px #ececec;
+ 
+">
+
+
+
+
+		<span style="
+    font-size: 18px;
+    color:  #333;
+">{{n.nombre}}</span>
+
+	<div style="    margin-top: 10px;">
+
+    <span *ngIf='n.oferta' style="color: #555 !important;font-size: 16px;  text-decoration: line-through;">${{n.precio}}</span>
+    <span style="color: #EC527E !important;font-size: 15px;">${{n.precioFinal}}</span>
+
+    <span style="margin-right: 20px;     margin-left: 24px;   color: #333;
+    font-size: 12px;">
+    <ion-icon style='margin-right: 5px' name="ios-time-outline"></ion-icon>
+    {{n.duracion}} min
+    </span>
+
+    </div>
+
+	</div>
+
+
+
+
 </div>
 
 
 
-<div class="separator"></div>
-
-	
-
-<div style="width:100%">
-
-
 
 	<div style="
-    margin-bottom: 15px;
-    margin-left: 81px;
+   padding: 16px;
 "><span style="
     font-size: 16px;
     color: #999;
@@ -138,32 +126,39 @@
     color: #EC527E !important;
     font-size: 16px;
     float: right;
-    margin-right: 47px;
-">$120.00</span></div>
+
+">${{dataCentro?.total}}</span>
 
 
-
-
-
-	 <ion-item style='padding: 0px !important;'>
-  <ion-textarea  style='    color: #777;
-    background: white;
-    height: 136px;' placeholder="Nota para el centro de belleza" 
-      [(ngModel)]="note" name="note" autocomplete="on" autocorrect="on"></ion-textarea>
- </ion-item>
 
 </div>
 
+	 <ion-item style='padding: 0px !important;'>
+  <ion-textarea  style='      color: #777;
+    background: white;
+    height: 136px;
+    margin: 16px;
+    font-size: 14px;
+    padding: 12px;' placeholder="Nota para {{dataCentro.data?.nombre}} (opcional)" 
+      [(ngModel)]="dataCentro.notaCita" name="note" autocomplete="on" autocorrect="on"></ion-textarea>
+ </ion-item>
 
 
 
 
 
 
-<button (click)='confirmacionLista()' style="    margin: 40px 0px 40px 0px;" ion-button class="botonVerdeFulls">Confirmar Reserva</button>
+
 
 
 
 
 
 </ion-content>
+
+<ion-footer style='padding: 16px;'>
+    <button (click)='confirmacionLista()' style=" " ion-button class="botonVerdeFulls">Confirmar Reserva</button>
+
+
+
+</ion-footer>

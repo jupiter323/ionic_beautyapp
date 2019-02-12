@@ -15,15 +15,11 @@
     </ion-buttons>
 
     
-    <ion-title>Coupones</ion-title>
+    <ion-title>Cupones</ion-title>
 
 
 
           <ion-buttons end>
-      <button (click)='filtroCategoria()' ion-button icon-only>
-        <ion-icon name="ios-options"></ion-icon>
-      </button>
-
 
        
 
@@ -33,19 +29,28 @@
 
   </ion-navbar>
 
-</ion-header>
 
-
-<ion-content >
 
 <div>
-	<span style="    vertical-align: middle;
+
+
+<!-- 	<span style="    vertical-align: middle;
     height: 100%;
     font-size: 17px;
     color: #333;
     margin-left: 12px;
     margin-top: 23px;
-    display: inline-block;">Ingresar coupon</span>
+    display: inline-block;">Ingresar coupon</span> -->
+  <ion-item class='redem' style='    padding-left: 0px !important;
+    margin-left: 5px !important;' >
+
+    <ion-input style='    background-color: white;
+    border: solid 2px lightgray;
+    border-radius: 30px;
+    padding: 0px 10px;' [(ngModel)]="codigo" autocomplete='off' type="text" placeholder="Ingresar cupón"></ion-input>
+  </ion-item>
+
+
 	<button ion-button   style="    padding: 14px 30px;
     color: white;
     background-color: #2FD99B;
@@ -53,7 +58,7 @@
     float: right;
     margin-right: 9px;
     border-radius: 40px;
-    font-size: 16px;">Usar coupon</button>
+    font-size: 16px;" (click)='canjear(codigo)'>Usar cupón</button>
 
 </div>
 
@@ -100,19 +105,32 @@
 
 
 
+</ion-header>
+
+
+<ion-content >
+
+
+
+
 <div [ngSwitch]="section">
     <ion-list mode="md" *ngSwitchCase="'one'">
 
-		<ion-card>
+
+<div class='noResultado' *ngIf="(cupones | filtrofav: filtroDisponible)?.length === 0" >No tienes cupones disponibles</div>
+
+
+		<ion-card   *ngFor="let n of cupones | filtrofav: filtroDisponible">
 
 		<ion-card-content>
 				<div style="
 				display: inline-block;    width: 100%;
 				">
-				<img src="assets/imgs/fotoComercio.png" style="
-				display: inline-block;
-				height: 90px;
-				width: 90px !important;
+				<img src="http://50.116.17.150:3000/{{n.idFoto}}" 
+				 onError="this.src='assets/imgs/fotocupon.png';" 
+				style="display: inline-block;
+				height: 65px;
+				width: 65px !important;
 				vertical-align: top;
 				">
 				<div style="    display: inline-block;
@@ -124,25 +142,26 @@
     font-size: 16px;
 
     font-weight: 800;
-    color: #EC527E;">20% de descuento</span>
+    color: #EC527E;">{{n.nombreCupon}}</span>
 
     <span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;display:block">Center Name Here</span>
+				font-size: 14px;
+				color: #999;display:block">{{getNombreE(n.nombresCentro)}}</span>
 
-				<span class="itemComercio" style="    margin-top: 13px;
+				<span class="itemComercio" style="    margin-top: 3px;
     display: block;
 }">
 
-					<span style="  margin-right: 21px;  color: #888;
+
+
+	<button  (click)='usarTicket(n.idCupon)' style='background-color: #2FD99B' ion-button small >Usar Ahora</button>	
+	<br>
+	<span style="  margin-right: 21px;  color: #888;
     font-size: 15px;"><ion-icon style='    margin-right: 8px;
    color:#2FD99B;
     font-size: 21px;
-    vertical-align: middle;' name="md-calendar"></ion-icon>Expira 20/02/05</span>
-
-					<span style="     color: #888;
-    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:rgb(249,199,0);
-    font-weight: 800;' name="ios-add-circle-outline"></ion-icon>Usar</span>
+    vertical-align: middle;' name="md-calendar"></ion-icon>Expira {{n.fechaExpira?.split('T')[0]}}
+	</span>
 
 				</span>
 
@@ -156,109 +175,6 @@
 
 
 		
-		<ion-card >
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/fotoComercio.png" style="
-				display: inline-block;
-				height: 90px;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				
-				<span style="    display: block;
-    font-size: 16px;
-
-    font-weight: 800;
-    color: #EC527E;">20% de descuento</span>
-
-    <span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;display:block">Center Name Here</span>
-
-				<span class="itemComercio" style="    margin-top: 13px;
-    display: block;
-}">
-
-					<span style="  margin-right: 21px;  color: #888;
-    font-size: 15px;"><ion-icon style='    margin-right: 8px;
-   color:#2FD99B;
-    font-size: 21px;
-    vertical-align: middle;' name="md-calendar"></ion-icon>Expira 20/02/05</span>
-
-					<span style="     color: #888;
-    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:rgb(249,199,0);
-    font-weight: 800;' name="ios-add-circle-outline"></ion-icon>Usar</span>
-
-				</span>
-
-				</div>
-				</div>
-
-		</ion-card-content>
-		</ion-card>
-
-
-
-		<ion-card >
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/fotoComercio.png" style="
-				display: inline-block;
-				height: 90px;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				
-				<span style="    display: block;
-    font-size: 16px;
-
-    font-weight: 800;
-    color: #EC527E;">20% de descuento</span>
-
-    <span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;display:block">Center Name Here</span>
-
-				<span class="itemComercio" style="    margin-top: 13px;
-    display: block;
-}">
-
-					<span style="  margin-right: 21px;  color: #888;
-    font-size: 15px;"><ion-icon style='    margin-right: 8px;
-   color:#2FD99B;
-    font-size: 21px;
-    vertical-align: middle;' name="md-calendar"></ion-icon>Expira 20/02/05</span>
-
-					<span style="     color: #888;
-    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:rgb(249,199,0);
-    font-weight: 800;' name="ios-add-circle-outline"></ion-icon>Usar</span>
-
-				</span>
-
-				</div>
-				</div>
-
-		</ion-card-content>
-		</ion-card>
-
-
-
-
 
 
 
@@ -267,14 +183,14 @@
 
     <ion-list mode="md" *ngSwitchCase="'two'">
 
-
-		<ion-card >
+    	<div class='noResultado' *ngIf="(cupones | filtrofav: filtroUsado)?.length === 0" >No has usado ningun cupón aun</div>
+		<ion-card  *ngFor="let n of cupones | filtrofav: filtroUsado">
 
 		<ion-card-content>
 				<div style="
 				display: inline-block;    width: 100%;
 				">
-				<img src="assets/imgs/fotoComercio.png" style="
+				<img src="assets/imgs/fotocupon.png" style="
 				display: inline-block;
 				height: 90px;
 				width: 90px !important;
@@ -289,11 +205,11 @@
     font-size: 16px;
 
     font-weight: 800;
-    color: #EC527E;">20% de descuento</span>
+    color: #EC527E;">{{n.nombreCupon}}</span>
 
     <span style="margin: 2px 0px 0px 0px;
 				font-size: 19px;
-				color: #333;display:block">Center Name Here</span>
+				color: #333;display:block">{{n.nombreCentro}}</span>
 
 				<span class="itemComercio" style="    margin-top: 13px;
     display: block;
@@ -303,7 +219,7 @@
     font-size: 15px;"><ion-icon style='    margin-right: 8px;
    color:#2FD99B;
     font-size: 21px;
-    vertical-align: middle;' name="md-calendar"></ion-icon>20/02/05</span>
+    vertical-align: middle;' name="md-calendar"></ion-icon>{{n.fechaUso?.split('T')[0]}}</span>
 
 					<span style="     color: #888;
     font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;
@@ -318,55 +234,6 @@
 		</ion-card>
 
 
-
-		<ion-card >
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/fotoComercio.png" style="
-				display: inline-block;
-				height: 90px;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				
-				<span style="    display: block;
-    font-size: 16px;
-
-    font-weight: 800;
-    color: #EC527E;">20% de descuento</span>
-
-    <span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;display:block">Center Name Here</span>
-
-				<span class="itemComercio" style="    margin-top: 13px;
-    display: block;
-}">
-
-					<span style="  margin-right: 21px;  color: #888;
-    font-size: 15px;"><ion-icon style='    margin-right: 8px;
-   color:#2FD99B;
-    font-size: 21px;
-    vertical-align: middle;' name="md-calendar"></ion-icon>20/02/05</span>
-
-					<span style="     color: #888;
-    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;
-    font-weight: 800;' name="md-checkbox"></ion-icon>Usado</span>
-
-				</span>
-
-				</div>
-				</div>
-
-		</ion-card-content>
-		</ion-card>
 
 
 
@@ -377,15 +244,15 @@
     <ion-list mode="md" *ngSwitchCase="'tres'">
 
 
+<div class='noResultado' *ngIf="(cupones | filtrofav: filtroExpirado)?.length === 0" >No tienes cupones expirados</div>
 
-
-		<ion-card >
+		<ion-card *ngFor="let n of cupones | filtrofav: filtroExpirado">
 
 		<ion-card-content>
 				<div style="
 				display: inline-block;    width: 100%;
 				">
-				<img src="assets/imgs/fotoComercio.png" style="
+				<img src="assets/imgs/fotocupon.png" style="
 				display: inline-block;
 				height: 90px;
 				width: 90px !important;
@@ -400,11 +267,11 @@
     font-size: 16px;
 
     font-weight: 800;
-    color: #EC527E;">20% de descuento</span>
+    color: #EC527E;">{{n.nombreCupon}}</span>
 
     <span style="margin: 2px 0px 0px 0px;
 				font-size: 19px;
-				color: #333;display:block">Center Name Here</span>
+				color: #333;display:block">{{n.nombreCentro}}</span>
 
 				<span class="itemComercio" style="    margin-top: 13px;
     display: block;
@@ -414,7 +281,7 @@
     font-size: 15px;"><ion-icon style='    margin-right: 8px;
    color:#EC527E;
     font-size: 21px;
-    vertical-align: middle;' name="md-calendar"></ion-icon>20/02/05</span>
+    vertical-align: middle;' name="md-calendar"></ion-icon>{{n.fechaExpira?.split('T')[0]}}</span>
 
 					<span style="     color: #888;
     font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#EC527E;
@@ -436,3 +303,13 @@
 
 
 </ion-content>
+
+
+<!-- <ion-footer>
+  <div  style="text-align: center;
+    color: #999;
+    font-size: 16px;
+    margin: 17px;" (click)='fcompartir()'><a>Comparte </a> Yourbeauty con tus amigos y gana premios asombrosos</div>
+</ion-footer> -->
+
+

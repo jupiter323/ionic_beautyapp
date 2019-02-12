@@ -1,29 +1,23 @@
-<!--
-  Generated template for the OfertasPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
+  <ion-navbar  color="headerColor">
 
-  <ion-navbar>
-
-   <ion-buttons start>
+    <ion-buttons start>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     </ion-buttons>
 
-    
-    <ion-title>Ofertas</ion-title>
+    <ion-title>
+Ofertas
 
 
+    </ion-title>
 
           <ion-buttons end>
-      <button (click)='filtroCategoria()' ion-button icon-only>
+<!--       <button (click)='filtroCategoria()' ion-button icon-only>
         <ion-icon name="ios-options"></ion-icon>
       </button>
-
+ -->
 
        
 
@@ -32,175 +26,146 @@
 
 
   </ion-navbar>
-
 </ion-header>
 
+<ion-content style='background: #fafafa !important;'>
+
+  
+
+
+  <ion-grid>
+  <ion-row>
+
+    <ion-col col-6>
+      <ion-select  placeholder="Categoria" style='    -webkit-box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3) !important;
+
+    width: 100%;
+    max-width: 100%;' [(ngModel)]="categoriaSeleccionada" (ionChange)="subcategorias=[];getSubCat($event,true)" multiple="false" okText="Filtrar"  cancelText="Cerrar">
+
+ <ion-option   [value]="0" 
+      >Todas</ion-option>
+
+
+ <ion-option  *ngFor="let n of categorias; let idx = index" [selected]='true'  [value]="n.idCategoria" 
+      >{{n.nombre}}</ion-option>
+  </ion-select>
+
+    </ion-col>
+    <ion-col col-6>
+
+      <ion-select   placeholder="Sub Categoria" [disabled]='subcategorias?.length<1' style='    -webkit-box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3) !important;
+
+    width: 100%;
+    max-width: 100%;' [(ngModel)]="subCategoriaSeleccionada" (ionChange)="filtrarSubCategorias($event,true)" multiple="true" okText="Filtrar"  cancelText="Cerrar">
+
+
+
+ <ion-option  *ngFor="let n of subcategorias; let idx = index" [selected]='true'  [value]="n.idSubcategoria" 
+      >{{n.nombre}}</ion-option>
+  </ion-select>
+
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
 
 
 
 
-<ion-content >
 
 
+    <ion-list mode="md" >
 
-	<ion-card >
 
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/fotoComercio.png" style="
-				display: inline-block;
-				height: 90px;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
+        <div class='noResultado' 
+        *ngIf="((favoritos)?.length == 0) || ((favoritos | filtrofav: filterFav)?.length == 0)" >No se han encontrado negocios</div> 
+
+    <ion-card *ngFor="let n of favoritos | filtrofav: filterFav"  (click)='goCentro(n.idCentro,n.idCategoria,n.idServicio)' >
+    <ion-card-content>
+        <div style="
+        display: inline-block;    width: 100%;
+        ">
+        <img src="http://50.116.17.150:3000/{{n.imagenCentro}}" 
+        onError="this.src='assets/imgs/fotoComercio.png';" style="
+        display: inline-block;
+        height: 90px;
+        width: 90px !important;
+        vertical-align: top;
+        ">
+        <div style="    display: inline-block;
     width: calc(100% - 105px);
     margin-left: 10px;
-				">
-				<span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;display:block">Lavado, Corte y Estilo</span>
-				<span style="display:block;
-				font-size: 16px;
-				color: #333;">Center name here</span>
+        ">
+        <span style="margin: 2px 0px 0px 0px;
+        font-size: 19px;
+        color: #333;">{{n.nombre}} </span><br>
 
 
-						<span style="    
+
+   <span style="     color: #888;
+    font-size: 15px;  ">
+
+    {{n.nombreCentro}}
+  </span>
+
+  
+
+        <span style="    display: block;
     font-size: 16px;
-    color: gray;  text-decoration: line-through;">$40</span> <span style="    
-    font-size: 16px;
-margin-left: 10px;
+    margin: 10px 0px;
     font-weight: 800;
-    color: #EC527E;">$25</span>
+   "><span style="text-decoration: line-through;">${{n.precio}} </span><span style=" color: #EC527E;">  ${{n.precio2}}</span></span>
 
-				<span class="itemComercio" >
+        <span class="itemComercio" >
 
-					<span style="  margin-right: 21px;  color: #888;
-    font-size: 15px;"><ion-icon style='    margin-right: 8px;
+          <span style="  margin-right: 21px;  color: #888;
+    font-size: 15px;"><ion-icon [ngClass]="{'colorGris': n.cantRate==0}"  style='    margin-right: 8px;
     color: rgb(249,199,53);
     font-size: 21px;
-    vertical-align: middle;' name="md-star"></ion-icon>5.0 (20)</span>
+    vertical-align: middle;' name="md-star"></ion-icon>{{n.rate  | number:'1.1-2'}} ({{n.cantRate
+}})</span>
 
-					<span style="     color: #888;
-    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>7.5 Km</span>
+          <span style="     color: #888;
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>{{n.distance | number:'1.1-2'}} Km</span>
 
-				</span>
+        </span>
 
-				</div>
-				</div>
+        </div>
+        </div>
 
-		</ion-card-content>
-		</ion-card>
-
-
-	<ion-card >
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/fotoComercio.png" style="
-				display: inline-block;
-				height: 90px;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				<span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;display:block">Lavado, Corte y Estilo</span>
-				<span style="display:block;
-				font-size: 16px;
-				color: #333;">Center name here</span>
-
-
-						<span style="    
-    font-size: 16px;
-    color: gray;  text-decoration: line-through;">$40</span> <span style="    
-    font-size: 16px;
-margin-left: 10px;
-    font-weight: 800;
-    color: #EC527E;">$25</span>
-
-				<span class="itemComercio" >
-
-					<span style="  margin-right: 21px;  color: #888;
-    font-size: 15px;"><ion-icon style='    margin-right: 8px;
-    color: rgb(249,199,53);
-    font-size: 21px;
-    vertical-align: middle;' name="md-star"></ion-icon>5.0 (20)</span>
-
-					<span style="     color: #888;
-    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>7.5 Km</span>
-
-				</span>
-
-				</div>
-				</div>
-
-		</ion-card-content>
-		</ion-card>
-
-
-
-	<ion-card >
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/fotoComercio.png" style="
-				display: inline-block;
-				height: 90px;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				<span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;display:block">Lavado, Corte y Estilo</span>
-				<span style="display:block;
-				font-size: 16px;
-				color: #333;">Center name here</span>
-
-
-						<span style="    
-    font-size: 16px;
-    color: gray;  text-decoration: line-through;">$40</span> <span style="    
-    font-size: 16px;
-margin-left: 10px;
-    font-weight: 800;
-    color: #EC527E;">$25</span>
-
-				<span class="itemComercio" >
-
-					<span style="  margin-right: 21px;  color: #888;
-    font-size: 15px;"><ion-icon style='    margin-right: 8px;
-    color: rgb(249,199,53);
-    font-size: 21px;
-    vertical-align: middle;' name="md-star"></ion-icon>5.0 (20)</span>
-
-					<span style="     color: #888;
-    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>7.5 Km</span>
-
-				</span>
-
-				</div>
-				</div>
-
-		</ion-card-content>
-		</ion-card>
+    </ion-card-content>
+    </ion-card>
 
 
 
 
 
+
+
+
+
+    </ion-list>
+
+  <div *ngIf='categorias?.length==0' style="text-align: center;padding-top: 25%;">
+        <ion-spinner name="bubbles"></ion-spinner>
+      </div>
 </ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

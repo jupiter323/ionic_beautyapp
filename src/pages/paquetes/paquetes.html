@@ -1,0 +1,196 @@
+<ion-header>
+  <ion-navbar  color="headerColor">
+
+    <ion-buttons start>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-buttons>
+
+    <ion-title>
+Paquetes
+
+
+    </ion-title>
+
+          <ion-buttons end>
+<!--       <button (click)='filtroCategoria()' ion-button icon-only>
+        <ion-icon name="ios-options"></ion-icon>
+      </button>
+ -->
+
+      </ion-buttons>
+
+
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content style='    background-color: #f7f8f9 !important;'>
+
+  
+
+
+  <ion-grid style='    margin-bottom: 15px;'>
+  <ion-row>
+
+    <ion-col col-6>
+      <ion-select  placeholder="Categoria" style='    -webkit-box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3) !important;
+
+    width: 100%;
+    max-width: 100%;' [(ngModel)]="categoriaSeleccionada" (ionChange)="subcategorias=[];getSubCat($event,true)" multiple="false" okText="Filtrar"  cancelText="Cerrar">
+
+ <ion-option   [value]="0" 
+      >Todas</ion-option>
+
+
+ <ion-option  *ngFor="let n of categorias; let idx = index" [selected]='true'  [value]="n.idCategoria" 
+      >{{n.nombre}}</ion-option>
+  </ion-select>
+
+    </ion-col>
+    <ion-col col-6>
+
+      <ion-select   placeholder="Sub Categoria" [disabled]='subcategorias?.length<1' style='    -webkit-box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3) !important;
+
+    width: 100%;
+    max-width: 100%;' [(ngModel)]="subCategoriaSeleccionada" (ionChange)="filtrarSubCategorias($event,true)" multiple="true" okText="Filtrar"  cancelText="Cerrar">
+
+
+
+ <ion-option  *ngFor="let n of subcategorias; let idx = index" [selected]='true'  [value]="n.idSubcategoria" 
+      >{{n.nombre}}</ion-option>
+  </ion-select>
+
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+
+
+
+
+
+    <div mode="md" >
+
+
+        <div class='noResultado' 
+        *ngIf="((favoritos)?.length == 0) || ((favoritos | filtrofav: filterFav)?.length == 0)">
+    No se han encontrado paquetes</div> 
+
+    <div *ngFor="let n of favoritos | filtrofav: filterFav"  (click)='goCentro(n[0].idCentro,n)'
+    style=' margin: 11px 15px;
+    display: grid !important;
+    padding: 8px;
+    border-radius: 3px;
+    background: white;
+    -webkit-box-shadow: 6px 7px 12px -7px #999;
+    -moz-box-shadow: 6px 7px 12px -7px #999;
+    box-shadow: 6px 7px 12px -7px #999;' >
+
+
+  
+		<div style="     font-size: 17px;
+    margin-bottom: 3px;">
+
+			<span style="     width: calc(100% - 70px);
+    white-space: pre-line;   float: left;">{{n[0].nombrePaquete}}</span>
+				<!-- <span style="float: right; text-decoration: line-through;"> $220</span> -->
+			<span style="float: right;color:#EC527E;"> ${{n[0].precioPaquete}}</span>
+
+			
+		</div>
+
+
+		<div style="   font-size: 14px; color: #888 !important;" *ngFor="let i of n" >
+			<span style="    width: calc(100% - 70px);
+    white-space: pre-line;
+    font-size: 16px;
+    float: left;">{{i.nombreServicio}}</span>
+			<span style="float: right; text-decoration: line-through;">${{i.precioServicio}}</span>
+		</div>
+
+    <div style="  margin-top: 6px; font-size: 14px; color: #888 !important;" >
+      <div style="    width: calc(100% - 70px);
+
+    font-size: 16px;
+    float: left;">
+      <img src="http://50.116.17.150:3000/{{n[0].idFoto}}" 
+              onError="this.src='assets/imgs/fotoComercio.png';" style="
+              display: inline-block;
+              vertical-align: sub;
+             
+              height: 25px;    text-transform: lowercase;
+              width: 25px;    border-radius: 20px;
+              ">
+      <span style=" color: #444;">{{n[0].nombreCentro}}</span>
+  </div>
+      <span style="float: right; "><ion-icon style='  margin-right: 1px;    font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>
+       {{n[0].distance.toFixed(2)}}</span>
+    </div>
+
+<!-- 		<div class="">
+
+			<span style="    font-size: 16px;float: left;">
+        <img src="http://50.116.17.150:3000/{{n[0].idFoto}}" 
+              onError="this.src='assets/imgs/fotoComercio.png';" style="
+              display: inline-block;
+              vertical-align: sub;
+              height: 25px;    text-transform: lowercase;
+              width: 25px;    border-radius: 20px;
+              ">
+      {{n[0].nombreCentro}}
+    </span>
+	
+			<span style="float: right;color:#777; margin-right: 10px">
+				<ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>
+			 {{n[0].distance.toFixed(2)}}
+			</span>
+
+			
+		</div> 
+
+    <div style="     margin-top: 16px;
+    height: 1px;
+    background-color: #999;
+    opacity: 0.2;"></div>
+
+-->
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    </div>
+
+  <div *ngIf='categorias?.length==0' style="text-align: center;padding-top: 25%;">
+        <ion-spinner name="bubbles"></ion-spinner>
+      </div>
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

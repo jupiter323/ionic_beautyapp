@@ -1,5 +1,10 @@
 page-perfil-centro {
- 
+ .my-loading {
+    ion-backdrop {
+        top: 15%;
+        height: 70%; 
+    }
+}
 
  ion-content{
        
@@ -10,7 +15,15 @@ page-perfil-centro {
 }
 
 
+.horarioUt{
+        width: 90px;
+    display: inline-block;
+}
 
+.containerHorario{
+        margin-top: 10px;
+    color: #888;
+}
 
 .button-ios.activated{
     background-color:#24bb84;

@@ -3,8 +3,93 @@ page-mis-reservas {
 .content-ios {
     background-color: rgb(247,248,249);
 }
+.estadoReservas{
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+}
 
 
+.citaE4sb3{
+        border-left: solid 3px #f75669 !important;
+  
+    
+    }
+.citaE0sb3{
+        border-left: solid 3px #efd801 !important;
+
+        }
+.citaE1sb3{
+        border-left: solid 3px #5072C0 !important; 
+        }
+
+.citaE2sb3{
+border-left: solid 3px #FFC859 !important;
+ }
+
+.citaE3sb3{ 
+border-left: solid 3px #2FD99B !important;
+ }
+
+
+
+
+.citaE4{
+        color:  #f75669 !important;
+  
+    
+    }
+.citaE0{
+        color: #FFC859 !important;
+
+        }
+.citaE1{
+        color:  #5072C0 !important; 
+        }
+
+.citaE2{
+color:  #E39B0C !important;
+ }
+
+.citaE3{ 
+color:  #2FD99B !important;
+ }
+
+
+
+
+.fechaItem{
+	    display: inline-block;
+    height: 85px;
+    width: 90px !important;
+    vertical-align: middle;
+    text-align: center;
+    color: #777;
+    padding: 10px 0px;
+    border-right: solid 2px #ececec;
+
+}
+.iconR{
+	
+    position: absolute;
+    font-size: 30px;
+    color: #ececec;
+    margin-right: 15px;
+    right: 0;
+    margin-top: 30px;
+
+}
+.cardReserva{
+	margin:10px !important;
+	    background-color: white;
+    border-bottom: solid 2px #ececec;
+
+}
+.estadoReservas2{
+    display: block;
+    font-size: 13px;
+
+}
 
 .itemComercio{
 	

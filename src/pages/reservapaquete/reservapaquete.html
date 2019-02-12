@@ -1,0 +1,288 @@
+<!--
+  Generated template for the ReservaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  	<ion-navbar  >
+    <ion-title>Reserva</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+<div>
+<!--   
+		<div style="    height: 30px;
+    margin: 22px;" *ngIf='serviciosCarro' class="paqueteI">
+
+			<span style="float: left;">
+				<b>Paquete </b> {{serviciosCarro[0]?.nombrePaquete}}</span>
+			<span style="float: right;color:#EC527E; margin-right: 10px"> <b>Precio Total </b>${{serviciosCarro[0]?.precioPaquete.toFixed(2)}}</span>
+
+			
+		</div> -->
+
+
+	<div class="itemReserva"  style="text-align: center" >
+	
+	<div style="
+    display: inline-block;
+    width: 70%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+">
+
+		<span style="    font-size: 16px;
+    color: #444;"><b>Paquete </b> {{serviciosCarro[0]?.nombrePaquete}}</span>
+    <br>
+			<span style="color:#EC527E; font-size: 16px; margin-right: 10px"> <b>Precio Total </b>${{serviciosCarro[0]?.precioPaquete}}</span>
+</div>
+
+</div>
+
+
+<!-- <div class="itemReserva" *ngFor="let n of serviciosAll | filtrofav: filterFav"  > -->
+	<div class="itemReserva" *ngFor="let n of serviciosCarro"  >
+	<img src="http://50.116.17.150:3000/{{n.imagenCategoria}}" 
+        onError="this.src='assets/imgs/reservation.png';" style="    max-height: 40px;
+    margin-right: 13px;">
+	<div style="
+    display: inline-block;
+    width: 70%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+">
+		<span style="    font-size: 17px;
+    color: #444;">{{n.nombreServicio}}</span>
+<br>
+ 		<p style=" color: #888;
+    margin-top: 8px;
+    display: inline-block;
+    margin-right: 14px;text-decoration: line-through">${{n.precioServicio}}</p>
+
+<!--
+    		<span style="    color: darkgrey;
+    margin-top: 8px;
+    display: inline-block;">{{n.duracion}}min</span> -->
+
+
+
+
+	</div>
+
+</div>
+
+
+</div>
+<div style="margin-top:20px;width:90%; margin-left:5%">
+
+
+
+		<ion-list class="accordion-list">
+			<!-- First Level -->
+			<ion-list-header  [ngClass]="{'borderSelected': item.open, 'borderSelected2': item.open && item.id==1}" *ngFor="let item of information; let i = index" no-lines no-padding
+			 [hidden]='(!fechaSeleccionada && (item.id == 2 || item.id == 3)) || 
+			 		   (!horaSeleccionada && (item.id == 3))' >
+			<!-- Toggle Button -->
+			<button style='    background: white !important;
+    border-bottom: solid 1px #d3d3d352'  ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
+			<ion-icon class='btnList' item-right  name="ios-add" *ngIf="!item.open"></ion-icon>
+			<ion-icon class='btnList' item-right name="ios-remove" *ngIf="item.open"></ion-icon>
+
+			{{ item.id == 1 ? (fechaSeleccionada || item.nombre) : 
+			   item.id == 2 ? ( item.nombre) : 
+			   item.id == 3 ? ( item.nombre) : item.nombre }}
+
+			</button>
+
+			<ion-list style='margin:0px !important' *ngIf="item.open && item.id == 1" no-lines >
+			<!-- Second Level -->
+			
+				 <ion-calendar [(ngModel)]="date"
+	                  (onChange)="onChange($event)"
+	                  [options]="options"
+	                  type="string"
+
+	                  format="YYYY-MM-DD">
+	   			 </ion-calendar>
+			</ion-list>
+
+
+			<ion-list class='backItem' style='width: 100%;
+    display: table;
+    white-space: normal;'  [hidden]='!fechaSeleccionada' *ngIf="item.open && item.id == 2 "  radio-group [(ngModel)]="horaSeleccionada">
+
+<div [hidden]='diaCerrado'>
+
+
+
+<ion-item  *ngIf='(tipoReserva==2 || tipoReserva=="2")'  style='background: white !important;     padding-top: 6px;
+    padding-bottom: 10px;  border-top: solid 1px lightgray;'>
+  <ion-label style='    color: #444 !important;'>Hora de Inicio</ion-label>
+ <ion-datetime (ionChange)='actualizarHora(horaSeleccionada)' style='    color: #444 !important;' [(ngModel)]="horaSeleccionada" displayFormat="hh:mm A" pickerFormat="HH:mm"  minuteValues="0,30"  max="{{maxH}}" min="{{minH}}"> </ion-datetime> 
+
+</ion-item>
+
+<!-- <ion-item (click)='abrirSelect()'   *ngIf='true'  style='background: white !important;     padding-top: 6px;
+    padding-bottom: 10px;  border-top: solid 1px lightgray;'>
+  <ion-label style='    color: #444 !important;'>Hora de Inicio</ion-label>
+
+
+
+</ion-item> -->
+
+<ion-item *ngIf='horaSeleccionada && (tipoReserva==1 || tipoReserva=="1")'  style='     background: white !important;     padding-top: 6px;
+    padding-bottom: 10px;  border-top: solid 1px lightgray;'>
+  <ion-label style='    color: #444 !important;'>Hora Inicio</ion-label>
+ <ion-datetime [disabled]='true' style='    color: #444 !important;' [(ngModel)]="horaSeleccionada" displayFormat="hh:mm A"> </ion-datetime> 
+
+</ion-item>
+<ion-item *ngIf='horaSeleccionada'  style='     background: white !important;     padding-top: 6px;
+    padding-bottom: 10px;  border-top: solid 1px lightgray;'>
+  <ion-label style='    color: #444 !important;'>Finaliza aprox.</ion-label>
+ <ion-datetime [disabled]='true' style='    color: #444 !important;' [(ngModel)]="horaFinalizacion" displayFormat="hh:mm A" > </ion-datetime> 
+
+</ion-item>
+
+
+</div>
+<div style="    margin: 25px;
+    text-align: center;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 400;
+    color: lightcoral;" [hidden]='!diaCerrado'>
+	
+	Centro cerrado este dia
+</div>
+
+
+	<!-- 			<ion-item class='itemHora'>
+				<ion-label>11:25am</ion-label>
+				<ion-radio mode='wp' value="11:25am" checked></ion-radio>
+				</ion-item>
+				<ion-item class='itemHora' >
+				<ion-label>11:35am</ion-label>
+				<ion-radio mode='wp' value="11:35am"></ion-radio>
+				</ion-item>
+				<ion-item class='itemHora'>
+				<ion-label>11:55am</ion-label>
+				<ion-radio mode='wp' value="11:55am" [disabled]="isDisabled"></ion-radio>
+				</ion-item> -->
+
+
+
+
+
+			</ion-list>
+
+
+
+<!-- 						<ion-list class='backItem' style='width: 100%;
+    display: table;
+    white-space: normal;'  *ngIf="item.open && item.id == 3 "  radio-group [(ngModel)]="staffSeleccionado">
+
+
+
+
+				<ion-item class='avatarSelect' *ngFor="let n of empleados" >
+				<ion-label>
+				<ion-avatar item-start>
+				<img src="http://50.116.17.150:3000/{{n.idFoto}}" 
+        onError="this.src='assets/imgs/usuario.png';" style="display: inline-block;">
+				<div style="    width: 100%;display: inline-block;margin-left: 7px;">
+				<h2  style="margin-bottom: 4px;">{{n.nombre}}</h2>
+				<p style="    white-space: normal;
+    width: calc(100% - 50px);">{{n.descripcion}}</p>
+				</div>
+				</ion-avatar>
+				</ion-label>
+				
+				<ion-radio mode='wp' value="{{n.idEmpleado}}" (ionSelect)="radioChecked(n.nombre)"></ion-radio>
+				</ion-item>
+
+				<ion-item class='avatarSelect' *ngIf='(tipoReserva==2 || tipoReserva=="2")' >
+				<ion-label>
+				<ion-avatar item-start>
+				<img src="assets/imgs/usuario.png" style="display: inline-block;">
+				<div style="    width: 100%;display: inline-block;margin-left: 7px;">
+				<h2  style="margin-bottom: 4px;">Cualquier Personal</h2>
+
+				</div>
+				</ion-avatar>
+				</ion-label>
+				
+				<ion-radio mode='wp' value="-1" (ionSelect)="radioChecked('Cualquier Personal')"></ion-radio>
+				</ion-item>
+
+
+
+<div style="    margin: 25px;
+    text-align: center;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 400;
+    color: lightcoral;" *ngIf='!(tipoReserva==2 || tipoReserva=="2") && (empleados.length<1) || !(empleados)'>
+	
+	<ion-spinner name="bubbles"></ion-spinner>
+</div>
+
+
+
+			</ion-list> -->
+
+
+
+
+
+
+
+			</ion-list-header>
+		</ion-list>
+
+
+<div style="    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;">
+	
+	    <button  *ngIf="!reprogra && fechaSeleccionada && horaSeleccionada && staffSeleccionado && staffSeleccionado !== 0 && (serviciosCarro?.length>0)" (click)='goReserva(fechaSeleccionada,horaSeleccionada)' ion-button class="botonVerdeFulls"
+	    	>Confirmar {{fechaSeleccionada}} - {{getDattts(fechaSeleccionada+' '+horaSeleccionada+':00') }}</button>
+
+</div>
+
+</div>
+
+
+
+<select-alertless   #selectH style='display:none'  [selectOptions]="selectOptions" (ionChange)='printOption($event)' >
+
+      <ion-option *ngFor="let d of horasDisponibles"  value="{{d[0].inicio.split(' ')[1].substring(0, 5)}}" >
+   		<!--   
+    {{d[0].inicio.split(' ')[1].substring(0, 5)}} - {{d[0].fin.split(' ')[1].substring(0, 5)}} 
+		-->
+
+
+		   {{getDattts(d[0].inicio)}} - {{getDattts(d[0].fin)}} 
+  		</ion-option>
+
+</select-alertless>
+
+</ion-content>
+
+
+<!-- <ion-footer style='    background-color: #f7f8f9 !important;'>
+  <ion-toolbar >
+
+
+    <button (click)='goReserva()' ion-button class="botonVerdeFull">Agendar Cita<ion-icon style='    margin-left: 10px !important;' name="md-arrow-forward"></ion-icon> </button>
+
+  </ion-toolbar>
+</ion-footer>
+
+
+ -->
+

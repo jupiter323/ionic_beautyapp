@@ -1,3 +1,56 @@
-page-demo {
-
-}
+ page-demo {
+     .skip {
+         position: fixed;
+         right: 0;
+         margin: 10px;
+         color: #1f140f;
+         font-size: 19px;
+         bottom: 0;
+         background: transparent;
+         z-index: 20
+     }
+     .scroll-content {
+         display: flex;
+         flex-direction: column;
+         ion-slides {
+             display: flex;
+         }
+     }
+     .swiper-slide img {
+         //    height: 300px !important;
+     }
+     .imgDemo {
+         // height: 300px !important;
+         width: 100% !important;
+         height: 100% !important;
+     }
+     .swiper-pagination-fraction,
+     .swiper-pagination-custom,
+     .swiper-container-horizontal>.swiper-pagination-bullets {
+         left: 0;
+         width: 100%;
+     }
+     .textoDemo {
+         color: white;
+         margin-bottom: 50px;
+     }
+     .tituloDemo {
+         margin-bottom: 30px;
+         color: white;
+         margin-top: -14px;
+         width: 100%;
+     }
+     .swiper-pagination-bullet {
+         border-radius: 100%;
+         display: inline-block;
+         width: 15px;
+         height: 15px;
+         background: #1f140f;
+         opacity: 0.9;
+         pointer-events: auto;
+     }
+     .swiper-pagination-bullet-active {
+         background: #EC527E !important;
+         opacity: 1;
+     }
+ }

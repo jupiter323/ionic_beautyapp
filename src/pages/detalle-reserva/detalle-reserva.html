@@ -7,31 +7,60 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Mi Reservacion</ion-title>
+
+
+      <ion-buttons start>
+    <button ion-button menuToggle *ngIf='startF'>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-buttons>
+
+
+    <ion-title>Mi Reservación</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+<div *ngIf='dataCita'>
 
 
 
 	<div>
-		<div><span  class="tituloBook">Reserva ID</span> <span  class="subBook">3413312</span></div>
-		<div style="margin-top: 12px;"><span class="tituloBook">Estado</span> <span class="subBook">Pendiente</span></div>
+		<div><span  class="tituloBook">Reserva ID</span> <span  class="subBook">{{dataCita?.idCita}}</span></div>
+		<div style="margin-top: 10px;">
+            <span class="tituloBook">Estado</span> 
+            <span class="subBook" [ngClass]="{'citaE3':dataCita.estado == 3,'citaE4':dataCita.estado == 4 || dataCita.estado == 7, 'citaE2': dataCita.estado == 5, 'citaE1':dataCita.estado == 2, 'citaE0':dataCita.estado == 1}" style="    
+    color: white;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 3px;">{{getEstado(dataCita?.estado)}}</span>
+        </div>
+
+<!--         <div style="margin-top: 10px;">
+            <span class="tituloBook">Staff</span> 
+            <span class="subBook">{{(dataCita?.nombreEmpleado || 'Cualquier personal')}}</span>
+        </div> -->
+        <div style="margin-top: 10px;">
+            <span class="tituloBook">Fecha</span> 
+            <span class="subBook">{{getFechaFormat(dataCita?.horaInicio.split('T')[0])}}</span>
+        </div>
+
+        <div *ngIf='dataCita?.estado == 5' >
 		<span style="    font-size: 15px;
     color: #777;
     display: inline-block;
-    margin-top: 12px;">Motivo de reprogramacion</span>
-		<p class="parrafoHead">Lorem ipsum dolor sit amet, viverra a sapien massa ante placerat, sed lorem nibh phasellus, molestie commodo</p>
-
+    margin-top: 12px;    color: lightcoral;    font-weight: 500;">Motivo de reprogramacion</span>
+		<p style="    border: solid 1px lightcoral;
+    padding: 10px;" class="parrafoHead">{{dataCita?.comentarioCita}}</p>
+        </div>
 
 		<div style="
-    display: inline-block;    width: 100%;
+    display: inline-block;    width: 100%;    margin-top: 20px;
 ">
-	<img src="assets/imgs/fotoComercio.png" style="
+	<img src="http://50.116.17.150:3000/{{dataCita?.idFoto}}" 
+        onError="this.src='assets/imgs/fotoComercio.png';"  style="
     display: inline-block;
     height: 90px;
     width: 90px !important;
@@ -44,9 +73,9 @@
 ">
 		<span style="margin: 2px 0px 0px 0px;
     font-size: 19px;
-    color: #333;">Center Name Here.....</span>
-		<span style="margin-top:10px" class="itemComercio">Center Name, Building Name</span>
-		<span style="margin-top:10px" class="itemComercio">City Name, Country</span>
+    color: #333;">{{dataCita?.nombre}}</span>
+		<span style="margin-top:10px" class="itemComercio">{{dataCita?.direccion}}</span>
+		<span style="margin-top:10px" class="itemComercio"></span>
 
 
 	</div>
@@ -61,114 +90,268 @@
     text-align: center;
  margin-top: 20px;">
 
-	<button  color='headerColor' ion-button  style="    width: 40%;
-    margin-right: 5%;
+	<button (click)='llamar()' [disabled]="!dataCita?.telefono"  color='headerColor' ion-button  style="    width: 44%;
+    margin-right: 2%;
     border-radius: 70px;" > <img style="margin-right:10px" src="assets/imgs/telefono.png"> Llamar</button> 
 
-	<button  style=" border-radius: 70px;   width: 40%;
-    margin-left: 5%;"  color='verdeApp' ion-button> <img style="margin-right:10px" src="assets/imgs/agregadosBlanco.png">  Mapa</button>
+	<button  (click)='comoLlegar()' style=" border-radius: 70px;   width: 44%;
+    margin-left: 2%;    white-space: normal;"  color='verdeApp' ion-button> <img style="margin-right:10px" src="assets/imgs/agregadosBlanco.png">Cómo llegar</button>
 
 
 
 </div>
 
-<div style="margin-top:13px"><span  style=' 
+
+
+<!-- 
+    <ion-item  style=' margin-top: 15px    '>
+                <ion-calendar 
+                    [(ngModel)]="fechaCalendario"
+                      [options]="options"
+                          (onChange)="onChange($event)"
+                      type="string"
+
+                      format="YYYY-MM-DD" [readonly]='!edicionFecha'>
+                 </ion-calendar>
+</ion-item>
+ -->
+<ion-list class='backItem' style='width: 100%;    margin-top: 23px;    margin-bottom: 23px;
+    display: table;
+    white-space: normal;    background: transparent !important; '>
+
+
+<!-- <div [hidden]='diaCerrado'>
+<ion-item style='     padding-top: 6px;padding-left: 0px !important;
+    padding-bottom: 10px;  border-top: solid 1px lightgray;'>
+  <ion-label style='    color: #444 !important;'>Hora de Inicio</ion-label>
+ <ion-datetime (ionChange)='actualizarHora(horaSeleccionada)' style='    color: #444 !important;' [(ngModel)]="horaSeleccionada" displayFormat="hh:mm A"  minuteValues="0,15,30,45"  max="{{maxH}}" min="{{minH}}" [disabled]='!edicionFecha'> </ion-datetime> 
+
+</ion-item>
+
+<ion-item   style='     padding-top: 6px;padding-left: 0px !important;
+    padding-bottom: 10px;  border-top: solid 1px lightgray;'>
+  <ion-label style='    color: #444 !important;'>Finaliza aprox.</ion-label>
+ <ion-datetime *ngIf='horaSeleccionada' [disabled]='true' style='    color: #444 !important;' [(ngModel)]="horaFinalizacion" displayFormat="hh:mm A" > </ion-datetime> 
+
+</ion-item>
+</div> -->
+
+<div style="    margin: 25px;
+    text-align: center;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 400;
+    color: lightcoral;" [hidden]='!diaCerrado'>
+    
+    Centro cerrado este dia
+</div>
+</ion-list>
+
+
+
+
+
+<!-- <div style="margin-top:13px"><span  style=' 
     width: 50px;
     margin-left: 8px;
-    font-size: 15px;' class="tituloBook">Fecha</span> <span  style='    font-size: 15px;' class="subBook">Jue, 5 Jul, 2018</span></div>
+    font-size: 15px;' class="tituloBook">Fecha</span> <span  style='    font-size: 15px;' class="subBook">{{dataCita?.horaInicio.split('T')[0]}}</span></div>
+
+    <div style="margin-top:13px"><span  style=' 
+    width: 50px;
+    margin-left: 8px;
+    font-size: 15px;' class="tituloBook">Inicio:</span> <span  style='    font-size: 15px;' class="subBook">{{dataCita?.horaFinalEsperado.split('T')[1]}}</span></div>
+
+    <div style="margin-top:13px"><span  style=' 
+    width: 50px;
+    margin-left: 8px;
+    font-size: 15px;' class="tituloBook">Final aprox:</span> <span  style='    font-size: 15px;' class="subBook">{{dataCita?.horaInicio.split('T')[1]}}</span></div>
 
 
-<div class="separator"></div>
+Uno  de los servicios no ha sido confirmado. Solicite una reprogramación o cambio de personal para completar su reserva
+
+ -->
+
+       <div *ngIf='algunaCancelada()' >
+        <span style="    font-size: 15px;
+    color: #777;
+    display: inline-block;
+    margin-top: 12px;    color: lightcoral;    font-weight: 800;">Importante</span>
+        <p style="      color: lightcoral;
+    border-radius: 3px;  border: solid 1px lightcoral;
+    padding: 10px;" class="parrafoHead">Uno  de los servicios no ha sido confirmado. Solicite una reprogramación o cambio de personal para completar su reserva</p>
+        </div>
+
+
+<div  *ngFor="let n of servicios">
+
+
 
 <div style="
     width: 100%;
     display: inline-block;
 ">
 	
-	<img src="assets/imgs/servicio1.png" style="
+<!-- 	<img src="http://50.116.17.150:3000/{{n.imagenCategoria}}" 
+        onError="this.src='assets/imgs/reservation.png';" style="
     display: inline-block;
     vertical-align: top;
-    height: 54px;
-    width: 54px;
-">
+    max-height: 36px;
+
+"> -->
 	<div style="
     display: inline-block;
-    width: calc(100% - 83px);
-    margin-left: 22px;
-">
-
-<span style="     color: #EC527E !important;
-    font-size: 16px;
-    float: right;
-    margin-right: 47px;">$42.00</span>
-
-
-		<span style="
-    font-size: 19px;
-    color:  #333;
-">Corte de Cabello</span>
-		<div style="    margin-top: 7px;"><span style="    color: #333;
-    font-size: 12px;">Any staff</span>	<span style="margin-right: 20px;     margin-left: 20px;   color: #333;
-    font-size: 12px;"><ion-icon style='margin-right: 5px' name="ios-time-outline"></ion-icon>7:00am to 9:00pm</span></div>
-	</div>
-</div>
-
-
-
-<div class="separator"></div>
-
-<div style="
     width: 100%;
-    display: inline-block;
+    padding: 15px 0px;
+    border-top: solid 2px #ececec;
+    margin-top: 10px;
 ">
-	
-	<img src="assets/imgs/servicio1.png" style="
-    display: inline-block;
-    vertical-align: top;
-    height: 54px;
-    width: 54px;
-">
-	<div style="
-    display: inline-block;
-    width: calc(100% - 83px);
-    margin-left: 22px;
-">
-<span style="     color: #EC527E !important;
-    font-size: 16px;
-    float: right;
-    margin-right: 47px;">$42.00</span>
+
+
+
+
+
 
 		<span style="
-    font-size: 19px;
-    color:  #333;
-">Tinte de Cabello
-
-
-
-    </span>
-		<div style="    margin-top: 7px;"><span style="    color: #333;
-    font-size: 12px;">Any staff</span>	<span style="margin-right: 20px;     margin-left: 20px;   color: #333;
-    font-size: 12px;"><ion-icon style='margin-right: 5px' name="ios-time-outline"></ion-icon>7:00am to 9:00pm</span></div>
-	</div>
-</div>
-
-
-
-<div class="separator"></div>
-
-
-	<div style="
-    margin-bottom: 15px;
-
-"><span style="
-    font-size: 16px;
+      font-size: 16px;
     color: #333;
-">Total</span> <span style="    color: #EC527E !important;
+    font-weight: 600;text-transform: lowercase;
+">{{n.nombre}}</span>
+
+        <span [ngClass]="{'citaE3':n.estado == 3,'citaE4':n.estado == 4 || n.estado == 7, 'citaE2': n.estado == 2, 'citaE1':n.estado == 1, 'citaE0':n.estado == 0}" style="
+          font-size: 13px;
+    color: white;
+    font-weight: 600;
+    float: right;
+    padding: 3px;
+    border-radius: 3px;
+">{{n.estado == 0 ? 'Por Confirmar' : 
+    n.estado == 1 ? 'Confirmado' :
+    n.estado == 2 ? 'Reprogramacion' :
+    n.estado == 3 ? 'Completado' :
+    n.estado == 4 ? 'Declinado' : 
+    n.estado == 7 ? 'Cancelado' : '-'}}</span>
+
+
+	<div style="    margin-top: 7px;">
+
+        <span style="    display: block; color: #333;
+        font-size: 12px; margin-bottom: 5px">
+
+        <img src="http://50.116.17.150:3000/{{n.idFotoE}}" 
+        onError="this.src='assets/imgs/usuario.png';" style="    display: inline-block;
+    height: 25px;
+    width: 25px;border-radius: 25px;
+    vertical-align: bottom;
+    margin-left: -6px;"><span style="margin-left: 5px">{{n.nombreEmpleado}}</span>
+
+
+        </span>
+
+
+
+        <span style="margin-right: 20px;   color: #333;
+        font-size: 12px;">
+
+        <ion-icon style='margin-right: 5px' name="ios-time-outline">
+        </ion-icon>{{getDattts(n.horaInicio)}} - {{getDattts(n.horaFin)}}
+
+
+        </span>
+   
+          <span style="    color: #EC527E !important;
+    float: right;
+    min-width: 41px;
+    text-align: left;
     font-size: 16px;
-    margin-left: 47px;">$120.00</span></div>
+    font-weight: 500;">${{n.precioCobrado}}
+        </span>
+           <span *ngIf='n.precioMomentoCompra !== n.precioCobrado' style="
+            font-size: 15px;
+            color: #777;
+            float: right;
+            margin-right: 15px;
+            text-decoration: line-through;">${{n.precioMomentoCompra}}
+        </span>
+
+
+    </div>
+	</div>
+    <div style="color: #f75669 !important;" *ngIf='n.estado == 7'>
+    Este servicio ha sido cancelado por el administrador de {{dataCita?.nombre}}
+</div>
+</div>
+
+</div>
 
 
 
+
+
+
+	<div style="    margin-bottom: 15px;
+    border-top: solid 2px #ececec;
+    padding: 15px 0px;"><span style="
+    font-size: 16px;
+    color: #333;font-weight: 800; 
+">Total</span> <span style="        font-weight: 800; color: #EC527E !important;
+    font-size: 16px;
+    float: right;
+    font-weight: 800;">${{dataCita?.precioEsperado}}</span></div>
+
+
+
+ <div *ngIf='dataCita?.estado == 5'  style="width: 100%;
+    text-align: center; display: inline-block;">
+
+   
+
+    <button  (click)='reprogramarCita()'  style="     white-space: normal;border-radius: 70px;   width: 48%;
+    margin-left: 0px;float:left"  color='verdeApp' ion-button> Aceptar Reprogramación</button>
+
+    <button  (click)='cancelarCita()'  color='headerColor' ion-button  style="    width: 40%;
+    margin-right: 5%;
+    border-radius: 70px;float:right;" >Cancelar</button> 
+
+
+</div>
+
+
+
+
+ <div *ngIf='dataCita?.estado == 2 || dataCita?.estado == 1'  style="     width: 100%;
+    text-align: center; display: inline-block;
+   ">
+
+<div  [hidden]='edicionFecha'>
+     <button  [disabled]='dataCita?.difT !== 1' (click)='reprogramarCita()' style=" border-radius: 70px;   width: 40%;
+    margin-left: 5%; float:left"  color='verdeApp' ion-button> Reprogramar</button>
+
+
+    <button (click)='cancelarCita()'  color='headerColor' ion-button  style="    width: 40%;
+    margin-right: 5%;
+    border-radius: 70px;float:right" >Cancelar</button> 
+
+
+</div>
+<div [hidden]='!edicionFecha'>
+    
+
+    <button [disabled]='horaSeleccionada==""'  (click)='guardarReprogramacion()' style=" border-radius: 70px;   width: 40%;
+    margin-left: 5%;float:left"  color='verdeApp' ion-button> Guardar cambio</button> 
+
+    <button (click)='cancelarEdicion()'  color='headerColor' ion-button  style="    width: 40%;
+    margin-right: 5%;
+    border-radius: 70px;float:right" >Deshacer</button>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- 
  <div style="    width: 100%;
     text-align: center;
  margin-top: 20px; margin-bottom: 30px;">
@@ -184,7 +367,24 @@
 
 </div>
 
+ -->
 
+<!-- 
+ <div *ngIf='dataCita?.estado == 2 || dataCita?.estado == 1'  style="    width: 100%;
+    text-align: center;
+ margin-top: 40px;">
+
+    <button (click)='cancelarCita()'  color='headerColor' ion-button  style="    width: 40%;
+    margin-right: 5%;
+    border-radius: 70px;" > Cancelar Reserva</button> 
+
+    <button  (click)='reprogramarCita()' style=" border-radius: 70px;   width: 40%;
+    margin-left: 5%;"  color='verdeApp' ion-button> Reprogramar</button>
+
+
+
+</div> -->
+</div>
 
 
 </ion-content>

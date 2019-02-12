@@ -14,10 +14,10 @@ Favoritos
     </ion-title>
 
           <ion-buttons end>
-      <button (click)='filtroCategoria()' ion-button icon-only>
+<!--       <button (click)='filtroCategoria()' ion-button icon-only>
         <ion-icon name="ios-options"></ion-icon>
       </button>
-
+ -->
 
        
 
@@ -28,19 +28,64 @@ Favoritos
   </ion-navbar>
 </ion-header>
 
-<ion-content >
+<ion-content  style='background: #fafafa !important;'>
+
+  <ion-grid>
+  <ion-row>
+
+    <ion-col col-6>
+      <ion-select  placeholder="Categoria" style='    -webkit-box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3) !important;
+
+    width: 100%;
+    max-width: 100%;' [(ngModel)]="categoriaSeleccionada" (ionChange)="subcategorias=[];getSubCat($event,true)" multiple="false" okText="Filtrar"  cancelText="Cerrar">
+
+ <ion-option   [value]="0" 
+      >Todas</ion-option>
+
+
+ <ion-option  *ngFor="let n of categorias; let idx = index" [selected]='true'  [value]="n.idCategoria" 
+      >{{n.nombre}}</ion-option>
+  </ion-select>
+
+    </ion-col>
+    <ion-col col-6>
+
+      <ion-select   placeholder="Sub Categoria" [disabled]='subcategorias?.length<1' style='    -webkit-box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 2px 9px rgba(0, 0, 0, 0.3) !important;
+
+    width: 100%;
+    max-width: 100%;' [(ngModel)]="subCategoriaSeleccionada" (ionChange)="filtrarSubCategorias($event,true)" multiple="true" okText="Filtrar"  cancelText="Cerrar">
+
+
+
+ <ion-option  *ngFor="let n of subcategorias; let idx = index" [selected]='true'  [value]="n.idSubcategoria" 
+      >{{n.nombre}}</ion-option>
+  </ion-select>
+
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+
+
 
 
 
     <ion-list mode="md" >
 
-		<ion-card (click)='goCentro()'>
 
+        <div class='noResultado' 
+        *ngIf="((favoritos)?.length == 0) || ((favoritos | filtrofav: filterFav)?.length == 0)" >No se han encontrado negocios</div> 
+
+		<ion-card *ngFor="let n of favoritos | filtrofav: filterFav"  (click)='goCentro(n.idCentro)' >
 		<ion-card-content>
 				<div style="
 				display: inline-block;    width: 100%;
 				">
-				<img src="assets/imgs/fotoComercio.png" style="
+				<img src="http://50.116.17.150:3000/{{n.idFoto}}" 
+        onError="this.src='assets/imgs/fotoComercio.png';" style="
 				display: inline-block;
 				height: 90px;
 				width: 90px !important;
@@ -52,23 +97,24 @@ Favoritos
 				">
 				<span style="margin: 2px 0px 0px 0px;
 				font-size: 19px;
-				color: #333;">Center Name Here</span>
+				color: #333;">{{n.nombre}}</span>
 				<span style="    display: block;
     font-size: 16px;
     margin: 10px 0px;
     font-weight: 800;
-    color: #EC527E;">$25 - $40</span>
+    color: #EC527E;">${{n.pMin}} <span [hidden]='n.pMin == n.pMax'>- ${{n.pMax}}</span></span>
 
 				<span class="itemComercio" >
 
 					<span style="  margin-right: 21px;  color: #888;
-    font-size: 15px;"><ion-icon style='    margin-right: 8px;
+    font-size: 15px;"><ion-icon [ngClass]="{'colorGris': n.cantRate==0}"  style='    margin-right: 8px;
     color: rgb(249,199,53);
     font-size: 21px;
-    vertical-align: middle;' name="md-star"></ion-icon>5.0 (20)</span>
+    vertical-align: middle;' name="md-star"></ion-icon>{{n.rate  | number:'1.1-2'}} ({{n.cantRate
+}})</span>
 
 					<span style="     color: #888;
-    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>7.5 Km</span>
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>{{n.distance | number:'1.1-2'}} Km</span>
 
 				</span>
 
@@ -79,99 +125,6 @@ Favoritos
 		</ion-card>
 
 
-
-		<ion-card (click)='goCentro()'>
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/fotoProfile.png" style="
-				display: inline-block;
-				height: 90px;
-
-    border-radius: 6px;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				<span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;">Center Name Here</span>
-				<span style="    display: block;
-    font-size: 16px;
-    margin: 10px 0px;
-    font-weight: 800;
-    color: #EC527E;">$25 - $40</span>
-
-				<span class="itemComercio" >
-
-					<span style="  margin-right: 21px;  color: #888;
-    font-size: 15px;"><ion-icon style='    margin-right: 8px;
-    color: rgb(249,199,53);
-    font-size: 21px;
-    vertical-align: middle;' name="md-star"></ion-icon>5.0 (20)</span>
-
-					<span style="     color: #888;
-    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>7.5 Km</span>
-
-				</span>
-
-				</div>
-				</div>
-
-		</ion-card-content>
-		</ion-card>
-
-
-
-		<ion-card (click)='goCentro()'>
-
-		<ion-card-content>
-				<div style="
-				display: inline-block;    width: 100%;
-				">
-				<img src="assets/imgs/imagenLogo.png" style="
-				display: inline-block;
-				height: 90px;
-				    object-fit: cover;
-				width: 90px !important;
-				vertical-align: top;
-				">
-				<div style="    display: inline-block;
-    width: calc(100% - 105px);
-    margin-left: 10px;
-				">
-				<span style="margin: 2px 0px 0px 0px;
-				font-size: 19px;
-				color: #333;">Center Name Here</span>
-				<span style="    display: block;
-    font-size: 16px;
-    margin: 10px 0px;
-    font-weight: 800;
-    color: #EC527E;">$25 - $40</span>
-
-				<span class="itemComercio" >
-
-					<span style="  margin-right: 21px;  color: #888;
-    font-size: 15px;"><ion-icon style='    margin-right: 8px;
-    color: rgb(249,199,53);
-    font-size: 21px;
-    vertical-align: middle;' name="md-star"></ion-icon>5.0 (20)</span>
-
-					<span style="     color: #888;
-    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>7.5 Km</span>
-
-				</span>
-
-				</div>
-				</div>
-
-		</ion-card-content>
-		</ion-card>
 
 
 
@@ -181,7 +134,9 @@ Favoritos
 
     </ion-list>
 
-
+  <div *ngIf='categorias?.length==0' style="text-align: center;padding-top: 25%;">
+        <ion-spinner name="bubbles"></ion-spinner>
+      </div>
 </ion-content>
 
 

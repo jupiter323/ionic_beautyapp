@@ -1,0 +1,60 @@
+<!--
+  Generated template for the AjustesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+
+   <ion-buttons start>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-buttons>
+
+    
+    <ion-title>Ayuda</ion-title>
+
+
+
+  </ion-navbar>
+
+</ion-header>
+
+
+
+
+<ion-content style='background-color: #fafafa; ' >
+
+
+
+		<ion-list class="accordion-list">
+			<ion-list-header  [ngClass]="{'borderSelected': item.open, 'borderSelected2': item.open && item.id==1}" *ngFor="let item of information; let i = index" no-lines no-padding>
+
+
+			<button style='        white-space: normal !important;
+    color: #777;background: transparent;
+    border-bottom: solid 1px #d3d3d352'  ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
+			<ion-icon class='btnList' item-right  name="ios-add" *ngIf="!item.open"></ion-icon>
+			<ion-icon class='btnList' item-right name="ios-remove" *ngIf="item.open"></ion-icon>
+
+			<p [ngClass]="{'section-active': item.open}" style="      text-overflow: ellipsis !important;
+    white-space: normal !important;
+    padding: 9px 0px;    color: #3d3f4a;
+    font-size: 16px;">{{ item.nombre }}</p>
+
+			</button>
+
+			<ion-list class='faqRespuesta' *ngIf="item.open" no-lines >
+			<p style="line-height: 19px;    color: #3d3f4a;
+    font-size: 16px;" [innerHtml]="item.respuesta"></p>
+			</ion-list>
+
+			</ion-list-header>
+		</ion-list>
+
+
+
+</ion-content>

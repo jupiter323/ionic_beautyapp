@@ -1,0 +1,150 @@
+<ion-header>
+  <ion-navbar  color="headerColor">
+
+    <ion-buttons start>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-buttons>
+
+    <ion-title>
+Usar Cupón
+
+
+    </ion-title>
+
+          <ion-buttons end>
+
+       
+
+      </ion-buttons>
+
+
+
+  </ion-navbar>
+
+
+   
+
+
+</ion-header>
+
+<ion-content >
+  <div class='alertaCupon' style="background-color:#EC527E">
+
+  		<span *ngIf='favoritos[0]?.tipo=="1"'> 
+  			
+  			 <span  *ngIf='favoritos[0]?.tipoDescuento=="1"'> 
+  				Algunos servicios con {{favoritos[0]?.porcentajeDescuento}}% de descuento
+  			</span>
+  			<span  *ngIf='favoritos[0]?.tipoDescuento=="2"'>
+  				Algunos servicios con ${{favoritos[0]?.porcentajeDescuento}} de descuento
+  			</span>
+
+  		</span>
+
+  		<span *ngIf='favoritos[0]?.tipo=="2"'>
+
+  			<span  *ngIf='favoritos[0]?.tipoDescuento=="1"'> 
+  				Todos los servicios con {{favoritos[0]?.porcentajeDescuento}}% de descuento
+  			</span>
+  			<span  *ngIf='favoritos[0]?.tipoDescuento=="2"'>
+  				Todos los servicios con ${{favoritos[0]?.porcentajeDescuento}} de descuento
+  			</span>
+  			
+
+  		</span>
+
+
+	  	
+
+	  </div>
+	
+
+    <ion-list mode="md" >
+
+
+        <div class='noResultado' *ngIf="(favoritos)?.length === 0" >
+
+       <!--  No has marcado ningun negocio como favorito 
+
+       	PONER ESPINER !!!!
+
+       -->
+
+    	</div> 
+
+		<ion-card *ngFor="let n of favoritos" (click)='goCentro(n.idCentro)' >
+		<ion-card-content>
+				<div style="
+				display: inline-block;    width: 100%;
+				">
+				<img src="http://50.116.17.150:3000/{{n.idFoto}}" 
+        onError="this.src='assets/imgs/fotoComercio.png';" style="
+				display: inline-block;
+				height: 90px;
+				width: 90px !important;
+				vertical-align: top;
+				">
+				<div style="    display: inline-block;
+    width: calc(100% - 105px);
+    margin-left: 10px;
+				">
+				<span style="margin: 2px 0px 0px 0px;
+				font-size: 19px;
+				color: #333;">{{n.nombreCentro}}</span>
+				<span style="    display: block;
+    font-size: 16px;
+    margin: 10px 0px;
+    font-weight: 800;
+    color: #EC527E;">${{n.pMin}} <span [hidden]='n.pMin == n.pMax'>- ${{n.pMax}}</span></span>
+
+				<span class="itemComercio" >
+
+					<span style="  margin-right: 21px;  color: #888;
+    font-size: 15px;"><ion-icon [ngClass]="{'colorGris': n.cantRate==0}"  style='    margin-right: 8px;
+    color: rgb(249,199,53);
+    font-size: 21px;
+    vertical-align: middle;' name="md-star"></ion-icon>{{n.rate  | number:'1.1-2'}} ({{n.cantRate
+}})</span>
+
+<!-- 					<span style="     color: #888;
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>{{n.distance | number:'1.1-2'}} Km</span> -->
+
+				</span>
+
+				</div>
+				</div>
+
+		</ion-card-content>
+		</ion-card>
+
+
+
+
+
+
+
+
+
+    </ion-list>
+
+
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

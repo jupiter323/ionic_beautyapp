@@ -1,0 +1,155 @@
+<!--
+  Generated template for the ListaServiciosPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+<ion-item style='background-color: transparent !important;'>
+  <ion-label style='    text-align: center;
+    color: white;
+    font-weight: bold;' >Resultados</ion-label>
+</ion-item>
+  </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+
+<ion-content >
+
+
+
+
+
+<div [ngSwitch]="section" *ngIf='cargaData'>
+
+	<div style="margin: 15px">
+
+		<div *ngIf='filtro.palabra' class="tagResultado">{{filtro.palabra}}</div>
+		<div  *ngIf='filtro.stringPlace' class="tagResultado">{{filtro.stringPlace}}</div>
+		<div  *ngIf='filtro.abierto' class="tagResultado">Abierto Ahora</div>
+		<div  *ngIf='filtro.filtroHora' class="tagResultado">Abierto en horario {{filtro.filtroHora}}</div>
+<div  *ngIf='filtro.fecha && filtro.filtroFecha' class="tagResultado">Abierto {{getFF(filtro.filtroFecha)}}</div>
+		
+
+		<div  *ngIf='filtro.orden && filtro.orden=="ASC"' class="tagResultado">Precio: De Menor a Mayor</div>
+		<div  *ngIf='filtro.orden && filtro.orden=="DESC"' class="tagResultado">Precio: De Mayor a Menor</div>
+
+		<div  *ngIf='filtro.ordenOpiniones' class="tagResultado">Opiniones altas</div>
+
+
+		<div  *ngIf='filtro.disponible' class="tagResultado">Disponible Hoy</div>
+
+
+
+<!-- 
+		<div *ngFor="let s of filtro.servicios; let i = index"  class="tagResultado">
+		{{categorias[s-1]}}</div> -->
+
+
+<div style="text-align: center;
+    color: #444;
+    font-size: 16px;
+    margin: 10px;" *ngIf="(resultados?.length > 0)" >Resultados de la Busqueda</div>
+
+	</div>
+
+    <ion-list mode="md" >
+    	<div *ngIf="!(resultados?.length > 0)" style="    text-align: center;">
+    		
+    		<img  style='' src="assets/imgs/busquedaNula.png">
+    		<p style="    text-align: center;
+    font-size: 16px;
+    margin: 0px 30px;
+    line-height: 23px;">   <b style="color:#666"> Lo sentimos no hemos encontrado resultados, intenta nuevamente con filtros de búsqueda diferentes.</b></p>
+    	</div>
+		
+
+                <ion-card *ngFor="let n of resultados" (click)='goCentro(n.idCentro)' 
+        [ngStyle]="{'border': n.ofertaActiva > 0 ? 'solid 3px #EC527E' : 'none' }">
+        <ion-card-content style='padding: 10px !important;' >
+                <div style="
+                display: inline-block;    width: 100%;
+                ">
+<!--                <img src="assets/imgs/fotoComercio.png" style="
+                display: inline-block;
+                height: 90px;
+                width: 90px !important;
+                vertical-align: top;
+                "> -->
+<div style="
+    display: inline-block;
+    height: 76px;
+    width: 95px !important;
+    vertical-align: top;
+    text-align: center;
+        ">
+                <img src="http://50.116.17.150:3000/{{n.idFoto}}" 
+        onError="this.src='assets/imgs/fotoComercio.png';"
+        style="
+        display: inline-block;
+        height: 76px;
+        width: 76px !important;
+        vertical-align: top;
+        ">
+        <span style="    background-color: #EC527E;
+    font-size: 11px;
+    font-weight: 800;
+    color: white;
+    border-radius: 2px;
+    padding: 1px 9px;" *ngIf='n.ofertaActiva > 0'>Con Ofertas</span>
+        </div>
+                <div style="    display: inline-block;
+        width: calc(100% - 103px);">
+                <span style="margin: 2px 0px 0px 0px;
+                font-size: 19px;
+                color: #333;">{{n.nombre}}</span>
+                <span style="    display: block;
+    font-size: 16px;
+    margin: 10px 0px;
+    font-weight: 800;
+    color: #EC527E;">${{n.pMin}} <span [hidden]='n.pMin == n.pMax'>- ${{n.pMax}}</span></span>
+
+                <span class="itemComercio" >
+
+                    <span style="  margin-right: 21px;  color: #888;
+    font-size: 15px;"><ion-icon [ngClass]="{'colorGris': n.cantRate==0}"  style='    margin-right: 8px;
+    color: rgb(249,199,53);
+    font-size: 21px;
+    vertical-align: middle;' name="md-star"></ion-icon>{{n.rate  | number:'1.1-2'}} ({{n.cantRate
+}})</span>
+
+                    <span style="     color: #888;
+    font-size: 15px;  "><ion-icon style='  margin-right: 8px;      vertical-align: middle;   font-size: 21px;color:#2FD99B;' name="ios-pin"></ion-icon>{{n.distance | number:'1.1-2'}} Km</span>
+
+                </span>
+
+                </div>
+                </div>
+
+        </ion-card-content>
+        </ion-card>
+
+
+
+
+
+    </ion-list>
+</div>
+
+
+
+
+
+
+    	<div *ngIf='!cargaData' style="text-align: center;padding-top: 25%;">
+    		<ion-spinner name="bubbles"></ion-spinner>
+    	</div>
+
+
+
+</ion-content>

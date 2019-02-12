@@ -1,0 +1,247 @@
+<!--
+  Generated template for the AjustesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+
+   <ion-buttons start>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    </ion-buttons>
+
+    
+    <ion-title>Cuenta</ion-title>
+
+
+
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content style='background-color: #fafafa; ' >
+
+        <ion-item style='    margin-top: 0px;
+    background-color: white !important;
+    padding: 20px;' class='fixProfileMargin'>
+          <ion-avatar item-start>
+
+          <img *ngIf="!imageFileName && editarData && !dataUser.fbId"  [hidden]='imageFileName' style='width:75px; height: 75px;    object-fit: cover;
+    object-position: center;' src="http://50.116.17.150:3000/{{dataUser?.idFoto}}" 
+        onError="this.src='assets/imgs/usuario.png';" />
+
+          <img *ngIf="!imageFileName && editarData && dataUser.fbId"  [hidden]='imageFileName || dataUser.idFoto' style='width:75px; height: 75px;    object-fit: cover;
+    object-position: center;' src="{{dataUser?.imagenFb}}" 
+        onError="this.src='assets/imgs/usuario.png';" />
+
+          <img *ngIf="!imageFileName && editarData && dataUser.fbId && dataUser.idFoto"  [hidden]='imageFileName' style='width:75px; height: 75px;    object-fit: cover;
+    object-position: center;' src="http://50.116.17.150:3000/{{dataUser?.idFoto}}" 
+        onError="this.src='assets/imgs/usuario.png';" />
+
+
+
+            <img  (click)='getImages()' *ngIf="!imageFileName && !editarData" [hidden]='imageFileName' style='width:75px; height: 75px' src="assets/imgs/editImage.png"   />
+
+        <img (click)='getImages()'  [src]="DomSanitizer.bypassSecurityTrustUrl(imageFileName)"  *ngIf="imageFileName" style='width:75px; height: 75px;object-fit: contain;' />
+
+          </ion-avatar>
+          <h2 style="margin-bottom: 23px;">{{dataUser?.nombre}}</h2>
+          <div class="barraContainer">
+
+
+
+            <div class="barraProgress" [ngStyle]="{'width': porcenBarra}"  ><span>{{getUDPE(dataUser?.exp) || 0}}/{{dataUser?.appexp}}</span></div>
+
+          </div>
+        </ion-item>
+
+
+
+
+          <ion-list>
+<!-- 
+
+
+          <button  class="claseItem"  ion-item  >
+          {{dataUser?.nombre || 'no especificado'}}
+    
+          </button>       <button  class="claseItem"  ion-item  >
+          {{dataUser?.email || 'no especificado'}}
+        
+          </button>
+          <button  class="claseItem"  ion-item  >
+          {{dataUser?.telefono || 'no especificado'}}
+        
+          </button>
+
+          <button  class="claseItem"  ion-item  >
+          Genero: {{dataUser?.genero || 'no especificado'}}
+        
+          </button>
+-->
+
+
+  <ion-item style='margin-top: 20px'  >
+    <ion-label color="headerColor" stacked>Nombre</ion-label>
+    <ion-input  [ngClass]="{'itemActi':!editarData}"   [disabled]='editarData' [(ngModel)]="dataUser.nombre" autocomplete='off' type="text" placeholder="nombre"></ion-input>
+  </ion-item>
+
+  <ion-item  style='margin-top: 20px'>
+    <ion-label color="headerColor" stacked>Email</ion-label>
+    <ion-input  [ngClass]="{'itemActi':!editarData}" [disabled]='true' [(ngModel)]="dataUser.email"  type="text" placeholder="correo electronico" autocomplete='off'></ion-input>
+  </ion-item>
+
+    <ion-item  style='margin-top: 20px'>
+    <ion-label color="headerColor" stacked>Contraseña</ion-label>
+    <ion-input   [ngClass]="{'itemActi':!editarData}"   [disabled]='editarData' [(ngModel)]="dataUser.password"  autocomplete='off' type="password" placeholder="pass"></ion-input>
+  </ion-item>
+
+
+  <ion-item  style='margin-top: 20px'>
+    <ion-label color="headerColor" stacked>Teléfono</ion-label>
+    <ion-input  [ngClass]="{'itemActi':!editarData}"  [disabled]='editarData' [(ngModel)]="dataUser.telefono" autocomplete='off' type="tel" placeholder="telefono"></ion-input>
+  </ion-item>
+
+
+  
+  
+      <div style="margin-left: 16px;margin-top:10px">
+        <span style="font-size: 1.2rem;
+    color: #EC527E;
+    display: block;" >Género</span>
+
+
+        <ion-icon  name="man" style='        font-size: 40px;
+    opacity: 0.5;
+    color: #2FD99B;
+    margin: 10px;' [ngClass]="{'iconActive':dataUser?.idGenero == 1}" 
+    (click)='seleccionarGenero(1)'></ion-icon>
+
+
+        <ion-icon name="woman" style='    color: #EC527E;
+    margin: 10px;
+        font-size: 40px;
+    opacity: 0.5;' [ngClass]="{'iconActive':dataUser?.idGenero == 2}" 
+    (click)='seleccionarGenero(2)'></ion-icon>
+     </div>
+<!--    <ion-item  style='margin-top: 20px'> 
+  <ion-label color="headerColor" stacked>Genero</ion-label>
+<ion-input   [ngClass]="{'itemActi':!editarData}"  [disabled]='editarData' [(ngModel)]="dataUser.genero"  type="text" placeholder=""></ion-input>
+
+   <ion-select interface='popover' [ngClass]="{'itemActi':!editarData}"  [disabled]='editarData' 
+   [(ngModel)]="dataUser.genero">
+
+      <ion-option value="Masculino">
+        <span>ion-icon name="man"></ion-icon>
+        
+      </ion-option>
+
+      <ion-option value="Femenino">
+      <ion-icon name="woman"></ion-icon>
+        Femenino
+      </ion-option>
+
+  </ion-select>
+
+  </ion-item>
+ -->
+    
+
+<!-- <ion-item   style='    height: 75px;'>
+  <ion-label class='headerColor' style='    font-size: 1.2rem;
+    color: #EC527E;
+    opacity: 1; ' >Fecha Nacimiento</ion-label><br>
+ <ion-datetime [disabled]='editarData' [(ngModel)]="dataUser.fechaNacimiento" displayFormat="YYYY-MM-DD"  style='     position: absolute;
+    margin-top: 24px;
+    border: solid 2px lightgray;
+    padding: 0px 15px;
+    min-width: 50px;' > </ion-datetime> 
+
+</ion-item>
+
+ -->
+
+
+  <ion-item  style='margin-top: 20px'>
+    <ion-label color="headerColor" stacked style='    opacity: 1 !important;'>Fecha Nacimiento</ion-label>
+
+
+<ion-datetime placeholder='seleccione una fecha' [ngClass]="{'itemActi':!editarData}"  [disabled]='editarData' [(ngModel)]="dataUser.fechaNacimiento" displayFormat="DD-MM-YYYY"  style='' > </ion-datetime>
+
+  </ion-item>
+
+
+
+
+          </ion-list>
+
+
+<!--
+              <div [hidden]='!editarData'  style="width: 100%;
+    position: fixed;
+    bottom: 0px;
+    background: rgb(247,248,249);
+    padding-bottom: 6px;
+">
+          <button (click)='editarData=false' ion-button class="botonVerdeFull">Actualizar informacion<ion-icon style='    margin-left: 10px !important;' name="md-arrow-forward"></ion-icon> 
+
+          </button>
+ </div>
+
+ <div  style="width: 100%;
+    position: fixed;
+    bottom: 0px;
+    background: rgb(247,248,249);
+    padding-bottom: 6px;
+" [hidden]='editarData'>
+    
+
+    <button (click)='guardarCambios()'  style=" border-radius: 70px;   width: 40%;
+    margin-left: 5%;float:left"  color='verdeApp' ion-button> Guardar cambio</button> 
+
+    <button (click)='cancelarEdicion()'  color='headerColor' ion-button  style="    width: 40%;
+    margin-right: 5%;
+    border-radius: 70px;float:right" >Deshacer</button>
+
+
+</div> -->
+
+
+
+
+
+   
+
+
+
+
+
+</ion-content>
+
+<ion-footer  style='  background-color: #f7f8f9 !important; '>
+ 
+
+<div [hidden]='editarData'>
+    <button (click)='guardarCambios()'  style=" border-radius: 70px;   width: 40%;
+    margin-left: 5%;float:left"  color='verdeApp' ion-button> Guardar cambio</button> 
+
+    <button (click)='cancelarEdicion()'  color='headerColor' ion-button  style="    width: 40%;
+    margin-right: 5%;
+    border-radius: 70px;float:right" >Deshacer</button>
+    </div>
+    <div [hidden]='!editarData'>
+      
+       <button (click)='editarData=false' ion-button class="botonVerdeFull">Actualizar informacion<ion-icon style='    margin-left: 10px !important;' name="md-arrow-forward"></ion-icon> 
+
+          </button>
+
+    </div>
+
+
+</ion-footer>

@@ -1,0 +1,42 @@
+page-cuenta {
+
+
+.iconActive{
+    font-size: 44px !important;
+    opacity: 1 !important;
+}
+
+.itemActi{border-bottom: solid 1px lightgray;
+    padding: 2px;
+    }
+page-cuenta .list-ios > .item-block:last-child, page-cuenta .list-ios > .item-wrapper:last-child .item-block {
+     border-bottom: none !important; 
+     border-color:  none !important;
+}
+.list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
+     border-bottom:  none !important;
+}
+
+
+
+.claseItem{
+	
+background-color: #fafafa !important;
+    border-bottom: solid 0.5px;
+    color: #3d3f4a;
+    padding: 8px;
+        padding-left: 16px;
+    font-size: 16px;
+    border-color: rgba(175, 175, 175, 0.8);
+}
+
+
+.list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
+    border-bottom: solid 0.5px;
+
+    border-color: rgba(175, 175, 175, 0.8);
+}
+
+
+
+}

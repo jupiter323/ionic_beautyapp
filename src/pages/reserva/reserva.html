@@ -14,92 +14,25 @@
 
 
 <ion-content >
-<div>
 
-
-<div class="itemReserva" >
-	<img src="assets/imgs/tijeras.png" >
-	<div style="
-    display: inline-block;
-    width: 70%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-">
-		<span style="    font-size: 17px;
-    color: #444;">Hair Cut</span>
-		<p style="
-    margin-top:  1px;
-    margin-bottom: 1px;    color: #777;
-">Lorem ipsum dolor sit amet, lectus voluptas ipsum felis nec massa vel.</p>
-		<span style="    color: #EC527E;
-    margin-top: 8px;
-    display: block;">$60.00</span>
-
-    <button ion-button style="    position: absolute;
-    top: 0;
-    right: 0px;
-    margin-right: 13px;
-    margin-top: 5px;
-    font-size: 27px;
-    width: 30px;
-    background: none;height: 30px;padding: 6px;
-    color: #888;"><ion-icon ios="ios-close"></ion-icon></button>
-	</div>
-
-</div>
-
-<div class="itemReserva" >
-	<img src="assets/imgs/tijeras.png" >
-	<div style="
-    display: inline-block;
-    width: 70%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-">
-		<span style="    font-size: 17px;
-    color: #444;">Hair Cut</span>
-		<p style="
-    margin-top:  1px;
-    margin-bottom: 1px;    color: #777;
-">Lorem ipsum dolor sit amet, lectus voluptas ipsum felis nec massa vel.</p>
-		<span style="    color: #EC527E;
-    margin-top: 8px;
-    display: block;">$60.00</span>
-
-    <button ion-button style="    position: absolute;
-    top: 0;
-    right: 0px;
-    margin-right: 13px;
-    margin-top: 5px;
-    font-size: 27px;
-    width: 30px;
-    background: none;height: 30px;padding: 6px;
-    color: #888;"><ion-icon ios="ios-close"></ion-icon></button>
-	</div>
-
-</div>
-
-
-    <button (click)='goAddServicios()' ion-button class="botonVerdeFull">Agregar mas servicios </button>
-
-
-</div>
 <div style="margin-top:20px;width:90%; margin-left:5%">
 
 
 
 		<ion-list class="accordion-list">
 			<!-- First Level -->
-			<ion-list-header  [ngClass]="{'borderSelected': item.open, 'borderSelected2': item.open && item.id==1}" *ngFor="let item of information; let i = index" no-lines no-padding>
+			<ion-list-header  [ngClass]="{'borderSelected': item.open, 'borderSelected2': item.open && item.id==1}" *ngFor="let item of information; let i = index" no-lines no-padding
+			 [hidden]='(!fechaSeleccionada && (item.id == 2 || item.id == 3)) || 
+			 		   (!horaSeleccionada && (item.id == 3))' >
 			<!-- Toggle Button -->
 			<button style='    background: white !important;
     border-bottom: solid 1px #d3d3d352'  ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
 			<ion-icon class='btnList' item-right  name="ios-add" *ngIf="!item.open"></ion-icon>
 			<ion-icon class='btnList' item-right name="ios-remove" *ngIf="item.open"></ion-icon>
 
-			{{ item.id == 1 ? (fechaSeleccionada || item.nombre) : 
-			   item.id == 2 ? (horaSeleccionada  || item.nombre) : 
-			   item.id == 3 ? (staffSeleccionado  || item.nombre) : item.nombre }}
+			{{ item.id == 1 ? (getFechaFormat() || item.nombre) : 
+			   item.id == 2 ? ( item.nombre) : 
+			   item.id == 3 ? ( item.nombre) : item.nombre }}
 
 			</button>
 
@@ -111,15 +44,63 @@
 	                  [options]="options"
 	                  type="string"
 
-	                  format="MMM DD YYYY">
+	                  format="YYYY-MM-DD">
 	   			 </ion-calendar>
 			</ion-list>
 
 
 			<ion-list class='backItem' style='width: 100%;
     display: table;
-    white-space: normal;'  *ngIf="item.open && item.id == 2 "  radio-group [(ngModel)]="horaSeleccionada">
-				<ion-item class='itemHora'>
+    white-space: normal;'  [hidden]='!fechaSeleccionada' *ngIf="item.open && item.id == 2 "  radio-group [(ngModel)]="horaSeleccionada">
+
+<div [hidden]='diaCerrado'>
+
+
+
+<!-- <ion-item  *ngIf='(tipoReserva==2 || tipoReserva=="2")'  style='background: white !important;     padding-top: 6px;
+    padding-bottom: 10px;  border-top: solid 1px lightgray;'>
+  <ion-label style='    color: #444 !important;'>Hora de Inicio</ion-label>
+ <ion-datetime (ionChange)='actualizarHora(horaSeleccionada)' style='    color: #444 !important;' [(ngModel)]="horaSeleccionada" displayFormat="hh:mm A" pickerFormat="HH:mm"  minuteValues="0,30"  max="{{maxH}}" min="{{minH}}"> </ion-datetime> 
+
+</ion-item> 
+
+CAMBIOS !!! ANTIGUA RESERVCA !!! -->
+
+<!--  --><ion-item (click)='abrirSelect()'   *ngIf='true'  style='background: white !important;     padding-top: 6px;
+    padding-bottom: 10px;  border-top: solid 1px lightgray;'>
+  <ion-label style='    color: #444 !important;'>Hora de Inicio</ion-label>
+
+
+
+</ion-item>
+
+<ion-item *ngIf='horaSeleccionada && (tipoReserva==1 || tipoReserva=="1")'  style='     background: white !important;     padding-top: 6px;
+    padding-bottom: 10px;  border-top: solid 1px lightgray;'>
+  <ion-label style='    color: #444 !important;'>Hora Inicio</ion-label>
+ <ion-datetime [disabled]='true' style='    color: #444 !important;' [(ngModel)]="horaSeleccionada" displayFormat="hh:mm A"> </ion-datetime> 
+
+</ion-item>
+<ion-item *ngIf='horaSeleccionada'  style='     background: white !important;     padding-top: 6px;
+    padding-bottom: 10px;  border-top: solid 1px lightgray;'>
+  <ion-label style='    color: #444 !important;'>Finaliza aprox.</ion-label>
+ <ion-datetime [disabled]='true' style='    color: #444 !important;' [(ngModel)]="horaFinalizacion" displayFormat="hh:mm A" > </ion-datetime> 
+
+</ion-item>
+
+
+</div>
+<div style="    margin: 25px;
+    text-align: center;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 400;
+    color: lightcoral;" [hidden]='!diaCerrado'>
+	
+	Centro cerrado este dia
+</div>
+
+
+	<!-- 			<ion-item class='itemHora'>
 				<ion-label>11:25am</ion-label>
 				<ion-radio mode='wp' value="11:25am" checked></ion-radio>
 				</ion-item>
@@ -130,8 +111,7 @@
 				<ion-item class='itemHora'>
 				<ion-label>11:55am</ion-label>
 				<ion-radio mode='wp' value="11:55am" [disabled]="isDisabled"></ion-radio>
-				</ion-item>
-
+				</ion-item> -->
 
 
 
@@ -146,56 +126,49 @@
     white-space: normal;'  *ngIf="item.open && item.id == 3 "  radio-group [(ngModel)]="staffSeleccionado">
 
 
+<!-- *ngIf='(tipoReserva==2 || tipoReserva=="2")' -->
 
-				<ion-item class='avatarSelect'>
+				<ion-item class='avatarSelect' *ngFor="let n of empleados" >
 				<ion-label>
 				<ion-avatar item-start>
-				<img src="assets/imgs/ben.png"  style="display: inline-block;">
+				<img src="http://50.116.17.150:3000/{{n.idFoto}}" 
+        onError="this.src='assets/imgs/usuario.png';" style="display: inline-block;">
 				<div style="    width: 100%;display: inline-block;margin-left: 7px;">
-				<h2  style="margin-bottom: 4px;">Carl Smith</h2>
+				<h2  style="margin-bottom: 4px;">{{n.nombre}}</h2>
 				<p style="    white-space: normal;
-    width: calc(100% - 50px);">Especialista en tintes</p>
+    width: calc(100% - 50px);">{{n.descripcion}}</p>
 				</div>
 				</ion-avatar>
 				</ion-label>
 				
-				<ion-radio mode='wp' value="Carl Smith" ></ion-radio>
+				<ion-radio mode='wp' value="{{n.idEmpleado}}" (ionSelect)="radioChecked(n.nombre)"></ion-radio>
 				</ion-item>
 
-
-
-				<ion-item class='avatarSelect'>
+				<ion-item class='avatarSelect' *ngIf='(tipoReserva==2 || tipoReserva=="2")' >
 				<ion-label>
 				<ion-avatar item-start>
-				<img src="assets/imgs/ben.png"  style="display: inline-block;">
+				<img src="assets/imgs/usuario.png" style="display: inline-block;">
 				<div style="    width: 100%;display: inline-block;margin-left: 7px;">
-				<h2 style="margin-bottom: 4px;">Lilian Gen</h2>
-				<p style="    white-space: normal;
-    width: calc(100% - 50px);">Recomendado en el servicio</p>
+				<h2  style="margin-bottom: 4px;">Cualquier Personal</h2>
+
 				</div>
 				</ion-avatar>
 				</ion-label>
 				
-				<ion-radio mode='wp' value="Lilian Gen" ></ion-radio>
+				<ion-radio mode='wp' value="-1" (ionSelect)="radioChecked('Cualquier Personal')"></ion-radio>
 				</ion-item>
 
 
 
-
-				<ion-item class='avatarSelect'>
-				<ion-label>
-				<ion-avatar item-start>
-				<img src="assets/imgs/ben.png"  style="display: inline-block;">
-				<div style="    width: 100%;display: inline-block;margin-left: 7px;">
-				<h2  style="margin-bottom: 4px;">Marty McFly</h2>
-				<p style="    white-space: normal;
-    width: calc(100% - 50px);">Especialista en tintes</p>
-				</div>
-				</ion-avatar>
-				</ion-label>
-				
-				<ion-radio mode='wp' value="Marty McFly" ></ion-radio>
-				</ion-item>
+<div style="    margin: 25px;
+    text-align: center;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 400;
+    color: lightcoral;" *ngIf='!(tipoReserva==2 || tipoReserva=="2") && (empleados.length<1) || !(empleados)'>
+	
+	<ion-spinner name="bubbles"></ion-spinner>
+</div>
 
 
 
@@ -215,28 +188,214 @@
     margin-top: 30px;
     margin-bottom: 30px;">
 	
-	    <button  *ngIf="fechaSeleccionada && horaSeleccionada" (click)='goReserva()' ion-button class="botonVerdeFulls">Confirmar {{fechaSeleccionada}},{{horaSeleccionada}}</button>
+	    <button  *ngIf="!reprogra && fechaSeleccionada && horaSeleccionada && staffSeleccionado && staffSeleccionado !== 0 && (serviciosCarro?.length>0)" (click)='goReserva(fechaSeleccionada,horaSeleccionada)' ion-button class="botonVerdeFulls"
+	    	>Confirmar {{fechaSeleccionada}} - {{getDattts(fechaSeleccionada+' '+horaSeleccionada+':00') }}</button>
+
+	  <button  *ngIf="reprogra && fechaSeleccionada && horaSeleccionada && staffSeleccionado && staffSeleccionado !== 0 && (serviciosCarro?.length>0)" (click)='goReserva3(fechaSeleccionada,horaSeleccionada)' ion-button class="botonVerdeFulls"
+	  	>REPROGRAMAR {{fechaSeleccionada}} - {{getDattts(fechaSeleccionada+' '+horaSeleccionada+':00')}}</button>
+
+
 
 </div>
 
 </div>
 
 
+<div>
+
+<div style="margin: -14px 14px 14px 14px;
+    padding: 11px;
+    background: white;
+    color: #666;
+    font-size: 16px;" *ngIf='serviciosCarro[0] && serviciosCarro[0].inicio' 
+    (click)='abrirSelect()' >
+	<span>Hora de Inicio:</span>
+	<button style='float: right; margin: -5px 0px 0px 0px;border-color: #2FD99B !important;color: #2FD99B !important' ion-button small outline>cambiar</button>
+	<span style="float: right;margin-right: 10px;" > 
+	  {{getDattts2(serviciosCarro[0].inicio)}}</span>
+
+</div>
+	
+	<div style="    margin: -14px 14px 14px 14px;
+    padding: 11px;
+    background: white;
+    color: black !important; font-weight: 800 !important;
+    font-size: 16px !important;" *ngIf='paquete'>Costo del paquete  
+
+    <span style="    float: right;
+    font-weight: 500;    
+    font-size: 16px;">${{costoPaquete}}</span></div>
+
+    <button (click)='openServices()' ion-button class="botonVerdeFull" [hidden]='reprogra || paquete'>Agregar mas servicios </button>
+
+
+<!-- <div class="itemReserva" *ngFor="let n of serviciosAll | filtrofav: filterFav"  > -->
+	<div class="itemReserva" style='margin: 14px !important;'
+	  *ngFor="let n of serviciosCarro; let i = index"  >
+
+
+<div style='background-color: #f7f8f9;
+    padding: 0px 0px 14px 0px;
+    text-align: center;
+    font-size: 16px;
+    color: darkgray;' *ngIf=' (serviciosCarro[1] && serviciosCarro[1].inicio) && i>0 && (n.inicio !== serviciosCarro[i-1].fin) '>
+	Tiempo de espera {{calcularEspera(n.inicio,serviciosCarro[i-1].fin)}}
+</div>
+
+
+	<div style="
+    display: inline-block;
+    width:100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+        padding-left: 8px;
+">
+
+
+
+<div [ngStyle]="{'margin-bottom': paquete ? '10px' : '0px' }">
+
+	    <button [hidden]='paquete || serviciosCarro.length<2' [disabled]='reprogra' (click)='quitarItem(n.idServicio)' ion-button style="    font-size: 23px;
+    margin-top: -10px !important;
+    padding-top: 0px !important;
+    background: none;
+    height: 27px;
+    padding: 6px;
+    float: right;
+    color: #888;
+    margin-bottom: 0px !important;
+    margin-right: 0px !important;"><ion-icon ios="ios-close"></ion-icon></button>
+
+
+		<span style="  font-size: 17px;
+    color: rgb(68, 68, 68);
+    padding-left: 8px;" [ngStyle]="{'padding-left': paquete ? '11px' : '0px' }">{{n.nombre}}</span>
+<!-- 		<p style="
+    margin-top:  1px;
+    margin-bottom: 1px;    color: #777;
+">{{n.descripcion}}</p> -->
+
+		<span style="    float: right; color:black !important;
+    font-weight: 800 !important;    margin-right: 10px;
+    font-size: 16px !important;" [ngStyle]="{'text-decoration': paquete ? 'line-through' : 'inherit' }">${{n.precioFinal}}</span>
+</div>
+<div style="    margin-top: 8px;">
+
+	<span *ngIf='n.empleadoSeleccionado' (click)='seleccionarEmpleados(n.empleados,i)' style="f    font-size: 15px;
+    color: #777;
+    display: inline-block;
+    max-width: calc(100% - 150px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;">
+
+			<img src="http://50.116.17.150:3000/{{n.idFoto}}" 
+        onError="this.src='assets/imgs/usuario.png';" style="display: inline-block;
+    height: 25px;
+    width: 25px;
+    margin: 0px 0px 0px 0px !important;
+    vertical-align: bottom;">
+		{{n.empleadoSeleccionado.nombre}}
+
+		<span style="    position: absolute;
+    left: 38px;
+    font-size: 11px;
+    bottom: 5px;color: #EC527E">cambiar staff</span>
+	</span>
+
+
+	<span *ngIf='n.inicio && n.fin' style="float: right;
+    margin-right: 10px;
+    font-size: 15px;    line-height: 35px;
+    color: #777;">
+		{{getDattts2(n.inicio)}}  - {{getDattts2(n.fin)}} 
+	</span>
+
+	<span [hidden]='loadingCargando' style="    width: 100%;
+    text-align: center;
+    display: block;
+    color: lightcoral;" *ngIf='this.fechaSeleccionada && (!n.inicio || !n.empleados)'>
+		No disponible, intenta otro horario o fecha
+	</span>
+
+<!--     		<span style="    color: darkgrey;
+    margin-top: 8px;
+    display: inline-block;">{{n.duracion}}min</span> -->
+
+
+</div>
+
+
+	</div>
+
+</div>
+
+
+
+
+
+
+
+</div>
+<select-alertless   #selectH style='display:none'  [selectOptions]="selectOptions" (ionChange)='printOption($event)' >
+
+      <ion-option *ngFor="let d of horasDisponibles"  value="{{d.control.split(' ')[1].substring(0, 5)}}" >
+   		<!--   
+    {{d[0].inicio.split(' ')[1].substring(0, 5)}} - {{d[0].fin.split(' ')[1].substring(0, 5)}} 
+		-->
+
+
+		<!--    {{getDattts(d.inicio)}} - {{getDattts(d.fin)}}  CAMBIOS!!!-->
+
+		   {{getDattts(d.control)}} 
+  		</ion-option>
+
+</select-alertless>
+
+
+<select-alertless   #selectH2 style='display:none'  [selectOptions]="selectOptions2" (ionChange)='printOption2($event)' >
+
+      <ion-option *ngFor="let d of staffDisponibles; let i = index"  value="{{i}}" >
+   		<!--   
+    {{d[0].inicio.split(' ')[1].substring(0, 5)}} - {{d[0].fin.split(' ')[1].substring(0, 5)}} 
+		-->
+
+
+		<!--    {{getDattts(d.inicio)}} - {{getDattts(d.fin)}}  CAMBIOS!!!-->
+
+		   {{d.nombre}} 
+  		</ion-option>
+
+</select-alertless>
 
 
 
 </ion-content>
 
 
-<!-- <ion-footer style='    background-color: #f7f8f9 !important;'>
+<!-- --><ion-footer style='    background-color: #f7f8f9 !important;'>
   <ion-toolbar >
 
+  	<div  *ngIf='!paquete' style="font-size: 17px;
+    font-weight: 800;
+    border: dashed 2px lightgray;
+    padding: 5px;">
+  		<span style="    margin-left: 9px;">Total</span>
+	<span style="    float: right;
+    margin-right: 9px;">${{totalPrefor2}}</span> 
+  	</div>
 
-    <button (click)='goReserva()' ion-button class="botonVerdeFull">Agendar Cita<ion-icon style='    margin-left: 10px !important;' name="md-arrow-forward"></ion-icon> </button>
+    <button [hidden]='reprogra'  (click)='goReserva()' [disabled]='sinEmpleado()' ion-button ion-button full style="    background-color: #2FD99B !important;color:white">Agendar Cita<ion-icon style='    margin-left: 10px !important;' name="md-arrow-forward"></ion-icon> </button>
+
+
+    <button [hidden]='!reprogra'  (click)='reprogramarCita()' [disabled]='sinEmpleado()' ion-button ion-button full style="    background-color: #2FD99B !important;color:white">Reprogramar<ion-icon style='    margin-left: 10px !important;' name="md-arrow-forward"></ion-icon> </button>
+
+
+    
 
   </ion-toolbar>
 </ion-footer>
 
 
- -->
+ 
 

@@ -1,0 +1,181 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Abrir cuenta en Yourbeauty</ion-title>
+
+
+
+        <ion-buttons end>
+            <button style="    font-size: 34px;" ion-button (click)="closeModal()">
+                <ion-icon ios="ios-close"></ion-icon>
+            </button>
+
+
+        </ion-buttons>
+
+
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+
+
+
+    <div>
+        <!--     <div style="background-color:#36609F;margin: 20px 17px;border-radius: 30px;color: white;text-align: center;font-size: 15px;">
+    <img src="assets/imgs/Facebook.png" style="
+    vertical-align: middle;
+    margin-right: 10px;
+    ">
+    <img src="assets/imgs/Sep.png" style="
+    vertical-align: middle;
+    padding-top:  10px;
+    padding-bottom: 10px;
+    ">
+    <span (click)='loginApp()' style="
+    ">Continuar con Facebook</span>
+    </div>
+
+<div style="
+    margin: 0px 17px;
+    text-align: center;
+    /* height: 300px; */
+">
+         <img src="assets/imgs/Sep2.png" style="
+    width: 40%;
+    display: inline-block;
+    height: 2px;
+    vertical-align: middle;
+"><span style="
+    display: inline-block;
+    margin: 0px 10px;
+">OR</span> <img src="assets/imgs/Sep2.png" style="
+    width: 40%;
+    display: inline-block;
+    height: 2px;
+    vertical-align: middle;
+">
+    </div>
+ -->
+        <div style="
+    margin: 0px 17px;">
+
+            <form style='margin-top: 20px;' [formGroup]="authForm" (ngSubmit)="crearUsuario(authForm.value)">
+
+
+                <ion-item style='    padding: 0px 13px 0px 0px;
+    background-color: white !important;
+    border-radius: 60px;
+    border: solid 1px #EC527E;
+    margin: 26px 0px 0px 0px;'>
+                    <ion-label style=' color: #e6e6e6;   position: absolute;
+    right: 16px;
+    font-size: 21px;'>
+                        <ion-icon ios="md-contact" md="md-contact"></ion-icon>
+                    </ion-label>
+                    <ion-input class='inputT' autocomplete='off' placeholder="Nombre" formControlName="nombre" type="text"></ion-input>
+                </ion-item>
+                <ion-item *ngIf="authForm.controls.nombre.hasError('required') && authForm.controls.nombre.touched"
+                    style='background-color: transparent !important;'>
+                    <p>Este campo es requerido</p>
+                </ion-item>
+
+
+
+
+                <ion-item style='    padding: 0px 13px 0px 0px;
+    background-color: white !important;
+    border-radius: 60px;
+    border: solid 1px #EC527E;
+   margin: 26px 0px 0px 0px;'>
+                    <ion-label style=' color: #e6e6e6;   position: absolute;
+    right: 16px;
+    font-size: 21px;'>
+                        <ion-icon ios="md-call" md="md-call"></ion-icon>
+                    </ion-label>
+                    <ion-input class='inputT' autocomplete='off' placeholder="Teléfono" formControlName="telefono" type="number"></ion-input>
+                </ion-item>
+
+                <ion-item *ngIf="authForm.controls.telefono.hasError('pattern') && authForm.controls.telefono.touched"
+                    style='background-color: transparent !important;'>
+                    <p>Numero invalido</p>
+                </ion-item>
+
+
+
+
+                <ion-item style='    padding: 0px 13px 0px 0px;
+    background-color: white !important;
+    border-radius: 60px;
+    border: solid 1px #EC527E;
+       margin: 26px 0px 0px 0px;'>
+                    <ion-label style=' color: #e6e6e6;   position: absolute;
+    right: 16px;
+    font-size: 21px;'>
+                        <ion-icon ios="md-mail" md="md-mail"></ion-icon>
+                    </ion-label>
+                    <ion-input class='inputT' autocomplete='off' placeholder="Email" formControlName="email" type="email"></ion-input>
+                </ion-item>
+
+                <ion-item *ngIf="authForm.controls.email.hasError('required') && authForm.controls.email.touched" style='background-color: transparent !important;'>
+                    <p>Este campo es requerido</p>
+                </ion-item>
+
+                <ion-item *ngIf="seleccionado" style='background-color: transparent !important;'>
+                    <p>Ya existe una cuenta con este email</p>
+                </ion-item>
+
+
+
+
+                <ion-item style='    padding: 0px 13px 0px 0px;
+    background-color: white !important;
+    border-radius: 60px;
+    border: solid 1px #EC527E;
+    margin: 26px 0px 0px 0px;'>
+                    <ion-label style=' color: #e6e6e6;   position: absolute;
+    right: 16px;
+    font-size: 21px;'>
+                        <ion-icon ios="md-lock" md="md-lock"></ion-icon>
+                    </ion-label>
+                    <ion-input class='inputT' autocomplete='off' placeholder="Contraseña" formControlName="password"
+                        type="password"></ion-input>
+                </ion-item>
+                <ion-item *ngIf="authForm.controls.password.hasError('required') && authForm.controls.password.touched"
+                    style='background-color: transparent !important;'>
+                    <p>Este campo es requerido</p>
+                </ion-item>
+                <ion-item *ngIf="authForm.controls.password.hasError('minlength') && authForm.controls.password.touched"
+                    style='background-color: transparent !important;'>
+                    <p>Este campo requiere al menos 6 caracteres</p>
+                </ion-item>
+
+                <button ion-button full color="verdeApp" [disabled]="!authForm.valid" style="    border-radius: 40px;margin-top: 20px;"
+                    type="submit">Crear cuenta</button>
+            </form>
+            <p style="    text-align: left;
+    font-size: 16px;
+    color: #444;
+    line-height: 27px;
+    margin-top: 40px;
+    opacity: 1;">Asegúrate
+                de brindar un número de teléfono válido para verificar tu cuenta. <br><br> Al registrarte en Yourbeauty
+                aceptas los <span style="color:#ee507d !important" (click)='openDerechos()'>términos y condiciones de
+                    uso.</span></p>
+
+        </div>
+
+    </div>
+
+
+
+</ion-content>

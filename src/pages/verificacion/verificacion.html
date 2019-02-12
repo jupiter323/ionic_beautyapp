@@ -1,0 +1,54 @@
+<!--
+  Generated template for the RecuperarPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title style='padding-left: 0px !important;padding-right: 0px !important;'>Confirma tu cuenta</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding style='    background-color: #fafafa !important;'>
+
+<div style="    text-align: center;
+    color: darkgray;
+    margin-top: 12px;">Ingresa el código de verificación enviado a {{dataUserV?.telefono}}</div>
+
+
+            <ion-item style='    padding: 0px 13px 0px 0px;
+    background-color: white !important;
+    border-radius: 60px;
+    border: solid 1px #EC527E;
+    margin: 26px 0px;'>
+     		<ion-label style=' color: #e6e6e6;   position: absolute;
+    right: 16px;
+    font-size: 21px;'>
+     			  <ion-icon   ios="md-key" md="md-key" ></ion-icon>
+     		</ion-label>
+
+            <ion-input [(ngModel)]="emailN" autocomplete='off' class='inputT' name="nombre" type="number" placeholder='código'></ion-input>
+
+
+        </ion-item>
+
+
+<div  >
+     <button  (click)='emailN="";goAtras()'   style=" border-radius: 70px;   width: 40%;
+    margin-left: 5%; float:left"  color='verdeApp' ion-button> Cancelar</button>
+
+
+    <button   color='headerColor' ion-button  style="    width: 40%;
+    margin-right: 5%;
+    border-radius: 70px;float:right" [disabled]='!emailN' (click)='actualizarContra(emailN)'>Verificar</button> 
+
+
+</div>
+
+
+
+</ion-content>

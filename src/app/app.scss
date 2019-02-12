@@ -16,6 +16,46 @@
 // automatically applied to the <body> element in the app.
 
 
+body{
+    padding-top: constant(safe-area-inset-top) !important;
+    padding-top: env(safe-area-inset-top) !important;
+} 
+ion-title{
+    padding-left: 0px !important;
+      padding-right: 0px !important;
+              padding-top: 25px !important;
+    padding-bottom: 25px !important;
+}
+
+.title .title-ios{
+        padding-top: 25px !important;
+    padding-bottom: 25px !important;
+}
+.inputT input{
+
+    border-right: solid 2px #f3eded !important;
+    padding: 7px 7px 7px 20px  !important;
+    margin: 6px 0px !important;
+
+    }
+
+    
+.redem{
+    
+        vertical-align: middle;
+    font-size: 17px;
+    color: #333;
+    background-color: #2FD99B;
+    margin-left: 12px;
+    margin-top: 12px;
+    display: inline-block;
+    width: 50%;
+}
+
+.button-ios.activated{
+        background-color: #25b580 !important;
+}
+.progress2 {   background-color: #2FD99B;}
 .botonVerdeFulls{
     width: 100%;
     padding-top: 15px;
@@ -26,7 +66,12 @@
     border-radius: 30px;
 
 }
-
+.noResultado{
+    font-size: 16px;
+    text-align: center;
+    margin: 30px;
+    color: #999;
+}
 
 .item-ios.item-block .item-inner {
 
@@ -42,7 +87,7 @@
 }
 .alertCustomCss {
     // text color for basic alerts
-    color: white; 
+    color: white !important; 
 
     // alert modal page bg color. Warning this will remove the alert transparency
     //background-color: color($colors, dark, base); 
@@ -205,7 +250,7 @@ list-ios .item-block .item-inner {
 	
 	    background-color: #2FD99B;
     height: 5px;
-    width: 85%;
+   
     position: absolute;
     left: 0;
     margin-top: -2px;
@@ -236,6 +281,18 @@ list-ios .item-block .item-inner {
 .item-ios {
 
     background-color: #fafafa !important;
+}
+
+.select-alertless .alert-button-group{
+    display:none
+}
+
+select-alertless {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    max-width: 45%;
 }
 
 
@@ -375,7 +432,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e7e7e7', end
 
 
 }
-
+.ratingStar{
+    color:#FFCB19
+}
 
 .itemReserva img{
     
@@ -386,12 +445,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e7e7e7', end
 
 }
 .alert-ios .alert-head {
-        background: #2FD99B !important;
-    color: white !important;
+       
+    color: #444 !important;
     font-weight: 800 !important;
 }
 .alert-ios .alert-message {
-        background: #2FD99B !important;
+    
 }
 .alert-ios .alert-radio-label {
 

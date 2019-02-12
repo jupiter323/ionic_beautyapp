@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>ReservaHecha</ion-title>
+    <ion-title>Reserva Completada</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,17 +15,15 @@
 
 <ion-content padding>
 
-
-
 <div style="
     padding-left: 40px;
     text-align: center;
     padding-right: 40px;
     margin-top: 30px;
 ">
-	<img src="assets/imgs/fotoComercio.png" style="
-   height: 90px;
-   width: 90px;
+	<img src="assets/imgs/{{icono}}" style="
+   height: 55px;
+   width: 55px;
    ">
 
 	<span style="
@@ -34,7 +32,7 @@
     color: #333;
     margin-top: 15px;
     margin-bottom:  15px;
-">Center Name Here...</span>
+">Completado!</span>
 
 	<span style="
     display: block;
@@ -42,7 +40,7 @@
     font-size: 15px;
     margin-bottom: 40px;
         line-height: 24px;
-">Tu reserva esta siendo confirmada en este momento. Te notificaremos cuando hayamos procesado tu reserva</span>
+">{{textoMensaje}}</span>
 
 
 </div>
@@ -54,7 +52,7 @@
     left: 0;
     bottom: 40px;">
 
-<button (click)='goPagina("MisReservasPage")' color='verdeApp' ion-button>Ver mi Reserva</button>
+<button (click)='goPagina("DetalleReservaPage")' color='verdeApp' ion-button>Ver mi Reserva</button>
 
 <button (click)='goPagina("InicioPage")' color='headerColor' ion-button>Volver al Inicio</button>
 

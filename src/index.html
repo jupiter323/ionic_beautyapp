@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Ionic App</title>
   <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
 
@@ -14,6 +15,13 @@
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="initial-scale=1, width=device-width, height=device-height, viewport-fit=cover">
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAT-tTbOja69paXaiAgAtNi9nGHRh75bzk&v=3.exp&libraries=places&language=es">
+</script>
+
+
 
   <!-- cordova.js required for cordova apps (remove if not needed) -->
   <script src="cordova.js"></script>
@@ -30,7 +38,9 @@
   <link href="build/main.css" rel="stylesheet">
 
 </head>
-<body>
+<body style='padding-top: constant(safe-area-inset-top) !important;
+    padding-top: env(safe-area-inset-top) !important;' >
+
 
   <!-- Ionic's root component and where the app will load -->
   <ion-app></ion-app>

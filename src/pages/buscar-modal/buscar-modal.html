@@ -29,31 +29,50 @@
 
 
 <ion-list style='margin:0px;'>
-  <ion-item style='       background: white !important;  padding-top: 6px;
+
+    <ion-item style='       background: white !important;  padding-top: 6px;
     padding-bottom: 6px;   color: #444 !important;'>
-    <ion-label >Palabra clave</ion-label>
-    <ion-input placeholder="Opcional"></ion-input>
+
+    <ion-input  [(ngModel)]="filtroSeleccion.palabra"  autocomplete='off' placeholder="Escribe un nombre de negocio o servicio" (keyup.enter)="closeKB()"></ion-input>
   </ion-item>
+
+  
 
   <ion-item  style='        background: white !important;    padding-top: 6px;
     padding-bottom: 6px;   border-top: solid 1px lightgray; color: #444 !important;'>
-    <ion-label  fixed>Lugar</ion-label>
-    <ion-input type="text" placeholder="Opcional"></ion-input>
+    <!-- <ion-label  fixed>Lugar</ion-label> -->
+   
+      <ion-input [(ngModel)]="autocomplete.input" (ionFocus)="seleccionIn=true"  (ionChange)="updateSearchResults()" placeholder="Busqueda por lugar" autocomplete='off'></ion-input>
+
+
+
+
   </ion-item>
+  <!-- 
+ -->
+
 </ion-list>
  
+
+        <ion-list [hidden]="autocompleteItems?.length == 0 || !seleccionIn">
+  <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+    {{ item.description }}
+  </ion-item>
+</ion-list>
+<!--
+ -->
  <div style="font-weight: 800;
     font-size: 18px;
     padding: 13px;
     background: #9993;">Ordenar Por</div>
 
-<div style="    margin: 29px 15px;">
+<div style="    margin: 8px 15px;">
   <ion-segment  style='background: rgb(245,246,247);
     font-weight: 800;' color='verdeApp' [(ngModel)]="ordenarPor">
-    <ion-segment-button value="kittens">
-      Mejor a mayor precio
+    <ion-segment-button value="ASC">
+      Menor a mayor precio
     </ion-segment-button>
-    <ion-segment-button value="puppies">
+    <ion-segment-button value="DESC">
       Mayor a menor precio
     </ion-segment-button>
   </ion-segment>
@@ -67,7 +86,7 @@
   <ion-item style='       background: white !important;    padding-top: 6px;
     padding-bottom: 6px; border-top: solid 1px lightgray !important;'>
     <ion-label  style='    color: #444 !important;'>Opiniones altas  primero</ion-label>
-    <ion-checkbox  item-right [(ngModel)]="peppfweroni"></ion-checkbox>
+    <ion-checkbox  item-right [(ngModel)]="filtroSeleccion.ordenOpiniones"></ion-checkbox>
   </ion-item>
 
 
@@ -87,14 +106,14 @@
   <ion-item style='     background: white !important;     padding-top: 6px;
     padding-bottom: 6px;  border-top: solid 1px lightgray;'>
     <ion-label style='    color: #444 !important;'>Abierto ahora</ion-label>
-    <ion-checkbox  item-right [(ngModel)]="pepperoni"></ion-checkbox>
+    <ion-checkbox  item-right  (ionChange)="selectedAddress(1)"  [(ngModel)]="filtroSeleccion.abierto"></ion-checkbox>
   </ion-item>
 
 
   <ion-item style='     background: white !important;     padding-top: 6px;
     padding-bottom: 10px;  border-top: solid 1px lightgray;'>
-    <ion-label  style='    color: #444 !important;'>Disponible hoy</ion-label>
-    <ion-checkbox  item-right [(ngModel)]="peppferoni"></ion-checkbox>
+    <ion-label  style='    color: #444 !important;'>Abierto hoy</ion-label>
+    <ion-checkbox  item-right (ionChange)="selectedAddress(2)"  [(ngModel)]="filtroSeleccion.disponible"></ion-checkbox>
   </ion-item>
 
 
@@ -102,7 +121,26 @@
 </ion-list>
 
 
+<!-- <ion-item style='     background: white !important;     padding-top: 6px;
+    padding-bottom: 10px;  border-top: solid 1px lightgray;'>
+  <ion-label style='    color: #444 !important;'>Disponible en hora</ion-label>
+ <ion-datetime style='    color: #444 !important;' [(ngModel)]="horaSeleccionada" displayFormat="hh:mm A"  minuteValues="0,30" > </ion-datetime> 
 
+</ion-item>
+ -->
+<ion-item style='     background: white !important;     padding-top: 6px;
+    padding-bottom: 10px;  border-top: solid 1px lightgray;'>
+  <ion-label style='    color: #444 !important;'>Abierto Desde</ion-label>
+ <ion-datetime style='    color: #444 !important;' [(ngModel)]="horaSeleccionadaDesde" displayFormat="hh:mm A"  minuteValues="0,30" max="{{horaMax}}" min="{{horaMin}}"> </ion-datetime> 
+
+</ion-item>
+
+<ion-item style='     background: white !important;     padding-top: 6px;
+    padding-bottom: 10px;  border-top: solid 1px lightgray;'>
+  <ion-label style='    color: #444 !important;'>Abierto Hasta</ion-label>
+ <ion-datetime style='    color: #444 !important;' [(ngModel)]="horaSeleccionadaHasta" displayFormat="hh:mm A"  minuteValues="0,30" max="{{horaMax}}" min="{{horaMin}}"> </ion-datetime> 
+
+</ion-item>
 
 
 
@@ -110,33 +148,45 @@
 		<ion-list class="accordion-list">
 			<!-- First Level -->
 			<ion-list-header style='background: white !important;
-    border-top: solid 1px lightgray;    padding-bottom: 10px;'  [ngClass]="{'borderSelected': item.open, 'borderSelected2': item.open && item.id==1}" *ngFor="let item of information; let i = index" no-lines no-padding>
+    border-top: solid 1px lightgray;    padding-bottom: 10px;'  [ngClass]="{'borderSelected': item.open, 'borderSelected2': item.open && item.id==1}" *ngFor="let item of information; let i = index" no-lines no-padding [hidden]="item.id == 2">
 			<!-- Toggle Button -->
-			<button style='    color: #444 !important;background: white !important;'  ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
+
+
+			<button *ngIf="item.id !== 2" style='    color: #444 !important;background: white !important;'  ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
 			<ion-icon class='btnList' item-right  name="ios-add" *ngIf="!item.open"></ion-icon>
 			<ion-icon class='btnList' item-right name="ios-remove" *ngIf="item.open"></ion-icon>
+
+
 {{item.nombre}} 
-			{{ item.id == 1 ? (fechaSeleccionada || '') : 
+			{{ item.id == 1 ? (getFechaFormat()) : 
 			   item.id == 2 ? (horaSeleccionada  || '') : 
 			   item.id == 3 ? (staffSeleccionado  || '') : '' }}
 
+      
+
 			</button>
+
+
+
 
 			<ion-list style='margin:0px !important' *ngIf="item.open && item.id == 1" no-lines >
 			<!-- Second Level -->
 			
-				 <ion-calendar [(ngModel)]="date"
+				 <ion-calendar [(ngModel)]="filtroSeleccion.filtroFecha"
 	                  (onChange)="onChange($event)"
 	                  [options]="options"
 	                  type="string"
-	                  format="MMM DD YYYY">
+	                  format="YYYY-MM-DD">
 	   			 </ion-calendar>
 			</ion-list>
 
-
+<ion-list class='backItem' style='margin:0px !important' *ngIf="item.open && item.id == 2" no-lines >
+<!-- 
 			<ion-list class='backItem' style='width: 100%;
     display: table;
     white-space: normal;'  *ngIf="item.open && item.id == 2 "  radio-group [(ngModel)]="horaSeleccionada">
+ 
+
 				<ion-item class='itemHora'>
 				<ion-label>11:25am</ion-label>
 				<ion-radio mode='wp' value="11:25am" checked></ion-radio>
@@ -151,8 +201,7 @@
 				</ion-item>
 
 
-
-
+ -->
 
 
 			</ion-list>
@@ -166,19 +215,40 @@
 			</ion-list-header>
 		</ion-list>
 
-		<div style="width:100%;height:50px;"></div>
+<!-- 		<div style="width:100%;height:50px;"></div>
 
 
     <div style="width: 100%;
     position: fixed;
+    z-index: 33;
     bottom: 0px;
     background: rgb(247,248,249);
     padding-bottom: 6px;
 ">
-          <button ion-button class="botonVerdeFull">Buscar<ion-icon style='    margin-left: 10px !important;' name="md-arrow-forward"></ion-icon> </button>
+          <button ion-button   (click)='filtroBusqueda()' class="botonVerdeFull">Buscar<ion-icon style='    margin-left: 10px !important;' name="md-arrow-forward"  ></ion-icon> </button>
 
 
     </div>
-
+ -->
 
 </ion-content>
+
+
+
+<ion-footer>
+ <div style="text-align: center;">
+   
+    <button (click)='reiniciarFiltros()' ion-button style="background-color: #2FD99B;width: 40%; max-width: 200px;    border-radius: 35px;">Reiniciar</button>
+
+
+    <button (click)='filtroBusqueda()' ion-button style="background-color: #EC527E;width: 40%; max-width: 200px;    border-radius: 35px;">Buscar</button>
+
+
+
+  </div>
+</ion-footer>
+
+
+
+
+

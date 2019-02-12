@@ -4,7 +4,6 @@
       <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header> -->
-
   <ion-content style='    background-color: #fafafa;'>
 
   <div *ngIf='!menuActivo'>
@@ -19,7 +18,7 @@
     padding-top:  10px;
     padding-bottom: 10px;
     ">
-    <span (click)='loginApp()' style="
+    <span (click)='facebookLogin()' style="
     ">Continuar con Facebook</span>
     </div>
 
@@ -47,17 +46,26 @@
     <div style="
     margin: 0px 17px;">
 
-    <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
-        <ion-item [ngClass]="{'error-border':!authForm.controls.username.valid && authForm.controls.username.touched}">
-            <ion-label floating>Email</ion-label>
-            <ion-input formControlName="username" type="text"></ion-input>
+    <form [formGroup]="authForm" (ngSubmit)="doLogin(authForm.value)">
+
+              <ion-item style='    padding: 0px 13px 0px 0px;
+    background-color: white !important;
+    border-radius: 60px;
+    border: solid 1px #EC527E;
+    margin: 26px 0px;'>
+            <ion-label style=' color: #e6e6e6;   position: absolute;
+    right: 16px;
+    font-size: 21px;'>
+                  <ion-icon   ios="md-mail" md="md-mail" ></ion-icon>
+            </ion-label>
+            <ion-input placeholder='Email' class='inputT' autocomplete='off' formControlName="username" type="text"></ion-input>
         </ion-item>
   
         <ion-item *ngIf="authForm.controls.username.hasError('required') && authForm.controls.username.touched">
-            <p>Sorry, field username is required!</p>
+            <p>Email invalido</p>
         </ion-item>
         <ion-item *ngIf="authForm.controls.username.hasError('pattern') && authForm.controls.username.touched">
-            <p>Sorry, only small and capital letters are allowed!</p>
+            <p>Email invalido</p>
         </ion-item>        
         <ion-item *ngIf="authForm.controls.username.hasError('minlength') && authForm.controls.username.touched">
             <p>Sorry, minimum username length is 8!</p>
@@ -66,18 +74,26 @@
             <p>Sorry, maximum username length is 30!</p>
         </ion-item>
   
-        <ion-item [ngClass]="{'error-border':!authForm.controls.password.valid && authForm.controls.password.touched}">
-            <ion-label floating>Password</ion-label>
-            <ion-input formControlName="password" type="password"></ion-input>
+                   <ion-item style='    padding: 0px 13px 0px 0px;
+    background-color: white !important;
+    border-radius: 60px;
+    border: solid 1px #EC527E;
+    margin: 26px 0px;'>
+            <ion-label style=' color: #e6e6e6;   position: absolute;
+    right: 16px;
+    font-size: 21px;'>
+                  <ion-icon   ios="md-lock" md="md-lock" ></ion-icon>
+            </ion-label>
+            <ion-input placeholder='Contraseña' class='inputT'  autocomplete='off' formControlName="password" type="password"></ion-input>
         </ion-item>
         <ion-item *ngIf="authForm.controls.password.hasError('required') && authForm.controls.password.touched">
-            <p>Sorry, field password is required!</p>
+            <p>Contraseña invalida</p>
         </ion-item>
         <ion-item *ngIf="authForm.controls.password.hasError('minlength') && authForm.controls.password.touched">
-            <p>Sorry, minimum password length is 8!</p>
+            <p>Contraseña invalida</p>
         </ion-item>                
   
-        <button ion-button full color="verdeApp" [disabled]="!authForm.valid" style="    border-radius: 40px;margin-top: 20px;" type="submit">Login</button>        
+        <button ion-button full color="verdeApp" [disabled]="!authForm.valid" style="    border-radius: 40px;margin-top: 20px;" type="submit">Iniciar sesión</button>        
     </form>
 
 
@@ -85,17 +101,43 @@
 
   </div>
 
+
     <ion-list style='margin-top:30px'>
-      <button style="background-color: #fafafa;margin-top: 10px; font-size: 15px;    border-bottom: solid 0.5px #80808045; color:#3d3f4a" menuClose ion-item *ngFor="let p of ['Olvidé mi contraseña',
-                                                            'Registrate en BeYou',
-                                                            'BeYou para negocios',
-                                                              'Compartir BeYou']">
+
+<!--       <button style="background-color: #fafafa;margin-top: 10px; font-size: 15px;    border-bottom: solid 0.5px #80808045; color:#3d3f4a" menuClose ion-item *ngFor="let p of ['Olvidé mi contraseña']">
        {{p}}
 
       
 
       </button>
+ -->
+      <button (click)='recupeCon()' style="background-color: #fafafa;margin-top: 10px; font-size: 15px;    border-bottom: solid 0.5px #80808045; color:#3d3f4a" menuClose ion-item >
+       Olvidé mi contraseña
+      
 
+      </button>
+
+
+
+      <button  (click)='registroNegocio()' style="background-color: #fafafa;margin-top: 10px; font-size: 15px;    border-bottom: solid 0.5px #80808045; color:#3d3f4a" menuClose ion-item >
+       Yourbeauty para negocios
+      
+
+      </button>
+
+
+      <button (click)='presentProfileModal2()' style="background-color: #fafafa;margin-top: 10px; font-size: 15px;    border-bottom: solid 0.5px #80808045; color:#3d3f4a" menuClose ion-item >
+       Regístrate en Yourbeauty
+      
+
+      </button>
+
+<!--       <button (click)='compartirApp()' style="background-color: #fafafa;margin-top: 10px; font-size: 15px;    border-bottom: solid 0.5px #80808045; color:#3d3f4a" menuClose ion-item >
+       Compartir Yourbeauty
+      
+
+      </button>
+ -->
 
 
     </ion-list>
@@ -110,55 +152,86 @@
     position: fixed;
     bottom: 0;
     background: #fafafa;
-    z-index: 10;">Al registrarte e iniciar sesion en BeYou aceptas nuestros <a>terminos y condiciones de servicio</a></div>
+    z-index: 10;" (click)='openDerechos()'>Al registrarte e iniciar sesión en Yourbeauty aceptas nuestros <a>términos y condiciones de servicio.</a></div>
 
     </div>
 
     <div *ngIf='menuActivo'>
-        <ion-item style='margin-top: 0px;' class='fixProfileMargin'>
+        <ion-item style='margin-top: 0px;' class='fixProfileMargin' menuClose (click)='goPagina("CuentaPage")' >
           <ion-avatar item-start>
-          <img style='width:75px; height: 75px' src="assets/imgs/ben.png">
+
+          <img [hidden]='userDataProfile?.imagenFb && !userDataProfile?.idFoto'  style='width:75px; height: 75px;object-fit: cover;
+    object-position: center;'  src="http://50.116.17.150:3000/{{userDataProfile?.idFoto}}" 
+        onError="this.src='assets/imgs/usuario.png';">
+
+         <img *ngIf="userDataProfile?.imagenFb && !userDataProfile?.idFoto"   style='width:75px; height: 75px;        object-fit: cover;
+    object-position: center;' src="{{userDataProfile?.imagenFb}}" 
+        onError="this.src='assets/imgs/usuario.png';" />
+
+
           </ion-avatar>
-          <h2 style="margin-bottom: 23px;">Marty McFly</h2>
+          <h2 style="margin-bottom: 23px;">{{userDataProfile?.nombre || 'Desconocido'}}</h2>
           <div class="barraContainer">
-            <div class="barraProgress"><span>400/750</span></div>
+            <div class="barraProgress" [ngStyle]="{'width': porcenBarra}"  ><span>{{getUDPE(userDataProfile?.exp) || 0}}/{{userDataProfile?.appexp || 0}}</span></div>
           </div>
         </ion-item>
 
           <ion-list>
-          <button (click)='goPagina(p.pagina)' style="background-color: #fafafa; font-size: 14px;    border-bottom: solid 0.5px #80808045; color:#3d3f4a" menuClose ion-item *ngFor="let p of [{nombre:'Servicios', img:'listVerde.png', pagina: 'InicioPage'},{nombre:'Reservaciones', img:'reservation.png', pagina: 'MisReservasPage'},
+          <button (click)='goPagina(p.pagina)' style="background-color: #fafafa; font-size: 14px;    border-bottom: solid 1px rgb(226, 226, 226) !important; color:#3d3f4a" menuClose ion-item *ngFor="let p of [{nombre:'Servicios', img:'listVerde.png', pagina: 'InicioPage'},{nombre:'Reservaciones', img:'reservation.png', pagina: 'MisReservasPage'},
           {nombre:'Favoritos', img:'corazonVerde.png', pagina: 'FavoritosPage'},
           {nombre:'Opiniones', img:'opiniones.png', pagina: 'OpinionesPage'},
           {nombre:'Cupones / Regalos', img:'cupones.png',  pagina: 'CuponesPage'},
-          {nombre:'Ofertas', img:'ofertas.png', pagina: 'OfertasPage' }]" >
+          {nombre:'Ofertas', img:'ofertas.png', pagina: 'OfertasPage' },
+          {nombre:'Paquetes', img:'cupones.png', pagina: 'PaquetesPage' }]" >
 
           {{p.nombre}}
 
           <img style='float: right;' src="assets/imgs/{{p.img}}">
 
           </button>
+
 
 
 
           </ion-list>
 
 
-          <ion-list style='    margin-top: 0px !important;
+  <!--         <ion-list style='    margin-top: 0px !important;
     position: absolute;
     width: 100%;
     bottom: 0px;
+    margin-bottom: 0px !important;'> -->
+
+
+    <ion-list style='    margin-top: 68px !important;
+    position: relative;
+    width: 100%;
     margin-bottom: 0px !important;'>
-          <button   (click)='salirApp(p.nombre)' style="background-color: #fafafa; font-size: 14px;    border-bottom: solid 0.5px #80808045; color:#3d3f4a" menuClose ion-item *ngFor="let p of [{nombre:'Compartir App', img:'compartir.png'},
-          {nombre:'Ajustes', img:'ajustes.png'},
-          {nombre:'Ayuda', img:'ayuda.png'},
-          {nombre:'Mi Cuenta', img:'perfil.png'},
-          {nombre:'Salir', img:'salir.png' }]" >
+
+        <button   (click)='compartirApp()' style="background-color: #fafafa; font-size: 14px;    border-bottom: solid 1px rgb(226, 226, 226) !important; color:#3d3f4a" menuClose ion-item  >
+
+          Compartir Yourbeauty
+
+          <ion-icon  style='    float: right;
+    margin-right: 4px;
+    font-size: 22px;
+    color: #2FD99B;' ios="md-share" md="md-share"></ion-icon>
+
+          </button>
+
+
+          <button   (click)='goPagina(p.pagina)' style="background-color: #fafafa; font-size: 14px;    border-bottom: solid 1px rgb(226, 226, 226) !important; color:#3d3f4a" menuClose ion-item *ngFor="let p of [
+          {nombre:'Ajustes', img:'ajustes.png', pagina: 'AjustesPage'},
+          {nombre:'Ayuda', img:'ayuda.png', pagina: 'AyudaPage'},
+          {nombre:'Mi Cuenta', img:'perfil.png', pagina: 'CuentaPage'},
+          {nombre:'Salir', img:'salir.png', pagina: 'logout' }]" >
 
           {{p.nombre}}
 
           <img style='float: right;' src="assets/imgs/{{p.img}}">
 
           </button>
+
 
 
 

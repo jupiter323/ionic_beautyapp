@@ -7,20 +7,26 @@
     </button>
     </ion-buttons>
 
-    <ion-title>
-<img src="assets/imgs/logoMenu.png">
 
+    <ion-title >
+<img src="assets/imgs/logoMenu.png" style="vertical-align: middle !important;">
     </ion-title>
 
       <ion-buttons end>
-      <button ion-button icon-only>
+
+        <button  (click)='goServicioMapa()'   ion-button icon-only>
+        <ion-icon name="ios-pin" style='font-color:white;color:white'></ion-icon>
+      </button>
+
+
+<!--       <button  ion-button icon-only>
         <ion-icon name="pin"></ion-icon>
-      </button>
+      </button> -->
 
 
-            <button ion-button icon-only>
+    <!--      (click)='goMapa()'   <button ion-button icon-only>
         <ion-icon name="search"></ion-icon>
-      </button>
+      </button> -->
 
 
       </ion-buttons>
@@ -31,62 +37,100 @@
 <ion-content >
 
   <div *ngIf='true'>
-
+<!-- 
     <div style="width: 100%;" >
     <img src="assets/imgs/imagenLogo.png" style="height: 100%; width:100%;margin-top:-75px;">
     </div>
+ -->
+  <div style="width: 100%;" >
+<ion-slides  class="slide-css"  autoplay="5000" loop="true" speed="700" 
+                 pager="true" autoplayDisableOnInteraction = "false">
+
+  <ion-slide class='sliderImg' style='background-image: url(http://50.116.17.150:3000/uploads/1banner)' >
+   
+  </ion-slide> 
+
+   <ion-slide class='sliderImg' style='background-image: url(http://50.116.17.150:3000/uploads/2banner)'>
+
+  </ion-slide>  
+
+  <ion-slide class='sliderImg' style='background-image: url(http://50.116.17.150:3000/uploads/3banner)' >
+  
+  </ion-slide>
+
+
+    </ion-slides>
+
+</div>
 
     <div>
       <div class="tituloSeccion">
-      Selecciona un Servicio
+      Selecciona una Categoría
       </div>
 
-      <div class="containerServicios">
+<ion-grid style='margin-bottom: 50px' >
 
-
-        <div class="servicios" (click)='goServicio("Peluqueria")'> 
-          <img src="assets/imgs/Peluqueria.png">
-          <span>Peluqueria</span>
-        </div>
-
-                <div class="servicios" (click)='goServicio("Rostro y Cuerpo")'> 
-          <img src="assets/imgs/rostro.png">
-          <span>Rostro y Cuerpo</span>
-        </div>
-
-                <div class="servicios" (click)='goServicio("Uñas")'> 
-          <img src="assets/imgs/unas.png">
-          <span>Uñas</span>
-        </div>
-
-     
-
-                <div class="servicios" (click)='goServicio("Masaje")'> 
-          <img src="assets/imgs/masaje.png">
-          <span>Masaje</span>
-        </div>
-
-                <div class="servicios" (click)='goServicio("Depilacion")'> 
-          <img src="assets/imgs/depilacion.png">
-          <span>Depilacion</span>
-        </div>
-
-                <div class="servicios" (click)='goServicio("Bienestar")'> 
-          <img src="assets/imgs/bienestar.png" >
-          <span>Bienestar</span>
-        </div>
-
-                <div class="servicios" (click)='goServicio("Paquetes")'> 
-          <img src="assets/imgs/paquetes.png">
-          <span>Paquetes</span>
-        </div>
-                <div class="servicios" (click)='goServicio("Ofertas")'> 
-          <img src="assets/imgs/ofertasVerde.png">
-          <span>Ofertas</span>
-        </div>
-
-
+ 
+      <div *ngIf='categorias.length<1' style="text-align: center;padding-top: 25%;">
+        <ion-spinner name="bubbles" style='color:darkgray'></ion-spinner>
       </div>
+
+
+
+  <div *ngFor="let n of categorias; let i = index">
+  <ion-row *ngIf=" i % 4 === 0" style='text-align: center;    max-width: 500px;
+    margin: 15px auto;' > 
+    <ion-col  *ngFor="let item of categorias.slice(i,i+4)" col-3 (click)='goServicio(item.idCategoria,item.nombre)'>
+
+
+
+      <img  class='imagenCategoria'  src="http://50.116.17.150:3000/{{item.idFoto}}" 
+          onError="this.src='assets/imgs/ofertasVerde.png';"  (load)="loaded = true"> 
+          <span style="    display: block;">{{item.nombre}}</span>
+    </ion-col>
+
+  </ion-row>
+</div>
+</ion-grid>
+
+<select-alertless   #select5  style='display:none' [selectOptions]="selectOptions" (ionChange)='printOption($event)' [(ngModel)]="option2">
+
+      <ion-option *ngFor="let d of optionSubcategorias"  value='{{d.idSubcategoria}}' >{{d.nombre}}</ion-option>
+
+</select-alertless>
+
+
+
+<!-- 
+<select-alertless   #select66  style='display:none' [selectOptions]="selectOptions2" (ngModelChange)='goServicio2($event)' [ngModel]="option3"> -->
+
+  <select-alertless   #select66  style='display:none' [selectOptions]="selectOptions2" (ngModelChange)='goServicio2($event)' [ngModel]="option3">
+  
+
+      <ion-option *ngFor="let d of categorias"  value='{{d.idCategoria}}' >{{d.nombre}}</ion-option>
+
+</select-alertless>
+
+
+
+<select-alertless   #select77  style='display:none' [selectOptions]="selectOptions" (ionChange)='goServicio3($event)' >
+
+      <ion-option *ngFor="let d of optionSubcategorias3"  value='{{d.idSubcategoria}}' >{{d.nombre}}</ion-option>
+
+</select-alertless>
+
+
+
+
+<!-- nuevo
+
+    <ion-select     #select5  style='display:none' [selectOptions]="selectOptions" 
+     >
+      <ion-option  value="f" selected="true">Female</ion-option>
+      <ion-option value="m">Male</ion-option>
+    </ion-select>
+
+nuevo -->
     </div>
 
   </div>
@@ -94,7 +138,14 @@
 
 
 
+<ion-footer>
+ <div style="text-align: center;margin-bottom: 15px !important;">
+   
+   
+    <button *ngIf='inicioSesion' (click)='openMenu()' ion-button style="background-color: #2FD99B;width: 80%; max-width: 500px;    border-radius: 35px;">Crear Cuenta</button>
 
+  </div>
+</ion-footer>
 
 
 
